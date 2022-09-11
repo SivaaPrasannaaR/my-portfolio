@@ -1,0 +1,23 @@
+@import "./variables.module.scss";
+
+/* ========== MEDIA QUERIES (MEDIUM DEVICES) ========== */
+@media screen and (max-width: $lg) {
+  .container {
+    width: $container-width-md;
+  }
+
+  section {
+    margin-top: 6rem;
+  }
+}
+
+/* ========== MEDIA QUERIES (SMALL DEVICES) ========== */
+@media screen and (max-width: $sm) {
+  .container {
+    width: $container-width-sm;
+  }
+
+  section > h2 {
+    margin-bottom: 2rem;
+  }
+}

@@ -1,0 +1,75 @@
+@import "./styles/global.module.scss";
+@import "./styles/variables.module.scss";
+@import "./styles/mediaQueries.module.scss";
+
+* {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  list-style: none;
+  text-decoration: none;
+  box-sizing: inherit;
+}
+
+html {
+  // font-size: 62.5%;
+  scroll-behavior: smooth;
+}
+
+::-webkit-scrollbar {
+  // to hide the vertical scroll bar
+  display: none;
+}
+
+body {
+  box-sizing: border-box;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  font-size: 1rem;
+  color: $color-white;
+  line-height: 1.7;
+  background: $color-bg;
+  background-image: url(./assets/bg-texture.png);
+}
+
+/* ========== GENERAL STYLES ========== */
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  font-weight: 500;
+}
+
+section {
+  // display: flex;
+  margin-top: 8rem;
+
+  & > h2 {
+    text-align: center;
+    color: $color-light;
+    margin-bottom: 4rem;
+  }
+
+  & > h5 {
+    text-align: center;
+    color: $color-light;
+  }
+}
+
+a {
+  color: $color-primary;
+  transition: $general-transition;
+
+  &:hover {
+    color: $color-white;
+  }
+}
+
+img {
+  display: block;
+  width: 100%;
+  object-fit: cover;
+}
