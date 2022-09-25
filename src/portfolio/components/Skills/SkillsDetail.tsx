@@ -4,11 +4,10 @@ import { BsPatchCheckFill } from "react-icons/bs"
 
 type itemTypes = {
   item: any
-  isOneColumn: boolean
 }
 
 const SkillsDetail = (props: itemTypes) => {
-  const { item, isOneColumn } = props
+  const { item } = props
   return (
     <>
       <article className={styles.skills__details}>

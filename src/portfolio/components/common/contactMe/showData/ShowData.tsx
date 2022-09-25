@@ -15,13 +15,7 @@ const ShowData = (props: any) => {
         }`}
       >
         {skills.map((item: any) => {
-          return (
-            <SkillsDetail
-              key={item.skill}
-              item={item}
-              isOneColumn={isOneColumn}
-            />
-          )
+          return <SkillsDetail key={item.skill} item={item} />
         })}
       </div>
     </div>

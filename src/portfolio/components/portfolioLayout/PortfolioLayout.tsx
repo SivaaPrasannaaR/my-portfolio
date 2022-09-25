@@ -1,7 +1,7 @@
 import React from "react"
 import About from "../about/About"
 import Contacts from "../contacts/Contacts"
-import Experience from "../Experience/Experience"
+// import Experience from "../Experience/Experience"
 import Footer from "../footer/Footer"
 import Header from "../header/Header"
 import Skills from "../Skills/Skills"

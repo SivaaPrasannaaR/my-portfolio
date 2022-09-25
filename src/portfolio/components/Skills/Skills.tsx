@@ -7,7 +7,6 @@ import {
   programingSkills,
 } from "./mySkills"
 import styles from "./Skills.module.scss"
-import SkillsDetail from "./SkillsDetail"
 
 const Skills = () => {
   return (

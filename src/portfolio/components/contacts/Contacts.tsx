@@ -2,7 +2,7 @@ import React from "react"
 import styles from "./contacts.module.scss"
 import { MdOutlineEmail } from "react-icons/md"
 import { BsWhatsapp } from "react-icons/bs"
-import { Link } from "react-router-dom"
+// import { Link } from "react-router-dom"
 
 const Contacts = () => {
   const emailUrl = "mailto:sivaprasanna98@gmail.com"

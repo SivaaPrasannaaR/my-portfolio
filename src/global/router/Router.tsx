@@ -1,4 +1,5 @@
 import React from "react"
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { Routes, Route } from "react-router-dom"
 // import { menuItemsPath } from "./menuItems"
 // import Experience from "../components/Experience/Experience"
