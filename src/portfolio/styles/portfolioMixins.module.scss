@@ -1,0 +1,100 @@
+@import "../../global/styles/variables.module.scss";
+
+$breakpointsDown: (
+  "sm": (
+    max-width: $sm,
+  ),
+  "md": (
+    max-width: $md,
+  ),
+  "lg": (
+    max-width: $lg,
+  ),
+  "xl": (
+    max-width: $xl,
+  ),
+  "xxl": (
+    max-width: $xxl,
+  ),
+);
+
+$breakpointsUp: (
+  "sm": (
+    min-width: $sm + 1px,
+  ),
+  "md": (
+    min-width: $md + 1px,
+  ),
+  "lg": (
+    min-width: $lg + 1px,
+  ),
+  "xl": (
+    min-width: $xl + 1px,
+  ),
+  "xxl": (
+    min-width: $xxl + 1px,
+  ),
+);
+@mixin breakpoint-down($breakpoint) {
+  $raw-query: map-get($breakpointsDown, $breakpoint);
+  @if $raw-query {
+    $query: if(
+      type-of($raw-query) == "string",
+      unquote($raw-query),
+      inspect($raw-query)
+    );
+    @media #{$query} {
+      @content;
+    }
+  } @else {
+    @error 'No value found for `#{$breakpoint}`. '+'Please make sure it is defined in `$breakpoints` map.';
+  }
+}
+
+@mixin breakpoint-up($breakpoint) {
+  $raw-query: map-get($breakpointsUp, $breakpoint);
+  @if $raw-query {
+    $query: if(
+      type-of($raw-query) == "string",
+      unquote($raw-query),
+      inspect($raw-query)
+    );
+    @media #{$query} {
+      @content;
+    }
+  } @else {
+    @error 'No value found for `#{$breakpoint}`. '+'Please make sure it is defined in `$breakpoints` map.';
+  }
+}
+
+@mixin display_flex_center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin container {
+  width: $container-width-lg;
+  margin: 0 auto;
+}
+
+@mixin btn {
+  width: max-content;
+  display: inline-block;
+  color: $color-primary;
+  padding: 0.75rem 1.2rem;
+  border-radius: 0.4rem;
+  border: 1px solid $color-primary;
+  transition: $general-transition;
+
+  &:hover {
+    background: $color-white;
+    color: $color-bg;
+    border-color: transparent;
+  }
+}
+
+@mixin btn-primary {
+  background: $color-primary;
+  color: $color-bg;
+}

@@ -1,0 +1,108 @@
+@import "../../styles/portfolioGlobal.module.scss";
+
+.header {
+  // height: 100vh;
+
+  overflow: hidden;
+}
+
+.header__container {
+  @include container;
+
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+
+  text-align: center;
+  height: 100%;
+  position: relative;
+}
+
+.header__info {
+  padding-top: 5rem;
+  margin: auto 0;
+
+  & > h1 {
+    font-size: 2.2rem;
+  }
+}
+
+.text_light {
+  color: $color-light;
+}
+
+.header__buttons {
+  margin-top: 2.5rem;
+  display: flex;
+  gap: 1.2rem;
+  justify-content: center;
+}
+
+.cvBtn {
+  @include btn;
+}
+
+.header__socials {
+  margin-top: 2rem;
+  display: flex;
+  // flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.8rem;
+  // position: absolute;
+  // left: 0;
+  // bottom: 3rem;
+
+  &::after,
+  &::before {
+    content: "";
+    width: 2rem;
+    height: 1px;
+    background: $color-primary;
+  }
+}
+
+.me {
+  background: linear-gradient($color-primary, transparent);
+  width: 22rem;
+  height: 30rem;
+  // position: absolute;
+  // left: 50%;
+  // transform: translateX(-50%);
+  margin-top: 5rem;
+  border-radius: 12rem 12rem 0 0;
+  overflow: hidden;
+  padding: 5rem 1.5rem 1.5rem 1.5rem;
+
+  & > img {
+    scale: 1.16;
+  }
+}
+
+// .scroll__down {
+//   position: absolute;
+//   right: -2.3rem;
+//   bottom: 5rem;
+//   transform: rotate(90deg);
+//   font-weight: 200;
+//   font-size: 0.9rem;
+// }
+
+@include breakpoint-down("md") {
+  .header__container {
+    grid-template-columns: 1fr;
+  }
+}
+
+@include breakpoint-down("sm") {
+  .me {
+    width: 100%;
+    height: 85%;
+    margin: 2rem auto;
+  }
+
+  .header__socials,
+  .scroll__down {
+    display: none;
+  }
+}

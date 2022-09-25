@@ -1,0 +1,20 @@
+@import "../../styles/portfolioGlobal.module.scss";
+
+.projects_container {
+  height: 100%;
+
+  @include display_flex_center;
+
+  .projects_myName {
+    font-size: 7rem;
+    // display: inline-block;
+    // background-image: linear-gradient(to right, $color-white, $color-dark-gray);
+    // -webkit-background-clip: text;
+    color: $color-white;
+
+    &:hover {
+      transition: all 0.5s;
+      transform: scale(1.1);
+    }
+  }
+}

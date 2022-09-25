@@ -1,0 +1,48 @@
+@import "../../../../styles/portfolioGlobal.module.scss";
+
+.showData__container {
+  border: 1px solid $color-primary;
+  border-radius: 0 0 2rem 2rem;
+  background: $color-bg-variant;
+  transition: $general-transition;
+
+  &:hover {
+    background: transparent;
+  }
+}
+
+.skill__title {
+  margin-top: -1px;
+  margin-left: -1px;
+  background: $color-primary;
+  padding: 0.5rem;
+  border-radius: 0 0 2rem 2rem;
+  box-shadow: 0 2rem 0.8rem rgba(0, 0, 0, 0.13);
+
+  & h3 {
+    text-align: center;
+    color: $color-white;
+  }
+}
+
+.skills__content {
+  display: grid;
+  row-gap: 2rem;
+  padding: 2.5rem;
+}
+
+.skills__content__column_2 {
+  grid-template-columns: 1fr 1fr;
+}
+
+@include breakpoint-down("md") {
+  .skills__content {
+    padding: 3rem;
+  }
+}
+
+@include breakpoint-down("sm") {
+  .skills__content {
+    grid-template-columns: 1fr;
+  }
+}

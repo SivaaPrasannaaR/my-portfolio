@@ -1,0 +1,6 @@
+@import "../../../styles/portfolioGlobal.module.scss";
+
+.contactMeBtn {
+  @include btn;
+  @include btn-primary;
+}

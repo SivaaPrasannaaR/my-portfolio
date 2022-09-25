@@ -1,0 +1,21 @@
+{
+  "portfolio": {
+    "devToolsSkills": [
+      {
+        "skill": "Jira"
+      },
+      {
+        "skill": "Postman"
+      },
+      {
+        "skill": "Redmine"
+      },
+      {
+        "skill": "Git & Github"
+      },
+      {
+        "skill": "VS Code"
+      }
+    ]
+  }
+}

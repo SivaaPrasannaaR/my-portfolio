@@ -1,6 +1,6 @@
-@import "./styles/global.module.scss";
-@import "./styles/variables.module.scss";
-@import "./styles/mediaQueries.module.scss";
+@import "./global/styles/global.module.scss";
+@import "./global/styles/variables.module.scss";
+@import "./global/styles/mediaQueries.module.scss";
 
 * {
   margin: 0;
@@ -30,7 +30,7 @@ body {
   color: $color-white;
   line-height: 1.7;
   background: $color-bg;
-  background-image: url(./assets/bg-texture.png);
+  background-image: url(./global/assets/bg-texture.png);
 }
 
 /* ========== GENERAL STYLES ========== */

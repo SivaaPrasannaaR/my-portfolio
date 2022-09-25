@@ -1,12 +1,14 @@
 import React from "react"
-import Layout from "./components/layout/Layout"
-import NavBar from "./components/navBar/NavBar"
-import Router from "./router/Router"
+import PortfolioLayout from "./portfolio/components/portfolioLayout/PortfolioLayout"
+import NavBar from "./portfolio/components/navBar/NavBar"
+import Router from "./global/router/Router"
+import { getData } from "./global/api/jsonServerApi/jsonServerApi"
 
 function App() {
+  console.log("get Data from axios", getData())
   return (
     <div className="App">
-      <Layout />
+      <PortfolioLayout />
       <NavBar />
       <Router />
     </div>
