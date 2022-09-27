@@ -98,3 +98,24 @@ $breakpointsUp: (
   background: $color-primary;
   color: $color-bg;
 }
+
+@mixin generalButton($size) {
+  background-color: teal;
+  border: none;
+  color: white;
+  padding: 12px;
+  margin: 12px 0;
+  box-shadow: 0 1px 6px #ccc;
+  border-radius: 6px;
+  font-size: 18px;
+
+  @if $size == "small" {
+    width: 5rem;
+  }
+  @if $size == "max" {
+    width: 100%;
+  }
+  @if $size == "large" {
+    width: 20rem;
+  }
+}

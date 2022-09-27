@@ -34,6 +34,8 @@ export class CustomAxios {
   }
 }
 
+// this is an axios instance where some common or
+// specific data can be pre-defined while creating the axios.
 const createAxios = () => {
   const accessToken = ""
 

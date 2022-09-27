@@ -1,0 +1,13 @@
+@import "../styles/global.module.scss";
+
+.homeContainer {
+  @include display_flex_center;
+
+  min-height: 100vh;
+  flex-direction: column;
+  background: $color-white;
+}
+
+.logoutButton {
+  @include generalButton("large");
+}

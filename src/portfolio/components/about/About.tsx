@@ -1,6 +1,5 @@
 import React from "react"
 import styles from "./about.module.scss"
-
 import { FaAward } from "react-icons/fa"
 import ContactMe from "../common/contactMe/ContactMe"
 import ShowData from "../common/contactMe/showData/ShowData"
