@@ -1,61 +1,65 @@
-import React, { useRef } from "react"
-import { useNavigate } from "react-router-dom"
+import React from "react"
 import { useUserContext } from "../context/UserContext"
-import { urlPath } from "../router/urlPath"
 import styles from "./login_signup.module.scss"
+import RegisterA from "./register/RegisterA"
+import RegisterB from "./register/RegisterB"
+
+/*
+to do 
+- create dynamic multiple register component
+- error msg for already user
+*/
+
+export type SignUpType = {
+  onSubmit: (email: string, userName: string, password: string) => void
+  socialMediaOnClick: () => void
+}
 
 const Signup = () => {
-  const emailRef: any = useRef()
-  const nameRef: any = useRef()
-  const psdRef: any = useRef()
-  const navigate = useNavigate()
-
   const { registerUser, socialMediaAuth, googleProvider }: any =
     useUserContext()
 
-  const handleSocialMediaOnClick = async (provider: any) => {
-    const res = await socialMediaAuth(provider)
+  const handleSocialMediaOnClick = async () => {
+    const res = await socialMediaAuth(googleProvider)
     console.log(res)
   }
 
-  const onSubmit = (e: { preventDefault: () => void }) => {
-    e.preventDefault()
-    const email = emailRef.current.value
-    const name = nameRef.current.value
-    const password = psdRef.current.value
-    if (email && password && name) registerUser(email, password, name)
+  const onSubmit = (email: string, userName: string, password: string) => {
+    if (email && password && userName) {
+      registerUser(email, password, userName)
+    } else {
+      console.error("error in social media sign up")
+    }
   }
+
+  const tabs = [
+    {
+      label: "A",
+      component: (
+        <RegisterA
+          onSubmit={onSubmit}
+          socialMediaOnClick={handleSocialMediaOnClick}
+        />
+      ),
+    },
+    {
+      label: "B",
+      component: (
+        <RegisterB
+          onSubmit={onSubmit}
+          socialMediaOnClick={handleSocialMediaOnClick}
+        />
+      ),
+    },
+  ]
 
   return (
     <div className={styles.auth_parent_container}>
-      <div className={styles.authContainer}>
-        <div className={styles.form}>
-          <h2> New User Sign Up Form</h2>
-          <form onSubmit={onSubmit}>
-            <input placeholder="Email" type="email" ref={emailRef} />
-            <input placeholder="Name" type="name" ref={nameRef} />
-            <input placeholder="Password" type="password" ref={psdRef} />
-            <button type="submit" className={styles.formButton}>
-              Register
-            </button>
-            <p onClick={() => navigate(urlPath.signIn)}>
-              {"Already have an acount?"}
-            </p>
-            <button
-              onClick={() => handleSocialMediaOnClick(googleProvider)}
-              className={styles.loginWithGoogleBtn}
-            >
-              Sign up with Google
-            </button>
-            <button
-              onClick={() => navigate(urlPath.portfolio)}
-              className={styles.checkProfile}
-            >
-              Check My Profile Without Login
-            </button>
-          </form>
-        </div>
-      </div>
+      {/* {tabs.map((val) => val.component)} */}
+      <RegisterB
+        onSubmit={onSubmit}
+        socialMediaOnClick={handleSocialMediaOnClick}
+      />
     </div>
   )
 }

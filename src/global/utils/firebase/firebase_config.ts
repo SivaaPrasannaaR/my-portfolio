@@ -18,4 +18,5 @@ export const firebaseConfig = initializeApp({
 export const auth = getAuth(firebaseConfig)
 
 // used to access the firestore (DB)
+// Initialize Cloud Firestore and get a reference to the service
 export const db = getFirestore(firebaseConfig)
