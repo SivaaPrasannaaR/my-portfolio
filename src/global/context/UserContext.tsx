@@ -13,7 +13,7 @@ import {
 
 import { useNavigate } from "react-router-dom"
 import { auth } from "../utils/firebase/firebase_config"
-import URLPATH from "../router/urlPath"
+import { urlPath } from "../router/urlPath"
 
 export const UserContext = createContext({})
 
@@ -87,7 +87,7 @@ const UserContextProvider: FC<any> = ({ children }) => {
 
   const logoutUser = () => {
     signOut(auth)
-    navigate(URLPATH.SIGNIN)
+    navigate(urlPath.signIn)
   }
 
   const forgotPassword = (email: string) => {
@@ -104,7 +104,7 @@ const UserContextProvider: FC<any> = ({ children }) => {
         const socialMediaUser = result.user
         setUser(socialMediaUser)
         console.log(socialMediaUser)
-        navigate(URLPATH.HOME)
+        navigate(urlPath.home)
       })
       .catch((error) => {
         // const errorCode = error.code

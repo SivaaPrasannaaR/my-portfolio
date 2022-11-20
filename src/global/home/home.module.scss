@@ -11,3 +11,40 @@
 .logoutButton {
   @include generalButton("large");
 }
+
+.checkProfile {
+  @include generalButton("large");
+  transition: background-color 0.3s, box-shadow 0.3s;
+  padding: 12px 16px 12px 42px;
+
+  background-image: url("../../portfolio/assets/my-photo-1.png");
+  background-repeat: no-repeat;
+  background-position: 2% 50%;
+  background-size: 8%;
+
+  font-weight: 500;
+  box-shadow: 0 1px 8px #ccc;
+
+  &:hover {
+    box-shadow: 0 -1px 0 rgba($color-black, 0.04),
+      0 2px 4px rgba($color-black, 0.25);
+  }
+
+  &:active {
+    background-color: #eeeeee;
+  }
+
+  &:focus {
+    outline: none;
+    box-shadow: 0 -1px 0 rgba($color-black, 0.04),
+      0 2px 4px rgba($color-black, 0.25), 0 0 0 3px #c8dafc;
+  }
+
+  &:disabled {
+    filter: grayscale(100%);
+    background-color: #ebebeb;
+    box-shadow: 0 -1px 0 rgba($color-black, 0.04),
+      0 1px 1px rgba($color-black, 0.25);
+    cursor: not-allowed;
+  }
+}

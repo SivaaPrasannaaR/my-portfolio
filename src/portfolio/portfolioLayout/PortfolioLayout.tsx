@@ -1,11 +1,11 @@
 import React from "react"
-import About from "../about/About"
-import Contacts from "../contacts/Contacts"
+import About from "../components/about/About"
+import Contacts from "../components/contacts/Contacts"
 // import Experience from "../Experience/Experience"
-import Footer from "../footer/Footer"
-import Header from "../header/Header"
-import NavBar from "../navBar/NavBar"
-import Skills from "../Skills/Skills"
+import Footer from "../components/footer/Footer"
+import Header from "../components/header/Header"
+import NavBar from "../components/navBar/NavBar"
+import Skills from "../components/Skills/Skills"
 import styles from "./PortfolioLayout.module.scss"
 
 // layout for portfolio
