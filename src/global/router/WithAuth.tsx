@@ -1,16 +1,16 @@
 import React from "react"
 import { Routes, Route } from "react-router-dom"
-import PortfolioLayout from "../../portfolio/components/portfolioLayout/PortfolioLayout"
 import Home from "../home/Home"
-import URLPATH from "./urlPath"
+import routing from "./routing"
 
 const WithAuth = () => {
   return (
     <Routes>
       <Route index element={<Home />} />
-      <Route path={URLPATH.URLNOTFOUND} element={<Home />} />
-      <Route path={URLPATH.HOME} element={<Home />} />
-      <Route path={URLPATH.PORTFOLIO} element={<PortfolioLayout />} />
+      {routing.map((url) => {
+        if (url.hide(url.label)) return <></>
+        return <Route path={url.path} element={url.component} />
+      })}
     </Routes>
   )
 }

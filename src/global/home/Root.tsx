@@ -1,7 +1,7 @@
 import React, { useEffect } from "react"
 import { useNavigate } from "react-router-dom"
 import { useUserContext } from "../context/UserContext"
-import URLPATH from "../router/urlPath"
+import { urlPath } from "../router/urlPath"
 
 const Root = () => {
   const { user }: any = useUserContext()
@@ -9,9 +9,9 @@ const Root = () => {
 
   useEffect(() => {
     if (!user) {
-      navigate(URLPATH.SIGNIN)
+      navigate(urlPath.signIn)
     } else {
-      navigate(URLPATH.HOME)
+      navigate(urlPath.home)
     }
   }, [navigate, user])
 
