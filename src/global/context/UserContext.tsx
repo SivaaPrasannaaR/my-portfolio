@@ -14,6 +14,9 @@ import {
 import { useNavigate } from "react-router-dom"
 import { auth } from "../utils/firebase/firebase_config"
 import { urlPath } from "../router/urlPath"
+import Firestore from "../utils/firebase/firebase"
+import firebaseCol from "../utils/firebase/firebaseCollection"
+import firebaseRefs from "../utils/firebase/firebaseCollection"
 
 export const UserContext = createContext({})
 
@@ -100,10 +103,17 @@ const UserContextProvider: FC<any> = ({ children }) => {
 
   const socialMediaAuth = (provider: AuthProvider) => {
     signInWithPopup(auth, provider)
-      .then((result) => {
+      .then(async (result) => {
         const socialMediaUser = result.user
         setUser(socialMediaUser)
-        console.log(socialMediaUser)
+        const userData = {
+          uid: socialMediaUser.uid,
+          name: socialMediaUser.displayName,
+          email: socialMediaUser.email,
+          phoneNumber: socialMediaUser.phoneNumber,
+          photoURL: socialMediaUser.photoURL,
+        }
+        await Firestore.setData("users", userData.uid, userData)
         navigate(urlPath.home)
       })
       .catch((error) => {
