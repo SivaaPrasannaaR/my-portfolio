@@ -19,8 +19,8 @@ const Contacts = () => {
           onClick={() => window.open(emailUrl, "_blank")}
         >
           <MdOutlineEmail className={styles.contact__option_icon} />
-          <h4>Email</h4>
-          <h5>sivaprasanna98@gmail.com</h5>
+          <h4 className={styles.textColor_white}>Email</h4>
+          <h5 className={styles.textColor_white}>sivaprasanna98@gmail.com</h5>
           <a
             href="mailto:sivaprasanna98@gmail.com"
             target={"_blank"}
@@ -34,8 +34,8 @@ const Contacts = () => {
           onClick={() => window.open(whatsAppUrl, "_blank")}
         >
           <BsWhatsapp className={styles.contact__option_icon} />
-          <h4>WhatsApp</h4>
-          <h5>+91-824-839-2614</h5>
+          <h4 className={styles.textColor_white}>WhatsApp</h4>
+          <h5 className={styles.textColor_white}>+91-824-839-2614</h5>
           <a
             href="https://api.whatsapp.com/send?phone=+918248392614"
             target={"_blank"}

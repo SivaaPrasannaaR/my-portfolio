@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState } from "react"
 import { useUserContext } from "../context/UserContext"
 import styles from "./login_signup.module.scss"
 import RegisterA from "./register/RegisterA"
@@ -53,13 +53,24 @@ const Signup = () => {
     },
   ]
 
+  const [form, setForm] = useState<any>()
+
   return (
     <div className={styles.auth_parent_container}>
-      {/* {tabs.map((val) => val.component)} */}
-      <RegisterB
-        onSubmit={onSubmit}
-        socialMediaOnClick={handleSocialMediaOnClick}
-      />
+      {/* <span>Choose Register Form: </span> */}
+      <span className={styles.card}>
+        {tabs.map((val) => {
+          return (
+            <span
+              className={styles.card_label}
+              onClick={() => setForm(val.component)}
+            >
+              {val.label}
+            </span>
+          )
+        })}
+      </span>
+      {form}
     </div>
   )
 }

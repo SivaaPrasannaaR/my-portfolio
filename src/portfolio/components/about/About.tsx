@@ -22,18 +22,20 @@ const About = () => {
           <div className={styles.about__cards}>
             <article className={styles.about__card}>
               <FaAward className={styles.about__icons} />
-              <h5>Experience</h5>
-              <small>2 Years Working</small>
+              <h5 className={styles.textColor_white}>Experience</h5>
+              <small>2+ Years Working</small>
+            </article>{" "}
+            <article className={styles.about__card}>
+              <FaAward className={styles.about__icons} />
+              <h5 className={styles.textColor_white}>
+                Oracle Certified Associate
+              </h5>
+              <small>Java SE 8 Programmer</small>
             </article>
             <article className={styles.about__card}>
               <FaAward className={styles.about__icons} />
-              <h5>Experience</h5>
-              <small>2 Years Working</small>
-            </article>
-            <article className={styles.about__card}>
-              <FaAward className={styles.about__icons} />
-              <h5>Experience</h5>
-              <small>2 Years Working</small>
+              <h5 className={styles.textColor_white}>Infosys Certified</h5>
+              <small>as Software Programmer</small>
             </article>
           </div>
           <p>

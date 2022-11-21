@@ -13,7 +13,7 @@ const SkillsDetail = (props: itemTypes) => {
       <article className={styles.skills__details}>
         <BsPatchCheckFill className={styles.skills__details_icon} />
         <div>
-          <h5>{item.skill}</h5>
+          <h5 className={styles.textColor_white}>{item.skill}</h5>
           <small className={styles.text_light}>
             {item.level ? item.level : ""}
           </small>
