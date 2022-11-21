@@ -12,8 +12,8 @@ const Header = () => {
     <header className={style.header}>
       <div className={style.header__container}>
         <div className={style.header__info}>
-          <h5>Hello I'm</h5>
-          <h1>Sivaa Prasannaa R</h1>
+          <h5 className={style.textColor_white}>Hello I'm</h5>
+          <h1 className={style.textColor_white}>Sivaa Prasannaa R</h1>
           <h5 className={style.text_light}>React Fullstack Developer</h5>
 
           <div className={style.header__buttons}>

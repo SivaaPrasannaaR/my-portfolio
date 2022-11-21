@@ -31,6 +31,10 @@
 //   }
 // }
 
+.textColor_white {
+  color: $color-white;
+}
+
 .about__cards {
   display: grid;
   grid-template-columns: repeat(3, 1fr);

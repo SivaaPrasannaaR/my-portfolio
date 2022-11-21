@@ -15,8 +15,6 @@ import { useNavigate } from "react-router-dom"
 import { auth } from "../utils/firebase/firebase_config"
 import { urlPath } from "../router/urlPath"
 import Firestore from "../utils/firebase/firebase"
-import firebaseCol from "../utils/firebase/firebaseCollection"
-import firebaseRefs from "../utils/firebase/firebaseCollection"
 
 export const UserContext = createContext({})
 

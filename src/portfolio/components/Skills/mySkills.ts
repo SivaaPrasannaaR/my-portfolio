@@ -4,6 +4,7 @@ export const skillLevel = {
   l3: "Advanced",
 }
 
+// experience in months
 export const programingSkills = [
   {
     skill: "Javascript",
@@ -19,12 +20,17 @@ export const programingSkills = [
 
 export const frontendSkills = [
   {
-    skill: "React.Js",
+    skill: "React.js",
     level: skillLevel.l3,
     experience: 16,
   },
   {
     skill: "React Native",
+    level: skillLevel.l1,
+    experience: 2,
+  },
+  {
+    skill: "Next.js",
     level: skillLevel.l1,
     experience: 2,
   },
@@ -47,10 +53,21 @@ export const backendSkills = [
     experience: 16,
   },
   {
+    skill: "Axios",
+    level: skillLevel.l1,
+    experience: 16,
+  },
+]
+
+export const databaseSkills = [
+  {
     skill: "Firebase",
     level: skillLevel.l2,
     experience: 16,
   },
+]
+
+export const testingFramework = [
   {
     skill: "Jest",
     level: skillLevel.l2,
@@ -73,5 +90,8 @@ export const devToolsSkills = [
   },
   {
     skill: "VS Code",
+  },
+  {
+    skill: "Slack",
   },
 ]

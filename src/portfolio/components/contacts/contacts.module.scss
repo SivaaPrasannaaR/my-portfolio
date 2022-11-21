@@ -28,8 +28,13 @@
   }
 }
 
+.textColor_white {
+  color: $color-white;
+}
+
 .contact__option_icon {
   font-size: 2rem;
+  color: $color-white;
   margin-bottom: 1rem;
 }
 
