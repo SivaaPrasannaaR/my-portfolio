@@ -1,6 +1,6 @@
 import React, { useRef } from "react"
 import { useNavigate } from "react-router-dom"
-import { urlPath } from "../../router/urlPath"
+import { routingUrl } from "../../router/urlPath"
 import styles from "../login_signup.module.scss"
 import { SignUpType } from "../signup"
 
@@ -31,7 +31,7 @@ const RegisterB = (props: SignUpType) => {
           <button type="submit" className={styles.formButton}>
             Register
           </button>
-          <p onClick={() => navigate(urlPath.signIn)}>
+          <p onClick={() => navigate(routingUrl.signIn.path)}>
             {"Already have an acount?"}
           </p>
           <button
@@ -41,7 +41,7 @@ const RegisterB = (props: SignUpType) => {
             Sign up with Google
           </button>
           <button
-            onClick={() => navigate(urlPath.portfolio)}
+            onClick={() => navigate(routingUrl.portfolio.path)}
             className={styles.checkProfile}
           >
             Check My Profile Without Login

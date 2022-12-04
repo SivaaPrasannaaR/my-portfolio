@@ -1,7 +1,7 @@
 import React, { useRef } from "react"
 import { useNavigate } from "react-router-dom"
 import { useUserContext } from "../context/UserContext"
-import { urlPath } from "../router/urlPath"
+import { routingUrl } from "../router/urlPath"
 import styles from "./login_signup.module.scss"
 
 const Signin = () => {
@@ -18,7 +18,7 @@ const Signin = () => {
   const navigate = useNavigate()
 
   if (user) {
-    navigate(urlPath.home)
+    navigate(routingUrl.home.path)
   }
 
   const handleSocialMediaOnClick = async (provider: any) => {
@@ -53,7 +53,7 @@ const Signin = () => {
               Sign In
             </button>
             <p onClick={forgotPasswordHandler}>Forgot Password?</p>
-            <p onClick={() => navigate(urlPath.signUp)}>
+            <p onClick={() => navigate(routingUrl.signUp.path)}>
               {"New user? Click here"}
             </p>
             <button
@@ -63,7 +63,7 @@ const Signin = () => {
               Sign in with Google
             </button>
             <button
-              onClick={() => navigate(urlPath.portfolio)}
+              onClick={() => navigate(routingUrl.portfolio.path)}
               className={styles.checkProfile}
             >
               Check My Profile Without Login

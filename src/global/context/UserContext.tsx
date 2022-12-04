@@ -10,11 +10,10 @@ import {
   GoogleAuthProvider,
   AuthProvider,
 } from "firebase/auth"
-
 import { useNavigate } from "react-router-dom"
 import { auth } from "../utils/firebase/firebase_config"
-import { urlPath } from "../router/urlPath"
 import Firestore from "../utils/firebase/firebase"
+import { routingUrl } from "../router/urlPath"
 
 export const UserContext = createContext({})
 
@@ -46,8 +45,10 @@ const UserContextProvider: FC<any> = ({ children }) => {
     const unsubscribe = onAuthStateChanged(auth, (res) => {
       if (res) {
         setUser(res)
+        navigate(routingUrl.home.path)
       } else {
         setUser(null)
+        navigate(routingUrl.signIn.path)
       }
       setError("")
       setLoading(false)
@@ -88,7 +89,7 @@ const UserContextProvider: FC<any> = ({ children }) => {
 
   const logoutUser = () => {
     signOut(auth)
-    navigate(urlPath.signIn)
+    navigate(routingUrl.signIn.path)
   }
 
   const forgotPassword = (email: string) => {
@@ -112,7 +113,7 @@ const UserContextProvider: FC<any> = ({ children }) => {
           photoURL: socialMediaUser.photoURL,
         }
         await Firestore.setData("users", userData.uid, userData)
-        navigate(urlPath.home)
+        navigate(routingUrl.home.path)
       })
       .catch((error) => {
         // const errorCode = error.code
