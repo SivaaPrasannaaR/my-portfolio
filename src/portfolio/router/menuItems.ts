@@ -7,29 +7,38 @@ export const menuItemsPath = {
   contacts: "#contacts",
 }
 
+export const menuLabel = {
+  home: "Home",
+  about: "About",
+  skills: "Skills",
+  projects: "Projects",
+  experience: "Experience",
+  contacts: "Contacts",
+}
+
 export const menuItems = [
   {
-    title: "Home",
+    title: menuLabel.home,
     path: menuItemsPath.home,
   },
   {
-    title: "About",
+    title: menuLabel.about,
     path: menuItemsPath.about,
   },
   {
-    title: "Skills",
+    title: menuLabel.skills,
     path: menuItemsPath.skills,
   },
   {
-    title: "Projects",
+    title: menuLabel.projects,
     path: menuItemsPath.projects,
   },
   {
-    title: "Experience",
+    title: menuLabel.experience,
     path: menuItemsPath.experience,
   },
   {
-    title: "Contacts",
+    title: menuLabel.contacts,
     path: menuItemsPath.contacts,
   },
 ]

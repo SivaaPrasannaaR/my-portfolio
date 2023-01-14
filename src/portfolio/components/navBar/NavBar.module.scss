@@ -71,9 +71,20 @@ nav a {
   color: $color-light;
   font-size: 1.1rem;
 
+  position: relative;
+  display: inline-block;
+  margin-top: 20px;
+
   &:hover {
     background: rgba(0, 0, 0, 0.3);
   }
+}
+
+nav a[title]:hover::after {
+  content: attr(title);
+  position: absolute;
+  top: -100%;
+  left: 0;
 }
 
 nav a.active {

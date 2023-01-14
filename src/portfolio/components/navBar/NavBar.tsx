@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 // import { Link } from "react-router-dom"
 // import { HashLink } from "react-router-hash-link"
-import { menuItemsPath } from "../../router/menuItems"
+import { menuItemsPath, menuLabel } from "../../router/menuItems"
 import styles from "./NavBar.module.scss"
 import { AiOutlineHome, AiOutlineUser } from "react-icons/ai"
 import { BiBook, BiMessageSquareDetail } from "react-icons/bi"
@@ -9,14 +9,28 @@ import { BsPatchCheckFill } from "react-icons/bs"
 
 const NavBar = () => {
   const [activeNav, setActiveNav] = useState(menuItemsPath.home)
+
+  const [isHovering, setIsHovering] = useState(false)
+
+  const handleMouseOver = () => {
+    setIsHovering(true)
+  }
+
+  const handleMouseOut = () => {
+    setIsHovering(false)
+  }
   return (
     <nav className={styles.navbar}>
       <a
         href={menuItemsPath.home}
         onClick={() => setActiveNav(menuItemsPath.home)}
         className={activeNav === menuItemsPath.home ? styles.active : ""}
+        title={menuLabel.home}
       >
-        <AiOutlineHome />
+        <div onMouseOver={handleMouseOver} onMouseOut={handleMouseOut}>
+          <AiOutlineHome title={menuLabel.home} />
+        </div>
+        {/* {isHovering && <h2>{menuLabel.home}</h2>} */}
       </a>
       <a
         href={menuItemsPath.about}
