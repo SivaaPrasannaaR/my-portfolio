@@ -4,6 +4,10 @@ import { useUserContext } from "./global/context/UserContext"
 import WithAuth from "./global/router/WithAuth"
 import { NoAuth } from "./global/router/NoAuth"
 
+/**
+ *
+ * @returns
+ */
 function App() {
   const { user, loading, error }: any = useUserContext()
 

@@ -50,6 +50,12 @@ const Home = () => {
       >
         {routingUrl.expenseTracker.displayName}
       </button>
+      <button
+        onClick={() => navigate(routingUrl.betterShopping.path)}
+        className={styles.logoutButton}
+      >
+        {routingUrl.betterShopping.displayName}
+      </button>
       <button onClick={logoutUser} className={styles.logoutButton}>
         Log out
       </button>

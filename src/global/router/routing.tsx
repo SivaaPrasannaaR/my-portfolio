@@ -1,6 +1,8 @@
 import ExpenseTrackerLayout from "../../expenseTracker/layout/ExpenseTrackerLayout"
 import PortfolioLayout from "../../portfolio/portfolioLayout/PortfolioLayout"
 import SMLayout from "../../studyMaterial/SMLayout/SMLayout"
+import BetterShoppingIndex from "../../betterShopping/BetterShoppingIndex"
+import AllProductsDetails from "../../betterShopping/component/allProductList/AllProductsDetails"
 import Home from "../home/Home"
 import { routingUrl } from "./urlPath"
 
@@ -75,6 +77,24 @@ const routing: Routing = [
     displayname: routingUrl.expenseTracker.displayName,
     path: routingUrl.expenseTracker.path,
     component: <ExpenseTrackerLayout />,
+    hide: (accessLabel: string) => hideFunction(accessLabel),
+    showDisplayName: (accessLabel: string) =>
+      showDisplayNameFunction(accessLabel),
+  },
+  {
+    label: routingUrl.betterShopping.label,
+    displayname: routingUrl.betterShopping.displayName,
+    path: routingUrl.betterShopping.path,
+    component: <BetterShoppingIndex />,
+    hide: (accessLabel: string) => hideFunction(accessLabel),
+    showDisplayName: (accessLabel: string) =>
+      showDisplayNameFunction(accessLabel),
+  },
+  {
+    label: routingUrl.betterShoppingDetail.label,
+    displayname: routingUrl.betterShoppingDetail.displayName,
+    path: routingUrl.betterShoppingDetail.path,
+    component: <AllProductsDetails />,
     hide: (accessLabel: string) => hideFunction(accessLabel),
     showDisplayName: (accessLabel: string) =>
       showDisplayNameFunction(accessLabel),

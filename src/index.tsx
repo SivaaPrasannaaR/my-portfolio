@@ -7,6 +7,9 @@ import UserContextProvider from "./global/context/UserContext"
 import { Provider } from "react-redux"
 import { store } from "./global/redux/store"
 
+/**
+ * This is the root component
+ */
 const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement)
 root.render(
   <React.StrictMode>

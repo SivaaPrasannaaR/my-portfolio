@@ -41,6 +41,16 @@ export const routingUrl = {
     path: "/expenseTracker",
     displayName: "Expense Tracker",
   },
+  betterShopping: {
+    label: "betterShopping",
+    path: "/betterShopping",
+    displayName: "Better Shopping",
+  },
+  betterShoppingDetail: {
+    label: "betterShoppingDetail",
+    path: "/betterShopping/detail",
+    displayName: "Better Shopping Detail",
+  },
 }
 
 // // url path for navigating to screen
