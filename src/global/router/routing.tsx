@@ -5,6 +5,7 @@ import BetterShoppingIndex from "../../betterShopping/BetterShoppingIndex"
 import AllProductsDetails from "../../betterShopping/component/allProductList/AllProductsDetails"
 import Home from "../home/Home"
 import { routingUrl } from "./urlPath"
+import ShooterIndex from "../../game/shooter/screen/ShooterIndex"
 
 type Routing = {
   label: string
@@ -95,6 +96,15 @@ const routing: Routing = [
     displayname: routingUrl.betterShoppingDetail.displayName,
     path: routingUrl.betterShoppingDetail.path,
     component: <AllProductsDetails />,
+    hide: (accessLabel: string) => hideFunction(accessLabel),
+    showDisplayName: (accessLabel: string) =>
+      showDisplayNameFunction(accessLabel),
+  },
+  {
+    label: routingUrl.gameShooter.label,
+    displayname: routingUrl.gameShooter.displayName,
+    path: routingUrl.gameShooter.path,
+    component: <ShooterIndex />,
     hide: (accessLabel: string) => hideFunction(accessLabel),
     showDisplayName: (accessLabel: string) =>
       showDisplayNameFunction(accessLabel),

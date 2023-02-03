@@ -51,6 +51,11 @@ export const routingUrl = {
     path: "/betterShopping/detail",
     displayName: "Better Shopping Detail",
   },
+  gameShooter: {
+    label: "gameShooter",
+    path: "/gameShooter",
+    displayName: "Shooter Game",
+  },
 }
 
 // // url path for navigating to screen

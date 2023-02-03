@@ -56,6 +56,12 @@ const Home = () => {
       >
         {routingUrl.betterShopping.displayName}
       </button>
+      <button
+        onClick={() => navigate(routingUrl.gameShooter.path)}
+        className={styles.logoutButton}
+      >
+        {routingUrl.gameShooter.displayName}
+      </button>
       <button onClick={logoutUser} className={styles.logoutButton}>
         Log out
       </button>
