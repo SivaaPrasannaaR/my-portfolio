@@ -1,6 +1,9 @@
 import React from "react"
 import DisplayPlayers from "./DisplayPlayers"
 import style from "../shooter.module.scss"
+import { useAppSelector } from "../../../global/redux/redux-hooks"
+import { PlayersCountType } from "../enum/enum"
+import { getPlayerName } from "../functions/AllShooterValue"
 
 type PlayersType = {
   playerCount: number
@@ -8,12 +11,18 @@ type PlayersType = {
 
 export const Players: React.FC<PlayersType> = (props) => {
   const { playerCount } = props
-  const [currentPlayer, setCurrentPlayer] = React.useState<number>(1)
+  const player = useAppSelector((state) => state.shooter.playersScore)
+  const [currentPlayer, setCurrentPlayer] = React.useState<PlayersCountType>(1)
 
   const changeCurrentPlayer = () => {
-    setCurrentPlayer((prevState) =>
-      prevState > playerCount - 1 ? prevState - playerCount + 1 : prevState + 1
-    )
+    setCurrentPlayer((prevState) => {
+      const player: PlayersCountType =
+        prevState > playerCount - 1
+          ? ((prevState - playerCount + 1) as PlayersCountType)
+          : ((prevState + 1) as PlayersCountType)
+
+      return player
+    })
   }
 
   return (
@@ -28,6 +37,7 @@ export const Players: React.FC<PlayersType> = (props) => {
               <DisplayPlayers
                 key={index + 1}
                 currentPlayer={currentPlayer}
+                player={player[getPlayerName((index + 1) as PlayersCountType)]}
                 isTimeToPlay={index + 1 !== currentPlayer}
                 changeCurrentPlayer={changeCurrentPlayer}
               />

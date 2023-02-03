@@ -1,17 +1,21 @@
 import React from "react"
-import { getImage } from "../functions/getImage"
-import img_0 from "../assets/img_0.png"
+import { stageImage } from "../functions/getImage"
 import style from "../shooter.module.scss"
+import { StageType } from "../enum/enum"
 
-const DisplayImage: React.FC<{ count: number }> = (props) => {
-  const { count } = props
+type DisplayImageType = {
+  stage: StageType
+}
+
+const DisplayImage: React.FC<DisplayImageType> = (props) => {
+  const { stage } = props
 
   return (
     <div>
       <img
-        src={count < 9 ? getImage(count) : img_0}
+        src={stageImage[stage]}
         alt={""}
-        className={style.displayImg}
+        className={`${style.displayImg} ${style.displayImg}`}
       />
     </div>
   )

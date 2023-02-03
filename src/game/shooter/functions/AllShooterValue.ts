@@ -1,10 +1,10 @@
-import { Box, Player } from "../enum/enum"
+import { Box, BoxCountType, Player, PlayersCountType } from "../enum/enum"
 
 export let currentPlayer = {
   playerTime: 1,
 }
 
-export const getPlayerName = (count: number): Player => {
+export const getPlayerName = (count: PlayersCountType): Player => {
   switch (count) {
     case 1:
       return Player.player1
@@ -18,12 +18,9 @@ export const getPlayerName = (count: number): Player => {
       return Player.player5
     case 6:
       return Player.player6
-    // To-do need to remove default later
-    default:
-      return Player.player1
   }
 }
-export const getBoxName = (count: number): Box => {
+export const getBoxName = (count: BoxCountType): Box => {
   switch (count) {
     case 1:
       return Box.box1
@@ -35,8 +32,5 @@ export const getBoxName = (count: number): Box => {
       return Box.box7
     case 9:
       return Box.box9
-    // To-do need to remove default later
-    default:
-      return Box.box1
   }
 }

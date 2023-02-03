@@ -1,3 +1,9 @@
+export type PlayersCountType = 1 | 2 | 3 | 4 | 5 | 6
+export type BoxCountType = 1 | 3 | 5 | 7 | 9
+export type StageType = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8
+
+export const boxNameArr = [1, 3, 5, 7, 9] as BoxCountType[]
+
 export enum Player {
   player1 = "player1",
   player2 = "player2",

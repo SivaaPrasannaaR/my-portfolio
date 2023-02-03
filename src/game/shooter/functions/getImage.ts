@@ -8,57 +8,14 @@ import img_6 from "../assets/img_6.jpg"
 import img_7 from "../assets/img_7.jpg"
 import img_8 from "../assets/img_8.jpg"
 
-export const getImage = (count: number) => {
-  switch (count) {
-    case 0:
-      return img_0
-    case 1:
-      return img_1
-    case 2:
-      return img_2
-    case 3:
-      return img_3
-    case 4:
-      return img_4
-    case 5:
-      return img_5
-    case 6:
-      return img_6
-    case 7:
-      return img_7
-    case 8:
-      return img_8
-  }
+export const stageImage = {
+  0: img_0,
+  1: img_1,
+  2: img_2,
+  3: img_3,
+  4: img_4,
+  5: img_5,
+  6: img_6,
+  7: img_7,
+  8: img_8,
 }
-
-//     case 0:
-//       setBoxImg(img_0)
-//       break
-//     case 1:
-//       setBoxImg(img_1)
-//       break
-//     case 2:
-//       setBoxImg(img_2)
-//       break
-//     case 3:
-//       setBoxImg(img_3)
-//       break
-//     case 4:
-//       setBoxImg(img_4)
-//       break
-//     case 5:
-//       setBoxImg(img_6)
-//       break
-//     case 6:
-//       setBoxImg(img_6)
-//       break
-//     case 7:
-//       setBoxImg(img_7)
-//       break
-//     case 8:
-//       setBoxImg(img_8)
-//       break
-//     default:
-//       setBoxImg(img_0)
-//       break
-//
