@@ -54,7 +54,8 @@ const UserContextProvider: FC<any> = ({ children }) => {
       setLoading(false)
     })
     return unsubscribe
-  }, [navigate])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   const registerUser = async (email: string, password: string, name: any) => {
     setLoading(true)
