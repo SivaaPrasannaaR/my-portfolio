@@ -16,10 +16,12 @@ type displayPlayersProps = {
   player: PlayerBoxType
   changeCurrentPlayer: () => void
   isTimeToPlay: boolean
+  lost: boolean
 }
 
 const DisplayPlayers: React.FC<displayPlayersProps> = (props) => {
-  const { currentPlayer, changeCurrentPlayer, isTimeToPlay, player } = props
+  const { currentPlayer, changeCurrentPlayer, isTimeToPlay, player, lost } =
+    props
   const currentPlayerData = useAppSelector(
     (state) => state.shooter.playersScore[getPlayerName(currentPlayer)]
   )
@@ -29,16 +31,25 @@ const DisplayPlayers: React.FC<displayPlayersProps> = (props) => {
     generateRandomNum()
   )
 
-  const isCurrentPlayerLockedToShoot: boolean = boxNameArr.some(
-    (boxNum: BoxCountType) =>
-      currentPlayerData[getBoxName(boxNum)].lockedToShootBox
-  )
+  const isCurrentPlayerBox: {
+    box: BoxCountType | undefined
+    lockedToShoot: boolean
+  } = {
+    box: boxNameArr.find(
+      (boxNum: BoxCountType) =>
+        currentPlayerData[getBoxName(boxNum)].lockedToShootBox
+    ),
+    lockedToShoot: boxNameArr.some(
+      (boxNum: BoxCountType) =>
+        currentPlayerData[getBoxName(boxNum)].lockedToShootBox
+    ),
+  }
 
   const handleRandomNum = React.useCallback(() => {
     const random_number: BoxCountType = generateRandomNum() as BoxCountType
     setDiceNumber(random_number)
 
-    /* used to update the img count in state value */
+    /* used to update the box stage count in state value */
     dispatch(
       shooterAction.incrementBoxStage({
         player: currentPlayer,
@@ -48,7 +59,7 @@ const DisplayPlayers: React.FC<displayPlayersProps> = (props) => {
 
     /* used to update the ready to shoot in state value */
     dispatch(
-      shooterAction.readyToShootCheck({
+      shooterAction.updateReadyToShoot({
         player: currentPlayer,
         box: random_number,
       })
@@ -57,24 +68,22 @@ const DisplayPlayers: React.FC<displayPlayersProps> = (props) => {
     changeCurrentPlayer()
   }, [changeCurrentPlayer, currentPlayer, dispatch])
 
-  React.useEffect(() => {
-    Array.from(new Array(13)).forEach(() =>
-      setTimeout(() => handleRandomNum(), 500)
-    )
-  }, [])
-
   return (
-    <div>
-      <div className={style.imgDiv}>
+    <div className={lost ? style.playerLost : ""}>
+      <div
+        className={`
+          ${style.imgDiv} 
+          ${lost ? style.playerLost : ""}
+          `}
+      >
         <button
           onClick={handleRandomNum}
-          className={style.rollDiceButton}
-          disabled={!isTimeToPlay}
-          style={
-            isTimeToPlay
-              ? { backgroundColor: "teal" }
-              : { backgroundColor: "grey", cursor: "default" }
-          }
+          className={`
+          ${style.rollDiceButton} 
+          ${isTimeToPlay ? style.timeToPlay : style.notTimeToPlay} 
+          ${lost ? style.playerLost : ""}
+          `}
+          disabled={!isTimeToPlay || lost}
         >
           {diceNumber}
         </button>
@@ -86,7 +95,9 @@ const DisplayPlayers: React.FC<displayPlayersProps> = (props) => {
             key={boxName}
             box={player[boxName]}
             isTimeToPlay={isTimeToPlay}
-            isCurrentPlayerLockedToShoot={isCurrentPlayerLockedToShoot}
+            isCurrentPlayerLockedToShoot={isCurrentPlayerBox.lockedToShoot}
+            currentPlayerBoxNumber={isCurrentPlayerBox.box}
+            lost={lost}
           />
         )
       })}

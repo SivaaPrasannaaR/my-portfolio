@@ -17,6 +17,7 @@ export const Players: React.FC<PlayersType> = (props) => {
   const { playerCount } = props
   const player = useAppSelector((state) => state.shooter.playersScore)
   const currentPlayer = useAppSelector((state) => state.shooter.currentPlayer)
+  const playerStatus = useAppSelector((state) => state.shooter.playersStatus)
   const dispatch = useAppDispatch()
 
   React.useEffect(() => {
@@ -42,6 +43,10 @@ export const Players: React.FC<PlayersType> = (props) => {
                 player={player[getPlayerName((index + 1) as PlayersCountType)]}
                 isTimeToPlay={index + 1 === currentPlayer}
                 changeCurrentPlayer={changeCurrentPlayer}
+                lost={
+                  playerStatus[getPlayerName((index + 1) as PlayersCountType)]
+                    .lost
+                }
               />
             )
           })}

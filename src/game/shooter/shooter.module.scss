@@ -254,6 +254,9 @@ input {
 
 .readyToShoot {
   background-color: yellow;
+}
+
+.currentPlayerReadyToShoot {
   cursor: pointer;
 }
 
@@ -263,4 +266,18 @@ input {
 
 .otherPlayerStage {
   cursor: pointer;
+}
+
+.playerLost {
+  background-color: lightcoral;
+  cursor: default;
+}
+
+.timeToPlay {
+  background-color: teal;
+}
+
+.notTimeToPlay {
+  background-color: grey;
+  cursor: default;
 }

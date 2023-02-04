@@ -4,6 +4,7 @@ import {
   StageType,
   BoxCountType,
   PlayersCountType,
+  PlayersBoxValueType,
 } from "../enum/enum"
 
 type PlayerBoxTypeCommon = {
@@ -25,12 +26,27 @@ export type PlayerBoxType = {
   [B in Box]: EachPlayerBoxType
 }
 
-export type StateType = {
+type PlayerStatusType = {
+  lost: boolean
+  boxValue: PlayersBoxValueType
+}
+
+export type ShooterStateType = {
+  gameStarted: boolean
   playerCount: PlayersCountType
   currentPlayer: PlayersCountType
+  playersRank: PlayersCountType[]
+  playersStatus: {
+    [P in Player]: PlayerStatusType
+  }
   playersScore: {
     [P in Player]: PlayerBoxType
   }
+}
+
+const playerStatus: PlayerStatusType = {
+  lost: false,
+  boxValue: 5,
 }
 
 const playerBoxTypeCommon: PlayerBoxTypeCommon = {
@@ -77,9 +93,19 @@ const playerBoxType: PlayerBoxType = {
   },
 }
 
-export const initialState: StateType = {
+export const initialState: ShooterStateType = {
+  gameStarted: false,
   playerCount: 2,
   currentPlayer: 1,
+  playersRank: [],
+  playersStatus: {
+    player1: playerStatus,
+    player2: playerStatus,
+    player3: playerStatus,
+    player4: playerStatus,
+    player5: playerStatus,
+    player6: playerStatus,
+  },
   playersScore: {
     player1: playerBoxType,
     player2: playerBoxType,
