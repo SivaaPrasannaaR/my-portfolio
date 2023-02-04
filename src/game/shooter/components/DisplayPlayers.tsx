@@ -9,7 +9,7 @@ import {
 import { shooterAction } from "../redux/shooterSlice"
 import { BoxCountType, boxNameArr, PlayersCountType } from "../enum/enum"
 import { PlayerBoxType } from "../redux/shooterInitialState"
-import { getBoxName } from "../functions/AllShooterValue"
+import { getBoxName, getPlayerName } from "../functions/AllShooterValue"
 
 type displayPlayersProps = {
   currentPlayer: PlayersCountType
@@ -20,11 +20,18 @@ type displayPlayersProps = {
 
 const DisplayPlayers: React.FC<displayPlayersProps> = (props) => {
   const { currentPlayer, changeCurrentPlayer, isTimeToPlay, player } = props
-  const playerCount = useAppSelector((state) => state.shooter.playerCount)
+  const currentPlayerData = useAppSelector(
+    (state) => state.shooter.playersScore[getPlayerName(currentPlayer)]
+  )
   const dispatch = useAppDispatch()
 
   const [diceNumber, setDiceNumber] = React.useState<number>(
     generateRandomNum()
+  )
+
+  const isCurrentPlayerLockedToShoot: boolean = boxNameArr.some(
+    (boxNum: BoxCountType) =>
+      currentPlayerData[getBoxName(boxNum)].lockedToShootBox
   )
 
   const handleRandomNum = React.useCallback(() => {
@@ -76,9 +83,10 @@ const DisplayPlayers: React.FC<displayPlayersProps> = (props) => {
         const boxName = getBoxName(boxNum)
         return (
           <DisplayImage
+            key={boxName}
             box={player[boxName]}
             isTimeToPlay={isTimeToPlay}
-            currentPlayer={currentPlayer}
+            isCurrentPlayerLockedToShoot={isCurrentPlayerLockedToShoot}
           />
         )
       })}

@@ -2,6 +2,7 @@ import React, { useState } from "react"
 import { useAppDispatch } from "../../../global/redux/redux-hooks"
 import { Players } from "../components/Players"
 import ShowNumbers from "../components/ShowNumbers"
+import { PlayersCountType } from "../enum/enum"
 import { shooterAction } from "../redux/shooterSlice"
 import style from "../shooter.module.scss"
 
@@ -10,17 +11,21 @@ const maxPlayer = 6
 
 const ShooterIndex: React.FC = () => {
   const [display, setDisplay] = useState<boolean>(false)
-  const [playerCount, setPlayerCount] = useState<number>(minPlayer)
+  const [playerCount, setPlayerCount] = useState<PlayersCountType>(minPlayer)
   const dispatch = useAppDispatch()
 
   const addPlayerCount = () => {
     setPlayerCount((prevState) => {
-      return prevState < maxPlayer ? prevState + 1 : prevState
+      return prevState < maxPlayer
+        ? ((prevState + 1) as PlayersCountType)
+        : (prevState as PlayersCountType)
     })
   }
   const subPlayerCount = () => {
     setPlayerCount((prevState) => {
-      return prevState > minPlayer ? prevState - 1 : prevState
+      return prevState > minPlayer
+        ? ((prevState - 1) as PlayersCountType)
+        : (prevState as PlayersCountType)
     })
   }
   const handleSubmit = () => {

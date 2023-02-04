@@ -4,45 +4,62 @@ import style from "../shooter.module.scss"
 import { EachPlayerBoxType } from "../redux/shooterInitialState"
 import { useAppDispatch } from "../../../global/redux/redux-hooks"
 import { shooterAction } from "../redux/shooterSlice"
-import { PlayersCountType } from "../enum/enum"
 
 type DisplayImageType = {
   box: EachPlayerBoxType
-  currentPlayer: PlayersCountType
   isTimeToPlay: boolean
+  isCurrentPlayerLockedToShoot: boolean
 }
 
 const DisplayImage: React.FC<DisplayImageType> = (props) => {
-  const { box, isTimeToPlay, currentPlayer } = props
+  const { box, isTimeToPlay, isCurrentPlayerLockedToShoot } = props
   const dispatch = useAppDispatch()
 
-  const handleOnClickShoot = () => {
+  const handleOnClickShoot = React.useCallback(() => {
     if (isTimeToPlay && box.readyToShoot) {
       dispatch(
         shooterAction.setLockedToShoot({
-          player: currentPlayer,
-          box: box.boxNum,
+          player: box.boxInfo.playerNum,
+          box: box.boxInfo.boxNum,
         })
       )
     }
-  }
+    if (!isTimeToPlay && isCurrentPlayerLockedToShoot) {
+      console.log("###box.boxInfo", box.boxInfo)
+      dispatch(
+        shooterAction.shootOpponent({
+          opponentBox: box.boxInfo,
+        })
+      )
+    }
+  }, [
+    box.boxInfo,
+    box.readyToShoot,
+    dispatch,
+    isCurrentPlayerLockedToShoot,
+    isTimeToPlay,
+  ])
 
   React.useEffect(() => {
     if (!box.readyToShoot && box.stage < 6) {
       dispatch(
         shooterAction.unSetLockedToShoot({
-          player: currentPlayer,
+          player: box.boxInfo.playerNum,
         })
       )
     }
-  }, [box.readyToShoot, box.stage, currentPlayer, dispatch])
+  }, [box.boxInfo.playerNum, box.readyToShoot, box.stage, dispatch])
 
   return (
     <div
       className={`
       ${style.imgDiv} 
       ${box.readyToShoot ? style.readyToShoot : ""} 
-      ${!isTimeToPlay ? style.otherPlayerStage : ""} 
+      ${
+        !isTimeToPlay && isCurrentPlayerLockedToShoot
+          ? style.otherPlayerStage
+          : ""
+      } 
       ${box.lockedToShootBox ? style.lockedBox : ""}
       `}
       onClick={handleOnClickShoot}
