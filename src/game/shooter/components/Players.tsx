@@ -38,7 +38,7 @@ export const Players: React.FC<PlayersType> = (props) => {
                 key={index + 1}
                 currentPlayer={currentPlayer}
                 player={player[getPlayerName((index + 1) as PlayersCountType)]}
-                isTimeToPlay={index + 1 !== currentPlayer}
+                isTimeToPlay={index + 1 === currentPlayer}
                 changeCurrentPlayer={changeCurrentPlayer}
               />
             )

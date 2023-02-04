@@ -7,14 +7,15 @@ import {
   useAppSelector,
 } from "../../../global/redux/redux-hooks"
 import { shooterAction } from "../redux/shooterSlice"
-import { BoxCountType, PlayersCountType } from "../enum/enum"
-import { PlayerInitialScoreType } from "../redux/shooterInitialState"
+import { BoxCountType, boxNameArr, PlayersCountType } from "../enum/enum"
+import { PlayerBoxType } from "../redux/shooterInitialState"
+import { getBoxName } from "../functions/AllShooterValue"
 
 type displayPlayersProps = {
   currentPlayer: PlayersCountType
-  player: PlayerInitialScoreType
+  player: PlayerBoxType
   changeCurrentPlayer: () => void
-  isTimeToPlay: boolean | undefined
+  isTimeToPlay: boolean
 }
 
 const DisplayPlayers: React.FC<displayPlayersProps> = (props) => {
@@ -26,7 +27,7 @@ const DisplayPlayers: React.FC<displayPlayersProps> = (props) => {
     generateRandomNum()
   )
 
-  const handleRandomNum = () => {
+  const handleRandomNum = React.useCallback(() => {
     const random_number: BoxCountType = generateRandomNum() as BoxCountType
     setDiceNumber(random_number)
 
@@ -47,7 +48,13 @@ const DisplayPlayers: React.FC<displayPlayersProps> = (props) => {
     )
 
     changeCurrentPlayer()
-  }
+  }, [changeCurrentPlayer, currentPlayer, dispatch])
+
+  React.useEffect(() => {
+    Array.from(new Array(13)).forEach(() =>
+      setTimeout(() => handleRandomNum(), 500)
+    )
+  }, [])
 
   return (
     <div>
@@ -55,51 +62,26 @@ const DisplayPlayers: React.FC<displayPlayersProps> = (props) => {
         <button
           onClick={handleRandomNum}
           className={style.rollDiceButton}
-          disabled={isTimeToPlay}
+          disabled={!isTimeToPlay}
           style={
             isTimeToPlay
-              ? { backgroundColor: "grey", cursor: "default" }
-              : { backgroundColor: "teal" }
+              ? { backgroundColor: "teal" }
+              : { backgroundColor: "grey", cursor: "default" }
           }
         >
           {diceNumber}
         </button>
       </div>
-      <div
-        className={`${style.imgDiv} ${
-          player.box1.readyToShoot ? style.readyToShoot : ""
-        }`}
-      >
-        <DisplayImage stage={player.box1.stage} />
-      </div>
-      <div
-        className={`${style.imgDiv} ${
-          player.box3.readyToShoot ? style.readyToShoot : ""
-        }`}
-      >
-        <DisplayImage stage={player.box3.stage} />
-      </div>
-      <div
-        className={`${style.imgDiv} ${
-          player.box5.readyToShoot ? style.readyToShoot : ""
-        }`}
-      >
-        <DisplayImage stage={player.box5.stage} />
-      </div>
-      <div
-        className={`${style.imgDiv} ${
-          player.box7.readyToShoot ? style.readyToShoot : ""
-        }`}
-      >
-        <DisplayImage stage={player.box7.stage} />
-      </div>
-      <div
-        className={`${style.imgDiv} ${
-          player.box9.readyToShoot ? style.readyToShoot : ""
-        }`}
-      >
-        <DisplayImage stage={player.box9.stage} />
-      </div>
+      {boxNameArr.map((boxNum) => {
+        const boxName = getBoxName(boxNum)
+        return (
+          <DisplayImage
+            box={player[boxName]}
+            isTimeToPlay={isTimeToPlay}
+            currentPlayer={currentPlayer}
+          />
+        )
+      })}
     </div>
   )
 }

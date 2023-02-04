@@ -1,32 +1,39 @@
-import { Player, Box, StageType } from "../enum/enum"
+import { Player, Box, StageType, BoxCountType } from "../enum/enum"
 
-export type PlayerInitialScoreType = {
-  [B in Box]: { stage: StageType; readyToShoot: boolean }
+export type EachPlayerBoxType = {
+  boxNum: Readonly<BoxCountType>
+  stage: StageType
+  readyToShoot: boolean
+  lockedToShootBox: boolean
+}
+
+export type PlayerBoxType = {
+  [B in Box]: EachPlayerBoxType
 }
 
 export type StateType = {
   playerCount: number
   playersScore: {
-    [P in Player]: PlayerInitialScoreType
+    [P in Player]: PlayerBoxType
   }
 }
 
-export const playerInitialScore: PlayerInitialScoreType = {
-  box1: { stage: 0, readyToShoot: false },
-  box3: { stage: 0, readyToShoot: false },
-  box5: { stage: 0, readyToShoot: false },
-  box7: { stage: 0, readyToShoot: false },
-  box9: { stage: 0, readyToShoot: false },
+export const playerBoxType: PlayerBoxType = {
+  box1: { boxNum: 1, stage: 0, readyToShoot: false, lockedToShootBox: false },
+  box3: { boxNum: 3, stage: 0, readyToShoot: false, lockedToShootBox: false },
+  box5: { boxNum: 5, stage: 0, readyToShoot: false, lockedToShootBox: false },
+  box7: { boxNum: 7, stage: 0, readyToShoot: false, lockedToShootBox: false },
+  box9: { boxNum: 9, stage: 0, readyToShoot: false, lockedToShootBox: false },
 }
 
 export const initialState: StateType = {
   playerCount: 2,
   playersScore: {
-    player1: playerInitialScore,
-    player2: playerInitialScore,
-    player3: playerInitialScore,
-    player4: playerInitialScore,
-    player5: playerInitialScore,
-    player6: playerInitialScore,
+    player1: playerBoxType,
+    player2: playerBoxType,
+    player3: playerBoxType,
+    player4: playerBoxType,
+    player5: playerBoxType,
+    player6: playerBoxType,
   },
 }

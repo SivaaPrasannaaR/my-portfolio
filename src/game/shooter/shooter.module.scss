@@ -253,5 +253,14 @@ input {
 }
 
 .readyToShoot {
+  background-color: yellow;
+  cursor: pointer;
+}
+
+.lockedBox {
   background-color: green;
+}
+
+.otherPlayerStage {
+  cursor: pointer;
 }
