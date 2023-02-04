@@ -54,7 +54,7 @@ const UserContextProvider: FC<any> = ({ children }) => {
       setLoading(false)
     })
     return unsubscribe
-  }, [])
+  }, [navigate])
 
   const registerUser = async (email: string, password: string, name: any) => {
     setLoading(true)
