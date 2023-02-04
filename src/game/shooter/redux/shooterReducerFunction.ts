@@ -59,10 +59,11 @@ const incrementBoxStage = (
 ) => {
   const playerName = getPlayerName(action.payload.player)
   const boxName = getBoxName(action.payload.box)
+  const isBoxKilled = state.playersScore[playerName][boxName].boxInfo.killed
 
-  if (state.playersScore[playerName][boxName].stage < 8) {
+  if (!isBoxKilled && state.playersScore[playerName][boxName].stage < 8) {
     state.playersScore[playerName][boxName].stage += 1
-  } else {
+  } else if (!isBoxKilled) {
     state.playersScore[playerName][boxName].stage = 0
   }
 }
@@ -181,21 +182,35 @@ const shootOpponent = (
   }
 }
 
+const checkKilledBox = (state: ShooterStateType) => {
+  Array.from(new Array(state.playerCount)).forEach((_, index) => {
+    const playerNum = (index + 1) as PlayersCountType
+    const playerName = getPlayerName(playerNum)
+
+    boxNameArr.forEach((boxNumber: BoxCountType) => {
+      const boxName = getBoxName(boxNumber)
+      if (state.playersScore[playerName][boxName].stage === 0) {
+        state.playersScore[playerName][boxName].boxInfo.killed = true
+      }
+    })
+  })
+}
+
 const checkGameLosser = (state: ShooterStateType) => {
   if (state.gameStarted) {
     Array.from(new Array(state.playerCount)).forEach((_, index) => {
       const playerNum = (index + 1) as PlayersCountType
       const playerName = getPlayerName(playerNum)
-      let countZero = 0
+      let countKilled = 0
 
       boxNameArr.forEach((boxNumber: BoxCountType) => {
         const boxName = getBoxName(boxNumber)
-        if (state.playersScore[playerName][boxName].stage === 0) {
-          countZero++
+        if (state.playersScore[playerName][boxName].boxInfo.killed) {
+          countKilled++
         }
       })
 
-      if (countZero > 2) {
+      if (countKilled === 5) {
         state.playersRank.push(playerNum)
         state.playersStatus[playerName].lost = true
       }
@@ -213,6 +228,7 @@ const shooterReducerFunction = {
   setLockedToShoot,
   unSetLockedToShoot,
   shootOpponent,
+  checkKilledBox,
   checkGameLosser,
 }
 

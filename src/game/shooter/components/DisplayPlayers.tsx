@@ -69,24 +69,27 @@ const DisplayPlayers: React.FC<displayPlayersProps> = (props) => {
   }, [changeCurrentPlayer, currentPlayer, dispatch])
 
   return (
-    <div className={lost ? style.playerLost : ""}>
+    <div>
       <div
         className={`
           ${style.imgDiv} 
-          ${lost ? style.playerLost : ""}
+          ${lost ? style.disabled : ""}
           `}
       >
-        <button
-          onClick={handleRandomNum}
-          className={`
+        {!lost ? (
+          <button
+            onClick={handleRandomNum}
+            className={`
           ${style.rollDiceButton} 
           ${isTimeToPlay ? style.timeToPlay : style.notTimeToPlay} 
-          ${lost ? style.playerLost : ""}
           `}
-          disabled={!isTimeToPlay || lost}
-        >
-          {diceNumber}
-        </button>
+            disabled={!isTimeToPlay || lost}
+          >
+            {diceNumber}
+          </button>
+        ) : (
+          <p className={style.out}>OUT</p>
+        )}
       </div>
       {boxNameArr.map((boxNum) => {
         const boxName = getBoxName(boxNum)

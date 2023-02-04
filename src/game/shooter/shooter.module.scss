@@ -269,12 +269,24 @@ input {
 }
 
 .playerLost {
-  background-color: lightcoral;
+  background-color: red;
   cursor: default;
 }
 
 .timeToPlay {
   background-color: teal;
+}
+
+.disabled {
+  background-color: grey;
+  padding: 10px;
+  text-align: center;
+}
+
+.out {
+  font-size: 2rem;
+  font-weight: bolder;
+  padding-top: 30px;
 }
 
 .notTimeToPlay {

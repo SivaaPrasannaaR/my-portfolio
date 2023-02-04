@@ -52,7 +52,6 @@ const DisplayImage: React.FC<DisplayImageType> = (props) => {
           opponentBox: box.boxInfo,
         })
       )
-      dispatch(shooterAction.checkGameLosser())
     }
   }, [
     box.boxInfo,
@@ -64,14 +63,6 @@ const DisplayImage: React.FC<DisplayImageType> = (props) => {
   ])
 
   React.useEffect(() => {
-    if (!box.readyToShoot && box.stage < 6) {
-      dispatch(
-        shooterAction.unSetLockedToShoot({
-          player: box.boxInfo.playerNum,
-        })
-      )
-    }
-
     /** update ready to shoot state */
     if (currentPlayerBoxNumber) {
       dispatch(
@@ -81,13 +72,30 @@ const DisplayImage: React.FC<DisplayImageType> = (props) => {
         })
       )
     }
+
+    /** auto unset the locked box to shoot */
+    if (!box.readyToShoot && isCurrentPlayerLockedToShoot && box.stage < 6) {
+      dispatch(
+        shooterAction.unSetLockedToShoot({
+          player: box.boxInfo.playerNum,
+        })
+      )
+    }
+
+    /** update killed boxes */
+    if (isCurrentPlayerLockedToShoot) {
+      dispatch(shooterAction.checkKilledBox())
+      dispatch(shooterAction.checkGameLosser())
+    }
   }, [
     box.boxInfo.playerNum,
     box.readyToShoot,
     box.stage,
+    canShootOpponentBox,
     currentPlayer,
     currentPlayerBoxNumber,
     dispatch,
+    isCurrentPlayerLockedToShoot,
   ])
 
   return (
@@ -100,12 +108,12 @@ const DisplayImage: React.FC<DisplayImageType> = (props) => {
       } 
       ${canShootOpponentBox ? style.otherPlayerStage : ""} 
       ${box.lockedToShootBox ? style.lockedBox : ""}
-      ${lost ? style.playerLost : ""}
+      ${box.boxInfo.killed ? style.playerLost : ""}
       `}
       onClick={handleOnClickShoot}
     >
       <img
-        src={stageImage[box.stage]}
+        src={box.boxInfo.killed ? stageImage[0] : stageImage[box.stage]}
         alt={""}
         className={`${style.displayImg} ${style.displayImg}`}
       />

@@ -16,6 +16,7 @@ type PlayerBoxTypeCommon = {
 export type BoxInfoType = {
   boxNum: Readonly<BoxCountType>
   playerNum: PlayersCountType
+  killed: boolean
 }
 
 export type EachPlayerBoxType = {
@@ -60,6 +61,7 @@ const playerBoxType: PlayerBoxType = {
     boxInfo: {
       boxNum: 1,
       playerNum: 1,
+      killed: false,
     },
     ...playerBoxTypeCommon,
   },
@@ -67,6 +69,7 @@ const playerBoxType: PlayerBoxType = {
     boxInfo: {
       boxNum: 3,
       playerNum: 1,
+      killed: false,
     },
     ...playerBoxTypeCommon,
   },
@@ -74,6 +77,7 @@ const playerBoxType: PlayerBoxType = {
     boxInfo: {
       boxNum: 5,
       playerNum: 1,
+      killed: false,
     },
     ...playerBoxTypeCommon,
   },
@@ -81,6 +85,7 @@ const playerBoxType: PlayerBoxType = {
     boxInfo: {
       boxNum: 7,
       playerNum: 1,
+      killed: false,
     },
     ...playerBoxTypeCommon,
   },
@@ -88,6 +93,7 @@ const playerBoxType: PlayerBoxType = {
     boxInfo: {
       boxNum: 9,
       playerNum: 1,
+      killed: false,
     },
     ...playerBoxTypeCommon,
   },
