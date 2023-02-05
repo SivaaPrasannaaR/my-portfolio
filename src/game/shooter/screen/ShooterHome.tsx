@@ -8,16 +8,13 @@ import { uid } from "uid"
 import { shooterAction } from "../redux/shooterSlice"
 import style from "../shooter.module.scss"
 import useShooterFirebaseFunctions from "../firebase/useShooterFirebaseFunctions"
+import { useNavigate } from "react-router-dom"
 
 const minPlayer = 2
 const maxPlayer = 6
 
-type ShooterHomeType = {
-  setDisplay: React.Dispatch<React.SetStateAction<boolean>>
-}
-
-const ShooterHome: React.FC<ShooterHomeType> = (props) => {
-  const { setDisplay } = props
+const ShooterHome: React.FC = (props) => {
+  const navigate = useNavigate()
 
   const [playerCount, setPlayerCount] = useState<PlayersCountType>(minPlayer)
   const [room, setRoom] = useState<{ newRoom: boolean; existingRoom: boolean }>(
@@ -54,11 +51,15 @@ const ShooterHome: React.FC<ShooterHomeType> = (props) => {
     dispatch(shooterAction.setPlayer(playerCount))
     dispatch(shooterAction.updateInitialState())
   }
-  const handleJoinExistingRoom = async () => {
+  const handleJoinExistingRoom = () => {
     dispatch(shooterAction.setRoomId(roomId))
-    dispatch(shooterAction.setLoading(true))
 
-    await listenToDb(roomId)
+    setLoading(true)
+    listenToDb(roomId)
+    setTimeout(() => {
+      navigate(`/gameShooter/${roomId}`)
+      setLoading(false)
+    }, 3000)
   }
 
   const goToGame = async () => {
@@ -69,8 +70,12 @@ const ShooterHome: React.FC<ShooterHomeType> = (props) => {
           console.error(e)
         })
         .finally(() => {
+          listenToDb(roomId)
           setLoading(false)
-          setDisplay(true)
+          setTimeout(() => {
+            navigate(`/gameShooter/${roomId}`)
+            setLoading(false)
+          }, 2000)
         }))
   }
 
@@ -135,18 +140,10 @@ const ShooterHome: React.FC<ShooterHomeType> = (props) => {
           </div>
           <div>
             <button
-              onClick={() => handleJoinExistingRoom()}
+              onClick={() => !loading && handleJoinExistingRoom()}
               className={style.playerCount}
             >
-              {stateLoading ? "Loading..." : "Check Room"}
-            </button>
-          </div>
-          <div>
-            <button
-              onClick={() => !stateLoading && setDisplay(true)}
-              className={style.playerCount}
-            >
-              {stateLoading ? "Loading..." : "Join Room"}
+              {loading ? "Loading..." : "Join Room"}
             </button>
           </div>
         </div>

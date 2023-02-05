@@ -56,6 +56,11 @@ export const routingUrl = {
     path: "/gameShooter",
     displayName: "Shooter Game",
   },
+  gameShooterDetail: {
+    label: "gameShooterPlayground",
+    path: "/gameShooter/:id",
+    displayName: "Shooter Game Playground",
+  },
 }
 
 // // url path for navigating to screen

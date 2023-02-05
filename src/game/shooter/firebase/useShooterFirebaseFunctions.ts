@@ -62,7 +62,6 @@ const useShooterFirebaseFunctions = () => {
         console.warn("No data available")
       }
     })
-    dispatch(shooterAction.setLoading(false))
   }
 
   const updateShooterStateToDb = async () => {
