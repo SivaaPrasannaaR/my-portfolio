@@ -1,8 +1,5 @@
 import React, { useState } from "react"
-import {
-  useAppDispatch,
-  useAppSelector,
-} from "../../../global/redux/redux-hooks"
+import { useAppDispatch } from "../../../global/redux/redux-hooks"
 import { PlayersCountType } from "../enum/enum"
 import { uid } from "uid"
 import { shooterAction } from "../redux/shooterSlice"
@@ -22,7 +19,6 @@ const ShooterHome: React.FC = (props) => {
   )
   const [roomId, setRoomId] = useState<string>("")
   const [loading, setLoading] = useState<boolean>(false)
-  const stateLoading = useAppSelector((state) => state.shooter.loading)
 
   const dispatch = useAppDispatch()
 
