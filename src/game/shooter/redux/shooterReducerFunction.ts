@@ -77,9 +77,6 @@ const incrementBoxStage = (
   if (!isBoxKilled && state.playersScore[playerName][boxName].stage < 8) {
     state.playersScore[playerName][boxName].stage += 1
     state.playersScore[playerName][boxName].boxInfo.alive = true
-  } else if (!isBoxKilled) {
-    state.playersScore[playerName][boxName].stage = 0
-    state.playersScore[playerName][boxName].boxInfo.alive = false
   }
 }
 
