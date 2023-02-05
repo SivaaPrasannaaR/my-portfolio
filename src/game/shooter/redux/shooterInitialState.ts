@@ -33,8 +33,10 @@ export type PlayerStatusType = {
 }
 
 export type ShooterStateType = {
+  loading: boolean
   gameStarted: boolean
   playerCount: PlayersCountType
+  roomId: string
   currentPlayer: PlayersCountType
   playersRank: PlayersCountType[]
   playersStatus: {
@@ -105,8 +107,10 @@ const playerBoxType: PlayerBoxType = {
 }
 
 export const initialState: ShooterStateType = {
+  loading: false,
   gameStarted: false,
   playerCount: 2,
+  roomId: "",
   currentPlayer: 1,
   playersRank: [],
   playersStatus: {

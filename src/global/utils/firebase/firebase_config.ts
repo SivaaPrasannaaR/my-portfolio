@@ -1,6 +1,7 @@
 import { initializeApp } from "firebase/app"
 import { getAuth } from "firebase/auth"
 import { getFirestore } from "firebase/firestore"
+import { getDatabase } from "firebase/database"
 
 // used the firebase/app import to initialize the firebase access
 export const firebaseConfig = initializeApp({
@@ -20,3 +21,6 @@ export const auth = getAuth(firebaseConfig)
 // used to access the firestore (DB)
 // Initialize Cloud Firestore and get a reference to the service
 export const db = getFirestore(firebaseConfig)
+
+// Initialize Realtime Database and get a reference to the service
+export const realTimeDb = getDatabase(firebaseConfig)

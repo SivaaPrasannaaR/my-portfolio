@@ -1,28 +1,26 @@
 import React from "react"
 import DisplayPlayers from "./DisplayPlayers"
 import style from "../shooter.module.scss"
-import {
-  useAppDispatch,
-  useAppSelector,
-} from "../../../global/redux/redux-hooks"
+import { useAppSelector } from "../../../global/redux/redux-hooks"
 import { PlayersCountType } from "../enum/enum"
 import { getPlayerName } from "../functions/AllShooterValue"
-import { shooterAction } from "../redux/shooterSlice"
+import useShooterFirebaseFunctions from "../firebase/useShooterFirebaseFunctions"
 
-type PlayersType = {
-  playerCount: number
-}
-
-export const Players: React.FC<PlayersType> = (props) => {
-  const { playerCount } = props
+export const Players: React.FC = () => {
   const player = useAppSelector((state) => state.shooter.playersScore)
+  const playerCount = useAppSelector((state) => state.shooter.playerCount)
   const currentPlayer = useAppSelector((state) => state.shooter.currentPlayer)
   const playerStatus = useAppSelector((state) => state.shooter.playersStatus)
-  const dispatch = useAppDispatch()
+  const { updateShooterStateToDb } = useShooterFirebaseFunctions()
 
   React.useEffect(() => {
-    dispatch(shooterAction.updateInitialState())
-  }, [dispatch])
+    const handleInitialUpdate = async () => {
+      await updateShooterStateToDb()
+    }
+
+    handleInitialUpdate()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   return (
     <div>

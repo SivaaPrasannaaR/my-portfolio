@@ -11,6 +11,7 @@ import {
   getPlayerName,
 } from "../functions/AllShooterValue"
 import { generateRandomNum } from "../functions/generateRandomNum"
+import { realRimeDbReducerFunctions } from "./realTimeDbReducerFunctions"
 import { BoxInfoType, ShooterStateType } from "./shooterInitialState"
 
 export type BasicActionPayloadType = {
@@ -277,6 +278,7 @@ const shooterReducerFunction = {
   shootOpponent,
   checkKilledBox,
   checkGameLosser,
+  ...realRimeDbReducerFunctions,
 }
 
 export default shooterReducerFunction
