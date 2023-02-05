@@ -7,7 +7,7 @@ const ShowNumbers: React.FC = () => {
   const { handleRandomNum } = useDisplayPlayers()
 
   return (
-    <div className={style.displayGridNumbers}>
+    <div className={style.displayNumbers}>
       <div className={style.roolDiceDiv} onClick={handleRandomNum}>
         <img src={dice} alt={""} className={style.displayDiceImg} />
       </div>

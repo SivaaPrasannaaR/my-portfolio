@@ -1,68 +1,80 @@
+.displayFlexCenter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 /* ---------------------------------------------------------------------------------------- */
 /* Shooter CSS */
 
+.playerCountContainer {
+  @extend .displayFlexCenter;
+  height: 100vh;
+}
+
+.playerCount {
+  @extend .rollDiceButton;
+  margin: 10px;
+}
+
 .headContainer {
+  background-color: lightgoldenrodyellow;
   position: relative;
-  display: flex;
+  display: grid;
+  grid-template-columns: 0fr 1fr 5fr;
+  // column-gap: 30px;
   width: 100%;
 }
-.shooterWrapper {
-  display: grid;
-  /* grid-template-columns: repeat(5, auto); */
-  gap: 3.5rem;
-  justify-content: center;
+
+.commonHeight {
+  height: 75px;
 }
 
+.commonMaxWidth {
+  max-width: 100px;
+}
+
+/* ---------------------------------------------------------------------------------------- */
+/** dice column */
 .displayNumbers {
-  box-shadow: 0 1px 6px #ccc;
-  padding: 10px;
-  margin-right: 30px;
-}
-
-.displayGridNumbers {
   display: grid;
   grid-template-rows: repeat(5, 1fr);
-}
-
-.numbersDiv {
-  display: flex;
-  align-items: center;
-  justify-content: center;
   box-shadow: 0 1px 6px #ccc;
-  background-color: teal;
-  padding: 30px;
-  font-size: 50px;
-  color: #fff;
-  height: 120px;
-  /* border-radius: ; */
-  margin-bottom: 20px;
-  text-align: center;
+  padding: 10px;
 }
 
 .roolDiceDiv {
-  display: flex;
-  justify-content: center;
+  @extend .commonHeight;
+  @extend .commonMaxWidth;
   box-shadow: 0 1px 6px #ccc;
-  background-color: teal;
-  padding: auto;
-  height: 120px;
   margin-bottom: 20px;
   cursor: pointer;
+}
+
+.numbersDiv {
+  @extend .commonHeight;
+  @extend .commonMaxWidth;
+  @extend .displayFlexCenter;
+  box-shadow: 0 1px 6px #ccc;
+  background-color: teal;
+  padding: 30px;
+  font-size: 30px;
+  color: #fff;
+  margin-bottom: 20px;
+  text-align: center;
 }
 
 .showDice {
   box-shadow: 0 1px 6px #ccc;
   padding: 5px;
   position: relative;
-  display: flex;
   margin-top: 80px;
-  justify-content: flex-start;
+  @extend .displayFlexCenter;
 }
 
 .rollDiceButton {
-  font-size: 50px;
+  font-size: 30px;
   padding: 10px;
-  margin: 10px;
   background-color: teal;
   border: none;
   cursor: pointer;
@@ -71,37 +83,48 @@
   border-radius: 6px;
 }
 
+/* ---------------------------------------------------------------------------------------- */
+/** First players column */
+.displayFirstPlayer {
+  @extend .displayMultiPlayer;
+  box-shadow: 0 1px 6px #ccc;
+  background-color: skyblue;
+  margin: auto 50px;
+}
+
+/* ---------------------------------------------------------------------------------------- */
+/** opponent players column */
+
+.displayMultiPlayer {
+  border-radius: 6px;
+  width: auto;
+  padding: 10px;
+}
+
+.shooterWrapper {
+  display: grid;
+  gap: 3.5rem;
+  justify-content: left;
+}
+
 .displayDiceImg {
+  @extend .commonHeight;
   object-fit: cover;
-  height: 120px;
 }
 
 .displayImg {
   object-fit: contain;
-  height: 95px;
+  height: 60px;
 }
 
 .imgDiv {
+  @extend .commonHeight;
+  @extend .displayFlexCenter;
   box-shadow: 0 1px 12px #ccc;
-  // border: 1px solid;
   padding: 10px;
-  height: 120px;
   font-size: 50px;
   margin-bottom: 20px;
   background-color: #fff;
-}
-.displayMultiPlayer {
-  box-shadow: 0 1px 6px #ccc;
-  border-radius: 6px;
-  align-items: center;
-  justify-content: center;
-  display: flex;
-  flex-direction: row;
-  width: auto;
-  flex: 1;
-  background-color: lightgoldenrodyellow;
-  padding: 10px;
-  margin-right: 30px;
 }
 
 .readyToShoot {

@@ -32,6 +32,9 @@ export const Players: React.FC<PlayersType> = (props) => {
           style={{ gridTemplateColumns: `repeat(${playerCount}, auto)` }}
         >
           {Array.from(new Array(playerCount)).map((_, index) => {
+            if (index === 0) {
+              return <></>
+            }
             return (
               <DisplayPlayers
                 key={getPlayerName((index + 1) as PlayersCountType)}

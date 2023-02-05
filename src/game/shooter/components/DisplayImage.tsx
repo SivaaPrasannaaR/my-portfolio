@@ -119,7 +119,7 @@ const DisplayImage: React.FC<DisplayImageType> = (props) => {
       <img
         src={box.boxInfo.killed ? stageImage[0] : stageImage[box.stage]}
         alt={""}
-        className={`${style.displayImg} ${style.displayImg}`}
+        className={style.displayImg}
       />
     </div>
   )
