@@ -36,6 +36,17 @@
   text-align: center;
 }
 
+.roolDiceDiv {
+  display: flex;
+  justify-content: center;
+  box-shadow: 0 1px 6px #ccc;
+  background-color: teal;
+  padding: auto;
+  height: 120px;
+  margin-bottom: 20px;
+  cursor: pointer;
+}
+
 .showDice {
   box-shadow: 0 1px 6px #ccc;
   padding: 5px;
@@ -55,6 +66,11 @@
   color: white;
   box-shadow: 0 1px 6px #ccc;
   border-radius: 6px;
+}
+
+.displayDiceImg {
+  object-fit: cover;
+  height: 120px;
 }
 
 .displayImg {
