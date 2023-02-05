@@ -5,7 +5,12 @@ import {
   playerNameArr,
   PlayersCountType,
 } from "../enum/enum"
-import { getBoxName, getPlayerName } from "../functions/AllShooterValue"
+import {
+  getBoxName,
+  getNextPlayer,
+  getPlayerName,
+} from "../functions/AllShooterValue"
+import { generateRandomNum } from "../functions/generateRandomNum"
 import { BoxInfoType, ShooterStateType } from "./shooterInitialState"
 
 export type BasicActionPayloadType = {
@@ -26,6 +31,8 @@ const updateInitialState = (state: ShooterStateType) => {
   state.gameStarted = true
   playerNameArr.forEach((playerNum) => {
     const playerName = getPlayerName(playerNum)
+    state.playersStatus[playerName].diceValue =
+      generateRandomNum() as BoxCountType
 
     boxNameArr.forEach((boxNumber: BoxCountType) => {
       const boxName = getBoxName(boxNumber)
@@ -35,21 +42,27 @@ const updateInitialState = (state: ShooterStateType) => {
 }
 
 /** To update the current player */
-const setCurrentPlayer = (state: ShooterStateType) => {
+const changeCurrentPlayer = (state: ShooterStateType) => {
   const previousPlayer = state.currentPlayer
-
-  const getCurrentPlayer = (prevPlayer: PlayersCountType): PlayersCountType =>
-    prevPlayer > state.playerCount - 1
-      ? ((prevPlayer - state.playerCount + 1) as PlayersCountType)
-      : ((prevPlayer + 1) as PlayersCountType)
-
-  const currentPlayer: PlayersCountType = getCurrentPlayer(previousPlayer)
+  const currentPlayer: PlayersCountType = getNextPlayer(
+    state.playerCount,
+    previousPlayer
+  )
 
   if (state.playersStatus[getPlayerName(currentPlayer)].lost) {
-    state.currentPlayer = getCurrentPlayer(currentPlayer)
+    state.currentPlayer = getNextPlayer(state.playerCount, currentPlayer)
   } else {
     state.currentPlayer = currentPlayer
   }
+}
+
+/** To update the current player dice value */
+const setDiceNumber = (
+  state: ShooterStateType,
+  action: PayloadAction<BasicActionPayloadType>
+) => {
+  state.playersStatus[getPlayerName(action.payload.player)].diceValue =
+    action.payload.box
 }
 
 /** To increase the each player box stage to next stage */
@@ -63,8 +76,10 @@ const incrementBoxStage = (
 
   if (!isBoxKilled && state.playersScore[playerName][boxName].stage < 8) {
     state.playersScore[playerName][boxName].stage += 1
+    state.playersScore[playerName][boxName].boxInfo.alive = true
   } else if (!isBoxKilled) {
     state.playersScore[playerName][boxName].stage = 0
+    state.playersScore[playerName][boxName].boxInfo.alive = false
   }
 }
 
@@ -94,18 +109,48 @@ const updateReadyToShoot = (
   action: PayloadAction<BasicActionPayloadType>
 ) => {
   const playerName = getPlayerName(action.payload.player)
+
   boxNameArr.forEach((boxNumber: BoxCountType) => {
     const boxName = getBoxName(boxNumber)
 
     if (state.playersScore[playerName][boxName].stage === 8) {
       state.playersScore[playerName][boxName].readyToShoot = true
     }
+
+    if (
+      state.playersScore[playerName][boxName].readyToShoot &&
+      state.playersScore[playerName][boxName].stage < 8 &&
+      action.payload.player !== state.currentPlayer
+    ) {
+      state.playersScore[playerName][boxName].readyToShoot = false
+    }
+
     if (
       state.playersScore[playerName][boxName].stage < 6 &&
       state.playersScore[playerName][boxName].readyToShoot
     ) {
       state.playersScore[playerName][boxName].readyToShoot = false
     }
+  })
+}
+
+/** To reset previous player ready to shoot after player changed */
+const resetPreviousPlayerReadyToShoot = (
+  state: ShooterStateType,
+  action: PayloadAction<{ player: PlayersCountType }>
+) => {
+  const totalPlayerArr = Array.from(new Array(state.playerCount))
+
+  totalPlayerArr.forEach((playerNum: PlayersCountType) => {
+    if (playerNum === state.currentPlayer) {
+      return
+    }
+    const playerName = getPlayerName(playerNum)
+    boxNameArr.forEach((boxNumber: BoxCountType) => {
+      const boxName = getBoxName(boxNumber)
+
+      state.playersScore[playerName][boxName].readyToShoot = false
+    })
   })
 }
 
@@ -189,7 +234,10 @@ const checkKilledBox = (state: ShooterStateType) => {
 
     boxNameArr.forEach((boxNumber: BoxCountType) => {
       const boxName = getBoxName(boxNumber)
-      if (state.playersScore[playerName][boxName].stage === 0) {
+      if (
+        state.playersScore[playerName][boxName].stage === 0 &&
+        state.playersScore[playerName][boxName].boxInfo.alive
+      ) {
         state.playersScore[playerName][boxName].boxInfo.killed = true
       }
     })
@@ -221,10 +269,12 @@ const checkGameLosser = (state: ShooterStateType) => {
 const shooterReducerFunction = {
   setPlayer,
   updateInitialState,
-  setCurrentPlayer,
+  changeCurrentPlayer,
+  setDiceNumber,
   incrementBoxStage,
   decrementBoxStage,
   updateReadyToShoot,
+  resetPreviousPlayerReadyToShoot,
   setLockedToShoot,
   unSetLockedToShoot,
   shootOpponent,

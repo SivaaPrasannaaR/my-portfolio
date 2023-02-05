@@ -8,28 +8,26 @@ import {
 } from "../../../global/redux/redux-hooks"
 import { shooterAction } from "../redux/shooterSlice"
 import { BoxCountType, boxNameArr, PlayersCountType } from "../enum/enum"
-import { PlayerBoxType } from "../redux/shooterInitialState"
+import { PlayerBoxType, PlayerStatusType } from "../redux/shooterInitialState"
 import { getBoxName, getPlayerName } from "../functions/AllShooterValue"
 
 type displayPlayersProps = {
   currentPlayer: PlayersCountType
   player: PlayerBoxType
-  changeCurrentPlayer: () => void
   isTimeToPlay: boolean
-  lost: boolean
+  playerStatus: PlayerStatusType
 }
 
 const DisplayPlayers: React.FC<displayPlayersProps> = (props) => {
-  const { currentPlayer, changeCurrentPlayer, isTimeToPlay, player, lost } =
-    props
-  const currentPlayerData = useAppSelector(
-    (state) => state.shooter.playersScore[getPlayerName(currentPlayer)]
-  )
-  const dispatch = useAppDispatch()
+  const {
+    currentPlayer,
 
-  const [diceNumber, setDiceNumber] = React.useState<number>(
-    generateRandomNum()
-  )
+    isTimeToPlay,
+    player,
+    playerStatus,
+  } = props
+  const playerData = useAppSelector((state) => state.shooter.playersScore)
+  const dispatch = useAppDispatch()
 
   const isCurrentPlayerBox: {
     box: BoxCountType | undefined
@@ -37,17 +35,25 @@ const DisplayPlayers: React.FC<displayPlayersProps> = (props) => {
   } = {
     box: boxNameArr.find(
       (boxNum: BoxCountType) =>
-        currentPlayerData[getBoxName(boxNum)].lockedToShootBox
+        playerData[getPlayerName(currentPlayer)][getBoxName(boxNum)]
+          .lockedToShootBox
     ),
     lockedToShoot: boxNameArr.some(
       (boxNum: BoxCountType) =>
-        currentPlayerData[getBoxName(boxNum)].lockedToShootBox
+        playerData[getPlayerName(currentPlayer)][getBoxName(boxNum)]
+          .lockedToShootBox
     ),
   }
 
   const handleRandomNum = React.useCallback(() => {
     const random_number: BoxCountType = generateRandomNum() as BoxCountType
-    setDiceNumber(random_number)
+    /* update current player dice number */
+    dispatch(
+      shooterAction.setDiceNumber({
+        player: currentPlayer,
+        box: random_number,
+      })
+    )
 
     /* used to update the box stage count in state value */
     dispatch(
@@ -65,27 +71,34 @@ const DisplayPlayers: React.FC<displayPlayersProps> = (props) => {
       })
     )
 
-    changeCurrentPlayer()
-  }, [changeCurrentPlayer, currentPlayer, dispatch])
+    /* to change next player */
+    dispatch(shooterAction.changeCurrentPlayer())
+
+    if (isCurrentPlayerBox.lockedToShoot) {
+      dispatch(
+        shooterAction.resetPreviousPlayerReadyToShoot({ player: currentPlayer })
+      )
+    }
+  }, [currentPlayer, dispatch, isCurrentPlayerBox.lockedToShoot])
 
   return (
     <div>
       <div
+        onClick={handleRandomNum}
         className={`
           ${style.imgDiv} 
-          ${lost ? style.disabled : ""}
+          ${playerStatus.lost ? style.disabled : ""}
           `}
       >
-        {!lost ? (
+        {!playerStatus.lost ? (
           <button
-            onClick={handleRandomNum}
             className={`
           ${style.rollDiceButton} 
           ${isTimeToPlay ? style.timeToPlay : style.notTimeToPlay} 
           `}
-            disabled={!isTimeToPlay || lost}
+            disabled={!isTimeToPlay || playerStatus.lost}
           >
-            {diceNumber}
+            {playerStatus.diceValue}
           </button>
         ) : (
           <p className={style.out}>OUT</p>
@@ -100,7 +113,7 @@ const DisplayPlayers: React.FC<displayPlayersProps> = (props) => {
             isTimeToPlay={isTimeToPlay}
             isCurrentPlayerLockedToShoot={isCurrentPlayerBox.lockedToShoot}
             currentPlayerBoxNumber={isCurrentPlayerBox.box}
-            lost={lost}
+            lost={playerStatus.lost}
           />
         )
       })}

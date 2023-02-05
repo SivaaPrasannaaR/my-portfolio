@@ -34,3 +34,19 @@ export const getBoxName = (count: BoxCountType): Box => {
       return Box.box9
   }
 }
+
+/** Get the next player number */
+export const getNextPlayer = (
+  playerCount: PlayersCountType,
+  prevPlayer: PlayersCountType
+): PlayersCountType =>
+  prevPlayer === playerCount
+    ? (1 as PlayersCountType)
+    : ((prevPlayer + 1) as PlayersCountType)
+
+/** Get the previous player number */
+export const getPreviousPlayer = (
+  playerCount: PlayersCountType,
+  currentPlayer: PlayersCountType
+): PlayersCountType =>
+  currentPlayer === 1 ? playerCount : ((currentPlayer - 1) as PlayersCountType)

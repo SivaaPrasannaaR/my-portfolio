@@ -4,7 +4,6 @@ import {
   StageType,
   BoxCountType,
   PlayersCountType,
-  PlayersBoxValueType,
 } from "../enum/enum"
 
 type PlayerBoxTypeCommon = {
@@ -16,6 +15,7 @@ type PlayerBoxTypeCommon = {
 export type BoxInfoType = {
   boxNum: Readonly<BoxCountType>
   playerNum: PlayersCountType
+  alive: boolean
   killed: boolean
 }
 
@@ -27,9 +27,9 @@ export type PlayerBoxType = {
   [B in Box]: EachPlayerBoxType
 }
 
-type PlayerStatusType = {
+export type PlayerStatusType = {
   lost: boolean
-  boxValue: PlayersBoxValueType
+  diceValue: BoxCountType
 }
 
 export type ShooterStateType = {
@@ -47,7 +47,7 @@ export type ShooterStateType = {
 
 const playerStatus: PlayerStatusType = {
   lost: false,
-  boxValue: 5,
+  diceValue: 1,
 }
 
 const playerBoxTypeCommon: PlayerBoxTypeCommon = {
@@ -61,6 +61,7 @@ const playerBoxType: PlayerBoxType = {
     boxInfo: {
       boxNum: 1,
       playerNum: 1,
+      alive: false,
       killed: false,
     },
     ...playerBoxTypeCommon,
@@ -69,6 +70,7 @@ const playerBoxType: PlayerBoxType = {
     boxInfo: {
       boxNum: 3,
       playerNum: 1,
+      alive: false,
       killed: false,
     },
     ...playerBoxTypeCommon,
@@ -77,6 +79,7 @@ const playerBoxType: PlayerBoxType = {
     boxInfo: {
       boxNum: 5,
       playerNum: 1,
+      alive: false,
       killed: false,
     },
     ...playerBoxTypeCommon,
@@ -85,6 +88,7 @@ const playerBoxType: PlayerBoxType = {
     boxInfo: {
       boxNum: 7,
       playerNum: 1,
+      alive: false,
       killed: false,
     },
     ...playerBoxTypeCommon,
@@ -93,6 +97,7 @@ const playerBoxType: PlayerBoxType = {
     boxInfo: {
       boxNum: 9,
       playerNum: 1,
+      alive: false,
       killed: false,
     },
     ...playerBoxTypeCommon,

@@ -24,10 +24,6 @@ export const Players: React.FC<PlayersType> = (props) => {
     dispatch(shooterAction.updateInitialState())
   }, [dispatch])
 
-  const changeCurrentPlayer = () => {
-    dispatch(shooterAction.setCurrentPlayer())
-  }
-
   return (
     <div>
       <div className={style.displayMultiPlayer}>
@@ -42,10 +38,8 @@ export const Players: React.FC<PlayersType> = (props) => {
                 currentPlayer={currentPlayer}
                 player={player[getPlayerName((index + 1) as PlayersCountType)]}
                 isTimeToPlay={index + 1 === currentPlayer}
-                changeCurrentPlayer={changeCurrentPlayer}
-                lost={
+                playerStatus={
                   playerStatus[getPlayerName((index + 1) as PlayersCountType)]
-                    .lost
                 }
               />
             )

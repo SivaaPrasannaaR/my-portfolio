@@ -32,6 +32,8 @@ const DisplayImage: React.FC<DisplayImageType> = (props) => {
   const canShootOpponentBox: boolean =
     !isTimeToPlay && isCurrentPlayerLockedToShoot && box.stage > 0
 
+  const isBoxLocked: boolean = box.lockedToShootBox && isTimeToPlay
+
   const handleOnClickShoot = React.useCallback(() => {
     if (lost) return
 
@@ -45,7 +47,6 @@ const DisplayImage: React.FC<DisplayImageType> = (props) => {
     }
 
     if (canShootOpponentBox) {
-      console.log("###box.boxInfo", box.boxInfo)
       /** Shoot opponent player */
       dispatch(
         shooterAction.shootOpponent({
@@ -74,7 +75,7 @@ const DisplayImage: React.FC<DisplayImageType> = (props) => {
     }
 
     /** auto unset the locked box to shoot */
-    if (!box.readyToShoot && isCurrentPlayerLockedToShoot && box.stage < 6) {
+    if (box.lockedToShootBox && isCurrentPlayerLockedToShoot) {
       dispatch(
         shooterAction.unSetLockedToShoot({
           player: box.boxInfo.playerNum,
@@ -89,13 +90,16 @@ const DisplayImage: React.FC<DisplayImageType> = (props) => {
     }
   }, [
     box.boxInfo.playerNum,
+    box.lockedToShootBox,
     box.readyToShoot,
     box.stage,
     canShootOpponentBox,
     currentPlayer,
     currentPlayerBoxNumber,
     dispatch,
+    isBoxLocked,
     isCurrentPlayerLockedToShoot,
+    isTimeToPlay,
   ])
 
   return (
@@ -107,7 +111,7 @@ const DisplayImage: React.FC<DisplayImageType> = (props) => {
         box.readyToShoot && isTimeToPlay ? style.currentPlayerReadyToShoot : ""
       } 
       ${canShootOpponentBox ? style.otherPlayerStage : ""} 
-      ${box.lockedToShootBox ? style.lockedBox : ""}
+      ${isBoxLocked ? style.lockedBox : ""}
       ${box.boxInfo.killed ? style.playerLost : ""}
       `}
       onClick={handleOnClickShoot}
