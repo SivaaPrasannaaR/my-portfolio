@@ -18,11 +18,13 @@ const DisplayPlayers: React.FC<displayPlayersProps> = (props) => {
   const { isCurrentPlayerBox, handleRandomNum } = useDisplayPlayers()
 
   return (
-    <div>
+    <div
+      className={isTimeToPlay ? style.displayReadyToPlay : style.displayPlayer}
+    >
       <div
         onClick={() => !playerStatus.lost && isTimeToPlay && handleRandomNum()}
         className={`
-          ${style.imgDiv} 
+          ${style.diceDiv} 
           ${isTimeToPlay ? style.timeToPlay : style.notTimeToPlay} 
           ${playerStatus.lost ? style.disabled : ""}
           `}

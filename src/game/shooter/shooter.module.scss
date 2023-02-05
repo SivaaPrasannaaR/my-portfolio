@@ -74,13 +74,32 @@
   @extend .displayFlexCenter;
 }
 
+.diceDiv {
+  @extend .commonHeight;
+  @extend .displayFlexCenter;
+  padding: 10px;
+  margin-bottom: 20px;
+  box-shadow: 0 1px 6px black;
+  background-color: #fff;
+}
+
 .rollDiceButton {
   font-size: 30px;
+  font-weight: 700;
   padding: 10px;
   border: none;
   cursor: pointer;
   color: white;
   border-radius: 6px;
+}
+
+.displayPlayer {
+  padding: 10px;
+}
+
+.displayReadyToPlay {
+  background-color: teal;
+  padding: 10px;
 }
 
 /* ---------------------------------------------------------------------------------------- */
@@ -90,6 +109,7 @@
   box-shadow: 0 1px 6px #ccc;
   background-color: orange;
   margin: auto 50px;
+  // padding: 10px;
 }
 
 /* ---------------------------------------------------------------------------------------- */
@@ -98,12 +118,11 @@
 .displayMultiPlayer {
   border-radius: 6px;
   width: auto;
-  padding: 10px;
+  // padding: 10px;
 }
 
 .shooterWrapper {
   display: grid;
-  gap: 3.5rem;
   justify-content: left;
 }
 

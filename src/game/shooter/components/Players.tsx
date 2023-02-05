@@ -29,7 +29,7 @@ export const Players: React.FC<PlayersType> = (props) => {
       <div className={style.displayMultiPlayer}>
         <div
           className={style.shooterWrapper}
-          style={{ gridTemplateColumns: `repeat(${playerCount}, auto)` }}
+          style={{ gridTemplateColumns: `repeat(${playerCount - 1}, auto)` }}
         >
           {Array.from(new Array(playerCount)).map((_, index) => {
             if (index === 0) {
