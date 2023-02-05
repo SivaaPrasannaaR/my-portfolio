@@ -4,23 +4,13 @@ import style from "../shooter.module.scss"
 import { useAppSelector } from "../../../global/redux/redux-hooks"
 import { PlayersCountType } from "../enum/enum"
 import { getPlayerName } from "../functions/AllShooterValue"
-import useShooterFirebaseFunctions from "../firebase/useShooterFirebaseFunctions"
 
 export const Players: React.FC = () => {
   const player = useAppSelector((state) => state.shooter.playersScore)
+  const state = useAppSelector((state) => state.shooter)
   const playerCount = useAppSelector((state) => state.shooter.playerCount)
   const currentPlayer = useAppSelector((state) => state.shooter.currentPlayer)
   const playerStatus = useAppSelector((state) => state.shooter.playersStatus)
-  const { updateShooterStateToDb } = useShooterFirebaseFunctions()
-
-  React.useEffect(() => {
-    const handleInitialUpdate = async () => {
-      await updateShooterStateToDb()
-    }
-
-    handleInitialUpdate()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
 
   return (
     <div>
@@ -33,9 +23,13 @@ export const Players: React.FC = () => {
             if (index === 0) {
               return <></>
             }
+            const key =
+              getPlayerName((index + 1) as PlayersCountType) +
+              playerStatus[getPlayerName((index + 1) as PlayersCountType)].pId
+
             return (
               <DisplayPlayers
-                key={getPlayerName((index + 1) as PlayersCountType)}
+                key={key}
                 player={player[getPlayerName((index + 1) as PlayersCountType)]}
                 isTimeToPlay={index + 1 === currentPlayer}
                 playerStatus={

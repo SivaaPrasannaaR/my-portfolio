@@ -1,5 +1,8 @@
 import React, { useState } from "react"
-import { useAppDispatch } from "../../../global/redux/redux-hooks"
+import {
+  useAppDispatch,
+  useAppSelector,
+} from "../../../global/redux/redux-hooks"
 import { PlayersCountType } from "../enum/enum"
 import { uid } from "uid"
 import { shooterAction } from "../redux/shooterSlice"
@@ -22,10 +25,11 @@ const ShooterHome: React.FC<ShooterHomeType> = (props) => {
   )
   const [roomId, setRoomId] = useState<string>("")
   const [loading, setLoading] = useState<boolean>(false)
+  const stateLoading = useAppSelector((state) => state.shooter.loading)
 
   const dispatch = useAppDispatch()
 
-  const { writeToDb } = useShooterFirebaseFunctions()
+  const { writeToDb, listenToDb } = useShooterFirebaseFunctions()
 
   const addPlayerCount = async () => {
     setPlayerCount((prevState) => {
@@ -50,22 +54,24 @@ const ShooterHome: React.FC<ShooterHomeType> = (props) => {
     dispatch(shooterAction.setPlayer(playerCount))
     dispatch(shooterAction.updateInitialState())
   }
-  const handleJoinExistingRoom = () => {
+  const handleJoinExistingRoom = async () => {
     dispatch(shooterAction.setRoomId(roomId))
-    dispatch(shooterAction.setPlayer(playerCount))
-    dispatch(shooterAction.updateInitialState())
+    dispatch(shooterAction.setLoading(true))
+
+    await listenToDb(roomId)
   }
 
   const goToGame = async () => {
     setLoading(true)
-    await writeToDb()
-      .catch((e) => {
-        console.error(e)
-      })
-      .finally(() => {
-        setDisplay(true)
-        setLoading(false)
-      })
+    room.newRoom &&
+      (await writeToDb()
+        .catch((e) => {
+          console.error(e)
+        })
+        .finally(() => {
+          setLoading(false)
+          setDisplay(true)
+        }))
   }
 
   return (
@@ -108,8 +114,11 @@ const ShooterHome: React.FC<ShooterHomeType> = (props) => {
           {roomId && (
             <>
               <h1>Room Id: {roomId}</h1>
-              <button onClick={goToGame} className={style.playerCount}>
-                Go To game
+              <button
+                onClick={() => !loading && goToGame()}
+                className={style.playerCount}
+              >
+                {loading ? "Loading..." : "Go To game"}
               </button>
             </>
           )}
@@ -126,10 +135,18 @@ const ShooterHome: React.FC<ShooterHomeType> = (props) => {
           </div>
           <div>
             <button
-              onClick={handleJoinExistingRoom}
-              className={loading ? style.disabled : style.playerCount}
+              onClick={() => handleJoinExistingRoom()}
+              className={style.playerCount}
             >
-              Join Room
+              {stateLoading ? "Loading..." : "Check Room"}
+            </button>
+          </div>
+          <div>
+            <button
+              onClick={() => !stateLoading && setDisplay(true)}
+              className={style.playerCount}
+            >
+              {stateLoading ? "Loading..." : "Join Room"}
             </button>
           </div>
         </div>

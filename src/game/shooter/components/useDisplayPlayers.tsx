@@ -7,11 +7,13 @@ import {
 import { shooterAction } from "../redux/shooterSlice"
 import { BoxCountType, boxNameArr } from "../enum/enum"
 import { getBoxName, getPlayerName } from "../functions/AllShooterValue"
+import useShooterFirebaseFunctions from "../firebase/useShooterFirebaseFunctions"
 
 const useDisplayPlayers = () => {
   const currentPlayer = useAppSelector((state) => state.shooter.currentPlayer)
   const playerData = useAppSelector((state) => state.shooter.playersScore)
   const dispatch = useAppDispatch()
+  const { updateShooterStateToDb } = useShooterFirebaseFunctions()
 
   const isCurrentPlayerBox: {
     box: BoxCountType | undefined
@@ -64,6 +66,14 @@ const useDisplayPlayers = () => {
       )
     }
   }, [currentPlayer, dispatch, isCurrentPlayerBox.lockedToShoot])
+
+  // React.useEffect(() => {
+  //   const handleInitialUpdate = async () => {
+  //     await updateShooterStateToDb()
+  //   }
+  //   handleInitialUpdate()
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [currentPlayer])
 
   return { isCurrentPlayerBox, handleRandomNum }
 }

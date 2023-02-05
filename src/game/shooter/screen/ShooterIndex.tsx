@@ -22,6 +22,7 @@ const ShooterIndex: React.FC = () => {
           <ShowNumbers />
           <div className={style.displayFirstPlayer}>
             <DisplayPlayers
+              key={getPlayerName(1 as PlayersCountType)}
               player={player[getPlayerName(1 as PlayersCountType)]}
               isTimeToPlay={currentPlayer === 1}
               playerStatus={playerStatus[getPlayerName(1 as PlayersCountType)]}

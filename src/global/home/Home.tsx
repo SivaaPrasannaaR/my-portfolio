@@ -1,7 +1,5 @@
-import React from "react"
 import { useNavigate } from "react-router-dom"
 import { useUserContext } from "../context/UserContext"
-import Counter from "../redux/Counter"
 import { routingUrl } from "../router/urlPath"
 
 import styles from "./home.module.scss"
@@ -12,13 +10,13 @@ const Home = () => {
 
   return (
     <div className={styles.homeContainer}>
-      <Counter />
-      <button
+      {/* <button
         onClick={() => navigate(routingUrl.portfolio.path)}
         className={styles.checkProfile}
       >
         Check My Profile Without Login
-      </button>
+      </button> */}
+
       {/* {routing.map((url) => {
         if (!url.showDisplayName(url.label)) {
           return <></>
@@ -32,7 +30,7 @@ const Home = () => {
           </button>
         )
       })} */}
-      <button
+      {/* <button
         onClick={() => navigate(routingUrl.studyMaterial.path)}
         className={styles.logoutButton}
       >
@@ -55,7 +53,7 @@ const Home = () => {
         className={styles.logoutButton}
       >
         {routingUrl.betterShopping.displayName}
-      </button>
+      </button> */}
       <button
         onClick={() => navigate(routingUrl.gameShooter.path)}
         className={styles.logoutButton}

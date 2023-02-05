@@ -28,6 +28,7 @@ export type PlayerBoxType = {
 }
 
 export type PlayerStatusType = {
+  pId: string
   lost: boolean
   diceValue: BoxCountType
 }
@@ -48,6 +49,7 @@ export type ShooterStateType = {
 }
 
 const playerStatus: PlayerStatusType = {
+  pId: "",
   lost: false,
   diceValue: 1,
 }
