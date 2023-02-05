@@ -14,6 +14,8 @@
 
 .playerCount {
   @extend .rollDiceButton;
+  background-color: teal;
+  box-shadow: 0 1px 6px #ccc;
   margin: 10px;
 }
 
@@ -75,11 +77,9 @@
 .rollDiceButton {
   font-size: 30px;
   padding: 10px;
-  background-color: teal;
   border: none;
   cursor: pointer;
   color: white;
-  box-shadow: 0 1px 6px #ccc;
   border-radius: 6px;
 }
 
@@ -88,7 +88,7 @@
 .displayFirstPlayer {
   @extend .displayMultiPlayer;
   box-shadow: 0 1px 6px #ccc;
-  background-color: skyblue;
+  background-color: orange;
   margin: auto 50px;
 }
 
@@ -153,15 +153,17 @@
 }
 
 .disabled {
+  @extend .displayFlexCenter;
   background-color: grey;
   padding: 10px;
   text-align: center;
+  cursor: default;
 }
 
 .out {
+  pointer-events: none;
   font-size: 2rem;
   font-weight: bolder;
-  padding-top: 30px;
 }
 
 .notTimeToPlay {

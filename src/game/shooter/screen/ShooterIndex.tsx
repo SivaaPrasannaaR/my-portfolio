@@ -39,11 +39,8 @@ const ShooterIndex: React.FC = () => {
   }
   const handleSubmit = () => {
     setDisplay(true)
-  }
-
-  React.useEffect(() => {
     dispatch(shooterAction.setPlayer(playerCount))
-  }, [dispatch, playerCount])
+  }
 
   return (
     <React.Fragment>

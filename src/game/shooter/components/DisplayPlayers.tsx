@@ -20,25 +20,23 @@ const DisplayPlayers: React.FC<displayPlayersProps> = (props) => {
   return (
     <div>
       <div
-        onClick={handleRandomNum}
+        onClick={() => !playerStatus.lost && isTimeToPlay && handleRandomNum()}
         className={`
           ${style.imgDiv} 
+          ${isTimeToPlay ? style.timeToPlay : style.notTimeToPlay} 
           ${playerStatus.lost ? style.disabled : ""}
           `}
       >
-        {!playerStatus.lost ? (
-          <button
-            className={`
+        <button
+          className={`
           ${style.rollDiceButton} 
+          ${!isTimeToPlay || playerStatus.lost ? style.disabled : ""} 
           ${isTimeToPlay ? style.timeToPlay : style.notTimeToPlay} 
           `}
-            disabled={!isTimeToPlay || playerStatus.lost}
-          >
-            {playerStatus.diceValue}
-          </button>
-        ) : (
-          <p className={style.out}>OUT</p>
-        )}
+          disabled={!isTimeToPlay || playerStatus.lost}
+        >
+          {playerStatus.lost ? "OUT" : playerStatus.diceValue}
+        </button>
       </div>
       {boxNameArr.map((boxNum) => {
         const boxName = getBoxName(boxNum)
