@@ -7,7 +7,6 @@ import { getPlayerName } from "../functions/AllShooterValue"
 
 export const Players: React.FC = () => {
   const player = useAppSelector((state) => state.shooter.playersScore)
-  const state = useAppSelector((state) => state.shooter)
   const playerCount = useAppSelector((state) => state.shooter.playerCount)
   const currentPlayer = useAppSelector((state) => state.shooter.currentPlayer)
   const playerStatus = useAppSelector((state) => state.shooter.playersStatus)

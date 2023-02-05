@@ -259,7 +259,7 @@ const checkGameLosser = (state: ShooterStateType) => {
       })
 
       if (countKilled === 5) {
-        state.playersRank.push(playerNum)
+        // state.playersRank.push(playerNum)
         state.playersStatus[playerName].lost = true
       }
     })

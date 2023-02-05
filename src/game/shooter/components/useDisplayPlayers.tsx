@@ -67,13 +67,13 @@ const useDisplayPlayers = () => {
     }
   }, [currentPlayer, dispatch, isCurrentPlayerBox.lockedToShoot])
 
-  // React.useEffect(() => {
-  //   const handleInitialUpdate = async () => {
-  //     await updateShooterStateToDb()
-  //   }
-  //   handleInitialUpdate()
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [currentPlayer])
+  React.useEffect(() => {
+    const handleInitialUpdate = async () => {
+      await updateShooterStateToDb()
+    }
+    handleInitialUpdate()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentPlayer])
 
   return { isCurrentPlayerBox, handleRandomNum }
 }

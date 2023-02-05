@@ -39,7 +39,7 @@ export type ShooterStateType = {
   playerCount: PlayersCountType
   roomId: string
   currentPlayer: PlayersCountType
-  playersRank: PlayersCountType[]
+  // playersRank: PlayersCountType[]
   playersStatus: {
     [P in Player]: PlayerStatusType
   }
@@ -114,7 +114,7 @@ export const initialState: ShooterStateType = {
   playerCount: 2,
   roomId: "",
   currentPlayer: 1,
-  playersRank: [],
+  // playersRank: [],
   playersStatus: {
     player1: playerStatus,
     player2: playerStatus,
