@@ -1,4 +1,4 @@
-import React, { useRef } from "react"
+import { useRef } from "react"
 import { useNavigate } from "react-router-dom"
 import { useUserContext } from "../context/UserContext"
 import { routingUrl } from "../router/urlPath"
@@ -47,8 +47,18 @@ const Signin = () => {
         <div className={styles.form}>
           <h2> Login </h2>
           <form onSubmit={onSubmit}>
-            <input placeholder="Email" type="email" ref={emailRef} />
-            <input placeholder="Password" type="password" ref={psdRef} />
+            <input
+              placeholder="Email"
+              type="email"
+              ref={emailRef}
+              className={styles.input}
+            />
+            <input
+              placeholder="Password"
+              type="password"
+              ref={psdRef}
+              className={styles.input}
+            />
             <button type="submit" className={styles.formButton}>
               Sign In
             </button>
@@ -62,12 +72,12 @@ const Signin = () => {
             >
               Sign in with Google
             </button>
-            <button
+            {/* <button
               onClick={() => navigate(routingUrl.portfolio.path)}
               className={styles.checkProfile}
             >
               Check My Profile Without Login
-            </button>
+            </button> */}
           </form>
         </div>
       </div>

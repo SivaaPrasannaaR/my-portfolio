@@ -1,4 +1,4 @@
-import React, { useRef } from "react"
+import { useRef } from "react"
 import { useNavigate } from "react-router-dom"
 import { routingUrl } from "../../router/urlPath"
 import styles from "../login_signup.module.scss"
@@ -25,9 +25,24 @@ const RegisterB = (props: SignUpType) => {
       <div className={styles.form}>
         <h2> New User Sign Up Form</h2>
         <form onSubmit={onClickSubmit}>
-          <input placeholder="Email" type="email" ref={emailRef} />
-          <input placeholder="Name" type="name" ref={nameRef} />
-          <input placeholder="Password" type="password" ref={psdRef} />
+          <input
+            placeholder="Email"
+            type="email"
+            ref={emailRef}
+            className={styles.input}
+          />
+          <input
+            placeholder="Name"
+            type="name"
+            ref={nameRef}
+            className={styles.input}
+          />
+          <input
+            placeholder="Password"
+            type="password"
+            ref={psdRef}
+            className={styles.input}
+          />
           <button type="submit" className={styles.formButton}>
             Register
           </button>
@@ -40,12 +55,12 @@ const RegisterB = (props: SignUpType) => {
           >
             Sign up with Google
           </button>
-          <button
+          {/* <button
             onClick={() => navigate(routingUrl.portfolio.path)}
             className={styles.checkProfile}
           >
             Check My Profile Without Login
-          </button>
+          </button> */}
         </form>
       </div>
     </div>
