@@ -1,4 +1,6 @@
 import { PayloadAction } from "@reduxjs/toolkit"
+import { playerNameArr } from "../enum/enum"
+import { getPlayerName } from "../functions/AllShooterValue"
 import { ShooterStateType } from "./shooterInitialState"
 
 const setLoading = (
@@ -7,8 +9,26 @@ const setLoading = (
 ) => {
   state.loading = action.payload
 }
+
 const setRoomId = (state: ShooterStateType, action: PayloadAction<string>) => {
   state.roomId = action.payload
+}
+
+const setPlayerId = (
+  state: ShooterStateType,
+  action: PayloadAction<string>
+) => {
+  let alreadyPlayer: boolean = false
+  playerNameArr.forEach((playerNum) => {
+    const playerName = getPlayerName(playerNum)
+    if (state.playersStatus[playerName].pId === action.payload) {
+      alreadyPlayer = true
+    }
+    if (!alreadyPlayer && state.playersStatus[playerName].pId === "") {
+      state.playersStatus[playerName].pId = action.payload
+      alreadyPlayer = true
+    }
+  })
 }
 
 const setDataFromDb = (
@@ -28,5 +48,6 @@ const setDataFromDb = (
 export const realRimeDbReducerFunctions = {
   setLoading,
   setRoomId,
+  setPlayerId,
   setDataFromDb,
 }

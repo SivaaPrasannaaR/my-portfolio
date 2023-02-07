@@ -13,7 +13,6 @@ import {
 import { generateRandomNum } from "../functions/generateRandomNum"
 import { realRimeDbReducerFunctions } from "./realTimeDbReducerFunctions"
 import { BoxInfoType, ShooterStateType } from "./shooterInitialState"
-import { uid } from "uid"
 
 export type BasicActionPayloadType = {
   player: PlayersCountType
@@ -35,7 +34,6 @@ const updateInitialState = (state: ShooterStateType) => {
     const playerName = getPlayerName(playerNum)
     state.playersStatus[playerName].diceValue =
       generateRandomNum() as BoxCountType
-    state.playersStatus[playerName].pId = uid()
 
     boxNameArr.forEach((boxNumber: BoxCountType) => {
       const boxName = getBoxName(boxNumber)

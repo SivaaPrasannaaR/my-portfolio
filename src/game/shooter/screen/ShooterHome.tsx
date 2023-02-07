@@ -6,12 +6,15 @@ import { shooterAction } from "../redux/shooterSlice"
 import style from "../shooter.module.scss"
 import useShooterFirebaseFunctions from "../firebase/useShooterFirebaseFunctions"
 import { useNavigate } from "react-router-dom"
+import { useUserContext } from "../../../global/context/UserContext"
 
 const minPlayer = 2
 const maxPlayer = 6
 
 const ShooterHome: React.FC = (props) => {
   const navigate = useNavigate()
+
+  const { user }: any = useUserContext()
 
   const [playerCount, setPlayerCount] = useState<PlayersCountType>(minPlayer)
   const [room, setRoom] = useState<{ newRoom: boolean; existingRoom: boolean }>(
@@ -45,10 +48,12 @@ const ShooterHome: React.FC = (props) => {
 
     dispatch(shooterAction.setRoomId(uuid))
     dispatch(shooterAction.setPlayer(playerCount))
+    dispatch(shooterAction.setPlayerId(user.uid))
     dispatch(shooterAction.updateInitialState())
   }
   const handleJoinExistingRoom = () => {
     dispatch(shooterAction.setRoomId(roomId))
+    dispatch(shooterAction.setPlayerId(user.uid))
 
     setLoading(true)
     listenToDb(roomId)

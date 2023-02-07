@@ -8,12 +8,16 @@ import { shooterAction } from "../redux/shooterSlice"
 import { BoxCountType, boxNameArr } from "../enum/enum"
 import { getBoxName, getPlayerName } from "../functions/AllShooterValue"
 import useShooterFirebaseFunctions from "../firebase/useShooterFirebaseFunctions"
+import { useUserContext } from "../../../global/context/UserContext"
 
 const useDisplayPlayers = () => {
   const currentPlayer = useAppSelector((state) => state.shooter.currentPlayer)
   const playerData = useAppSelector((state) => state.shooter.playersScore)
+  const playerStatus = useAppSelector((state) => state.shooter.playersStatus)
   const dispatch = useAppDispatch()
   const { updateShooterStateToDb } = useShooterFirebaseFunctions()
+
+  const { user }: any = useUserContext()
 
   const isCurrentPlayerBox: {
     box: BoxCountType | undefined
@@ -32,6 +36,10 @@ const useDisplayPlayers = () => {
   }
 
   const handleRandomNum = React.useCallback(() => {
+    if (user.uid !== playerStatus[getPlayerName(currentPlayer)].pId) {
+      return
+    }
+
     const random_number: BoxCountType = generateRandomNum() as BoxCountType
     /* update current player dice number */
     dispatch(
@@ -65,7 +73,13 @@ const useDisplayPlayers = () => {
         shooterAction.resetPreviousPlayerReadyToShoot({ player: currentPlayer })
       )
     }
-  }, [currentPlayer, dispatch, isCurrentPlayerBox.lockedToShoot])
+  }, [
+    currentPlayer,
+    dispatch,
+    isCurrentPlayerBox.lockedToShoot,
+    playerStatus,
+    user.uid,
+  ])
 
   React.useEffect(() => {
     const handleInitialUpdate = async () => {
