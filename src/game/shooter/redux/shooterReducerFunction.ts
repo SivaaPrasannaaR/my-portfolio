@@ -85,20 +85,23 @@ const incrementBoxStage = (
 const degradeBoxStage = (
   state: ShooterStateType,
   player: PlayersCountType,
-  box: BoxCountType
+  box: BoxCountType,
+  isOpponent: boolean
 ) => {
   const playerName = getPlayerName(player)
   const boxName = getBoxName(box)
 
-  if (state.playersScore[playerName][boxName].stage > 0) {
+  if (!isOpponent && state.playersScore[playerName][boxName].stage > 0) {
     state.playersScore[playerName][boxName].stage -= 1
   }
-}
-const decrementBoxStage = (
-  state: ShooterStateType,
-  action: PayloadAction<BasicActionPayloadType>
-) => {
-  degradeBoxStage(state, action.payload.player, action.payload.box)
+
+  if (isOpponent) {
+    if (state.playersScore[playerName][boxName].stage > 5) {
+      state.playersScore[playerName][boxName].stage = 4
+    } else {
+      state.playersScore[playerName][boxName].stage -= 1
+    }
+  }
 }
 
 /** To check whether the player is ready to shoot */
@@ -210,12 +213,13 @@ const shootOpponent = (
 
     if (currentPlayerBox.readyToShoot) {
       /** decrease current player box stage */
-      degradeBoxStage(state, currentPlayer, currentPlayerBoxNumber)
+      degradeBoxStage(state, currentPlayer, currentPlayerBoxNumber, false)
       /** decrease opponent player box stage */
       degradeBoxStage(
         state,
         action.payload.opponentBox.playerNum,
-        action.payload.opponentBox.boxNum
+        action.payload.opponentBox.boxNum,
+        true
       )
 
       state.playersScore[getPlayerName(action.payload.opponentBox.playerNum)][
@@ -270,7 +274,6 @@ const shooterReducerFunction = {
   changeCurrentPlayer,
   setDiceNumber,
   incrementBoxStage,
-  decrementBoxStage,
   updateReadyToShoot,
   resetPreviousPlayerReadyToShoot,
   setLockedToShoot,

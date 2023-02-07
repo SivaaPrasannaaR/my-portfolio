@@ -36,6 +36,17 @@
   max-width: 100px;
 }
 
+.input {
+  padding: 12px;
+  margin: 12px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  box-shadow: 0 1px 4px #ccc;
+  border-radius: 6px;
+  font-size: 18px;
+  width: 93%;
+}
+
 /* ---------------------------------------------------------------------------------------- */
 /** dice column */
 .displayNumbers {

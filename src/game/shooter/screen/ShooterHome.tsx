@@ -137,6 +137,7 @@ const ShooterHome: React.FC = (props) => {
             <input
               value={roomId}
               onChange={(event) => setRoomId(event.target.value)}
+              className={style.input}
             />
           </div>
           <div>
