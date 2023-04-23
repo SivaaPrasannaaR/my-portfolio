@@ -10,12 +10,12 @@ const Home = () => {
 
   return (
     <div className={styles.homeContainer}>
-      {/* <button
+      <button
         onClick={() => navigate(routingUrl.portfolio.path)}
         className={styles.checkProfile}
       >
         Check My Profile Without Login
-      </button> */}
+      </button>
 
       {/* {routing.map((url) => {
         if (!url.showDisplayName(url.label)) {
@@ -30,7 +30,7 @@ const Home = () => {
           </button>
         )
       })} */}
-      {/* <button
+      <button
         onClick={() => navigate(routingUrl.studyMaterial.path)}
         className={styles.logoutButton}
       >
@@ -53,7 +53,7 @@ const Home = () => {
         className={styles.logoutButton}
       >
         {routingUrl.betterShopping.displayName}
-      </button> */}
+      </button>
       <button
         onClick={() => navigate(routingUrl.gameShooter.path)}
         className={styles.logoutButton}
