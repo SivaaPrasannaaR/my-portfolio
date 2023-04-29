@@ -5,6 +5,8 @@ export type BoxCountType = 1 | 3 | 5 | 7 | 9
 export type PlayersBoxValueType = 1 | 2 | 3 | 4 | 5
 
 export const boxNameArr = [1, 3, 5, 7, 9] as BoxCountType[]
+
+//It is used to get the name players
 export const playerNameArr = [1, 2, 3, 4, 5, 6] as PlayersCountType[]
 
 export enum Player {

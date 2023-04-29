@@ -3,6 +3,10 @@ import { createLogger } from "redux-logger"
 import { shooterReducer } from "../../game/shooter/redux/shooterSlice"
 import counterReducer from "./CounterSlice"
 
+/**
+ * createLogger is the library which create log and it need to be
+ * given in getDefaultMiddleware inbuilt method
+ */
 export const store = configureStore({
   reducer: { counter: counterReducer, shooter: shooterReducer },
   middleware: (getDefaultMiddleware) =>

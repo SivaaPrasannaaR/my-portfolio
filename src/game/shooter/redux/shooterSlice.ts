@@ -9,3 +9,6 @@ export const shooterSlice = createSlice({
 })
 
 export const { actions: shooterAction, reducer: shooterReducer } = shooterSlice
+/**
+ * The store is declared at src\global\redux\store.ts
+ */

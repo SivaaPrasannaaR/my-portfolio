@@ -8,7 +8,7 @@ import {
   CardContent,
   Typography,
 } from "@mui/material"
-import React, { useState } from "react"
+import { useState } from "react"
 
 const style = {
   root: {
@@ -16,6 +16,15 @@ const style = {
     justifyContent: "center",
   },
   someSpace: { margin: "16px", padding: "16px" },
+  cardSpace: { margin: "16px", padding: "8px" },
+  showExpense: {
+    margin: "16px",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "flex-start",
+    // display: "bl",
+    // justifyContent: "center",
+  },
 }
 
 type ExpenseType = { title: string; amount: string }
@@ -63,16 +72,18 @@ const ExpenseTrackerLayout = () => {
       </Stack>
       <Stack>
         <Paper sx={{ ...style.root, ...style.someSpace }}>
-          {totalExpense.map((ex) => {
-            return (
-              <Card>
-                <CardContent>
-                  <div>title: {ex.title}</div>
-                  <div>amount: {ex.amount}</div>
-                </CardContent>
-              </Card>
-            )
-          })}
+          <Typography sx={style.showExpense}>
+            {totalExpense.map((ex) => {
+              return (
+                <Card sx={style.cardSpace}>
+                  <CardContent>
+                    <div>title: {ex.title}</div>
+                    <div>amount: {ex.amount}</div>
+                  </CardContent>
+                </Card>
+              )
+            })}
+          </Typography>
         </Paper>
       </Stack>
     </Stack>

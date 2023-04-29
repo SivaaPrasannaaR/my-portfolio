@@ -1,8 +1,9 @@
-import React, { useEffect } from "react"
+import { useEffect } from "react"
 import { getData } from "./global/api/jsonServerApi/jsonServerApi"
 import { useUserContext } from "./global/context/UserContext"
 import WithAuth from "./global/router/WithAuth"
 import { NoAuth } from "./global/router/NoAuth"
+import SideMenu from "./global/menu/SideMenu"
 
 /**
  *
@@ -32,6 +33,7 @@ function App() {
       ) : (
         <>{user ? <WithAuth /> : <NoAuth />}</>
       )}
+      {user && <SideMenu />}
     </div>
   )
 }

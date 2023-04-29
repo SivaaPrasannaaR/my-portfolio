@@ -25,7 +25,7 @@ const ShooterHome: React.FC = (props) => {
 
   const dispatch = useAppDispatch()
 
-  const { writeToDb, listenToDb } = useShooterFirebaseFunctions()
+  const { writeToDb, getDataFromDb, listenToDb } = useShooterFirebaseFunctions()
 
   const addPlayerCount = async () => {
     setPlayerCount((prevState) => {
@@ -51,12 +51,13 @@ const ShooterHome: React.FC = (props) => {
     dispatch(shooterAction.setPlayerId(user.uid))
     dispatch(shooterAction.updateInitialState())
   }
-  const handleJoinExistingRoom = () => {
+  const handleJoinExistingRoom = async () => {
     dispatch(shooterAction.setRoomId(roomId))
-    dispatch(shooterAction.setPlayerId(user.uid))
-
     setLoading(true)
     listenToDb(roomId)
+    await getDataFromDb(roomId)
+    dispatch(shooterAction.setPlayerId(user.uid))
+
     setTimeout(() => {
       navigate(`/gameShooter/${roomId}`)
       setLoading(false)

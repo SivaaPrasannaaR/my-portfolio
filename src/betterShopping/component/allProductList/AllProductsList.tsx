@@ -12,8 +12,12 @@ const AllProductsList: React.FC = () => {
   }
   return (
     <>
-      {dbBS.map((v) => (
-        <Paper className={styles.allProdcuts} onClick={() => handleOnclick(v)}>
+      {dbBS.map((v, index) => (
+        <Paper
+          key={index}
+          className={styles.allProdcuts}
+          onClick={() => handleOnclick(v)}
+        >
           {v.title}
         </Paper>
       ))}

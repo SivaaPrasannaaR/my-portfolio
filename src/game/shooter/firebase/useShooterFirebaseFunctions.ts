@@ -30,7 +30,7 @@ const useShooterFirebaseFunctions = () => {
     const roomId = exRoomId
     const path = `room/${roomId}`
     const dbRef = ref(realTimeDb)
-    get(child(dbRef, path))
+    await get(child(dbRef, path))
       .then((snapshot) => {
         const data = snapshot.val()
         const stateData = data as ShooterStateType
@@ -52,6 +52,11 @@ const useShooterFirebaseFunctions = () => {
     const roomId = exRoomId
     const path = `room/${roomId}`
     const roomRef = ref(realTimeDb, path)
+
+    /**
+     * Whenever there is value change in the realtime db
+     * the onValue will be triggered automatically
+     */
     onValue(roomRef, async (snapshot) => {
       const data = snapshot.val()
       const stateData = data as ShooterStateType

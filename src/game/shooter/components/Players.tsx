@@ -23,7 +23,6 @@ export const Players: React.FC = () => {
               return <></>
             }
             const key =
-              getPlayerName((index + 1) as PlayersCountType) +
               playerStatus[getPlayerName((index + 1) as PlayersCountType)].pId
 
             return (

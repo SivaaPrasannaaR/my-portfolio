@@ -111,10 +111,12 @@ const playerBoxType: PlayerBoxType = {
 export const initialState: ShooterStateType = {
   loading: false,
   gameStarted: false,
+  // the initial count of the player is set to 2 (minimun 2 players)
   playerCount: 2,
   roomId: "",
   currentPlayer: 1,
   // playersRank: [],
+  // to check the player status (win or lose)
   playersStatus: {
     player1: playerStatus,
     player2: playerStatus,
@@ -123,6 +125,10 @@ export const initialState: ShooterStateType = {
     player5: playerStatus,
     player6: playerStatus,
   },
+  /**
+   * to know the players each box status
+   * whether killed or alive and the box stage
+   */
   playersScore: {
     player1: playerBoxType,
     player2: playerBoxType,
