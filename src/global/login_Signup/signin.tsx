@@ -77,7 +77,7 @@ const Signin = () => {
               onClick={() => navigate(routingUrl.portfolio.path)}
               className={styles.checkProfile}
             >
-              <img src={myPhoto} alt="my photo" />
+              <img src={myPhoto} alt="myPhoto" />
               <p>Check My Profile Without Login</p>
             </div>
           </form>
