@@ -17,6 +17,12 @@
   background-color: teal;
   box-shadow: 0 1px 6px #ccc;
   margin: 10px;
+  width: 100%;
+}
+.playerCountUpdateBtn {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
 }
 
 .headContainer {
@@ -41,8 +47,8 @@
   padding: 12px;
   margin: 12px;
   font-size: 14px;
-  border: 1px solid #ccc;
-  box-shadow: 0 1px 4px #ccc;
+  border: 1px solid #000;
+  box-shadow: 0 1px 20px #ccc;
   border-radius: 6px;
   font-size: 18px;
   width: 93%;

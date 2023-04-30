@@ -21,17 +21,17 @@ const SideMenu: React.FC = () => {
             </div>
             <label>My Profile</label>
           </li>
-          <li onClick={() => navigate(routingUrl.expenseTracker.path)}>
-            <div className={styles.menuIcon}>
-              <PollIcon />
-            </div>
-            <label> {routingUrl.expenseTracker.displayName}</label>
-          </li>
           <li onClick={() => navigate(routingUrl.gameShooter.path)}>
             <div className={styles.menuIcon}>
               <GamesIcon />
             </div>
             <label>{routingUrl.gameShooter.displayName}</label>
+          </li>
+          <li onClick={() => navigate(routingUrl.expenseTracker.path)}>
+            <div className={styles.menuIcon}>
+              <PollIcon />
+            </div>
+            <label> {routingUrl.expenseTracker.displayName}</label>
           </li>
           <li onClick={logoutUser} className={styles.logoutMenu}>
             <div className={styles.menuIcon}>

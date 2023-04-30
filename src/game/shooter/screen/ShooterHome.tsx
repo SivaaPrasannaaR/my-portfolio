@@ -107,7 +107,7 @@ const ShooterHome: React.FC = (props) => {
       {room.newRoom && (
         <div>
           <h1>Player Count: {playerCount}</h1>
-          <div>
+          <div className={style.playerCountUpdateBtn}>
             <button onClick={addPlayerCount} className={style.playerCount}>
               +
             </button>
