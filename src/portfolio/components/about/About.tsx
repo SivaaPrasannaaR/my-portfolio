@@ -1,4 +1,3 @@
-import React from "react"
 import styles from "./about.module.scss"
 import { FaAward } from "react-icons/fa"
 import ContactMe from "../common/contactMe/ContactMe"
@@ -23,8 +22,8 @@ const About = () => {
             <article className={styles.about__card}>
               <FaAward className={styles.about__icons} />
               <h5 className={styles.textColor_white}>Experience</h5>
-              <small>2+ Years Working</small>
-            </article>{" "}
+              <small>2.5+ Years Working</small>
+            </article>
             <article className={styles.about__card}>
               <FaAward className={styles.about__icons} />
               <h5 className={styles.textColor_white}>

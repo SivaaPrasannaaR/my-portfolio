@@ -1,0 +1,60 @@
+@import "../../../../global/styles/global.module.scss";
+
+.timeLineBox_container {
+  width: 100%;
+  border-left: 2px solid $color-primary;
+  padding: 0 20px 0 30px;
+}
+
+.timeLine_box {
+  background-color: $color-bg-variant;
+  padding: 10px 25px;
+  font-size: 1rem;
+  border: 2px solid $color-primary;
+  line-height: 1.7;
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.timeLine_box::before {
+  content: "";
+  display: block;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: black;
+  border: 3px solid white;
+  position: absolute;
+  top: 16px;
+  left: -38px;
+}
+
+.timeLine_box::after {
+  content: "";
+  display: block;
+  width: 0;
+  height: 24px;
+  border-style: solid;
+  border-color: transparent $color-primary transparent transparent;
+  border-width: 12px;
+  position: absolute;
+  top: 10px;
+  left: -26px;
+}
+
+.commonContent {
+  color: white;
+  margin: 0;
+  padding: 0;
+  gap: 4px;
+  margin-top: 12px;
+}
+
+.commonContent label {
+  color: $color-primary;
+  font-weight: 600;
+}
+
+.commonContent p {
+  color: white;
+}

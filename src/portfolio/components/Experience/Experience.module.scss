@@ -1,20 +1,31 @@
 @import "../../../global/styles/global.module.scss";
 
-.experience_container {
-  height: 100%;
+.experience__container {
+  @include container;
+  // @include display_flex_center;
+  // flex-direction: column;
+}
 
-  @include display_flex_center;
+.companyName {
+  color: $color-primary;
+  display: flex;
+  align-items: center;
+  margin-bottom: 16px;
+  text-align: center;
+}
+.companyLogo {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: white;
+  transform: translateX(-18px);
+}
+.companyName h2 {
+  margin: 0;
+}
 
-  .experience_myName {
-    font-size: 7rem;
-    // display: inline-block;
-    // background-image: linear-gradient(to right, $color-white, $color-dark-gray);
-    // -webkit-background-clip: text;
-    color: $color-white;
-
-    &:hover {
-      transition: all 0.5s ease-out;
-      transform: scale(1.1);
-    }
-  }
+.timeLineBox_container {
+  width: 100%;
+  border-left: 2px solid $color-primary;
+  padding: 0 20px 0 30px;
 }

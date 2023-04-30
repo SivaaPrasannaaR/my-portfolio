@@ -1,4 +1,3 @@
-import React from "react"
 import style from "./header.module.scss"
 import ME from "../../assets/my-photo-1.png"
 import HeaderSocial from "./HeaderSocial"
@@ -14,7 +13,7 @@ const Header = () => {
         <div className={style.header__info}>
           <h5 className={style.textColor_white}>Hello I'm</h5>
           <h1 className={style.textColor_white}>Sivaa Prasannaa R</h1>
-          <h5 className={style.text_light}>React Fullstack Developer</h5>
+          <h5 className={style.text_light}>Fullstack Web Developer</h5>
 
           <div className={style.header__buttons}>
             <a

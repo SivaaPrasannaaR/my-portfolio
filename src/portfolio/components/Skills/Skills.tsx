@@ -1,10 +1,11 @@
-import React from "react"
 import ShowData from "../common/contactMe/showData/ShowData"
 import {
   backendSkills,
   databaseSkills,
   devToolsSkills,
   frontendSkills,
+  libraryKnown,
+  notInTouch,
   programingSkills,
   testingFramework,
 } from "./mySkills"
@@ -17,6 +18,9 @@ const Skills = () => {
       <div className={styles.skills__container}>
         {/* Front-end Development */}
         <ShowData title={"Front-end Development"} skills={frontendSkills} />
+
+        {/* React and JS library Known */}
+        <ShowData title={"Library"} skills={libraryKnown} />
 
         {/* Backend Development */}
         <ShowData title={"Back-end Development"} skills={backendSkills} />
@@ -32,6 +36,9 @@ const Skills = () => {
 
         {/* Tools */}
         <ShowData title={"Tools"} skills={devToolsSkills} />
+
+        {/* Tech that are not in touch */}
+        <ShowData title={"Tech That are not in Touch"} skills={notInTouch} />
       </div>
     </section>
   )

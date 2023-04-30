@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom"
 import { useUserContext } from "../context/UserContext"
 import { routingUrl } from "../router/urlPath"
 import styles from "./login_signup.module.scss"
+import myPhoto from "../../portfolio/assets/my-photo-1.png"
 
 const Signin = () => {
   const emailRef: any = useRef()
@@ -72,12 +73,13 @@ const Signin = () => {
             >
               Sign in with Google
             </button>
-            {/* <button
+            <div
               onClick={() => navigate(routingUrl.portfolio.path)}
               className={styles.checkProfile}
             >
-              Check My Profile Without Login
-            </button> */}
+              <img src={myPhoto} alt="my photo" />
+              <p>Check My Profile Without Login</p>
+            </div>
           </form>
         </div>
       </div>

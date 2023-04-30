@@ -1,4 +1,3 @@
-import React from "react"
 import { BsLinkedin } from "react-icons/bs"
 import { FaGithub } from "react-icons/fa"
 import style from "./header.module.scss"
@@ -8,6 +7,7 @@ const HeaderSocial = () => {
     <div className={style.header__socials}>
       <a
         href="https://www.linkedin.com/in/sivaa-prasannaa-r/"
+        // used to open the link in new tab
         target="_blank"
         rel="noopener noreferrer"
       >
@@ -15,6 +15,7 @@ const HeaderSocial = () => {
       </a>
       <a
         href="https://github.com/SivaaPrasannaaR?tab=repositories"
+        // used to open the link in new tab
         target="_blank"
         rel="noopener noreferrer"
       >

@@ -93,13 +93,21 @@
 }
 
 .checkProfile {
-  background-image: url("../../portfolio/assets/my-photo-1.png");
-  background-repeat: no-repeat;
-  background-position: 2% 50%;
-  background-size: 8%;
+  // background-image: url("../../portfolio/assets/my-photo-1.png");
+  // background-repeat: no-repeat;
+  // background-position: 2% 50%;
+  // background-size: 8%;
 
+  display: flex;
+  gap: 8px;
   color: $color-white;
   background-color: teal;
+
+  & img {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+  }
 }
 
 .loginWithGoogleBtn,
