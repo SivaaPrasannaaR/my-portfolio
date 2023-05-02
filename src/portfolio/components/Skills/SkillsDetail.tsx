@@ -4,8 +4,9 @@ import { SkillLevelValueType, skillLevel } from "./mySkills"
 import StarIcon from "@mui/icons-material/Star"
 import StarBorderIcon from "@mui/icons-material/StarBorder"
 
-type itemTypes = {
+type ItemTypes = {
   item: any
+  isSkillType: boolean
 }
 
 const getStarLevel = (level: SkillLevelValueType) => {
@@ -38,8 +39,8 @@ const getStarLevel = (level: SkillLevelValueType) => {
   }
 }
 
-const SkillsDetail = (props: itemTypes) => {
-  const { item } = props
+const SkillsDetail = (props: ItemTypes) => {
+  const { item, isSkillType } = props
   return (
     <>
       <article className={styles.skills__details}>
@@ -47,7 +48,8 @@ const SkillsDetail = (props: itemTypes) => {
         <div>
           <h5 className={styles.textColor_white}>{item.skill}</h5>
           <small className={styles.text_light}>
-            {item.level ? getStarLevel(item.level) : ""}
+            {isSkillType && item.level ? getStarLevel(item.level) : ""}
+            {!isSkillType && item.level ? item.level : ""}
           </small>
         </div>
       </article>

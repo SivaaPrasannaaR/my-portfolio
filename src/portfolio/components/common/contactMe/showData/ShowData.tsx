@@ -1,9 +1,14 @@
-import React from "react"
 import SkillsDetail from "../../../Skills/SkillsDetail"
 import styles from "./showData.module.scss"
 
-const ShowData = (props: any) => {
-  const { title, skills, isOneColumn } = props
+type ShowDataType = {
+  title: any
+  skills: any
+  isSkillType?: boolean
+}
+
+const ShowData = (props: ShowDataType) => {
+  const { title, skills, isSkillType } = props
   return (
     <div className={styles.showData__container}>
       <div className={styles.skill__title}>
@@ -11,11 +16,17 @@ const ShowData = (props: any) => {
       </div>
       <div
         className={`${styles.skills__content} ${
-          isOneColumn ? "" : styles.skills__content__column_2
+          isSkillType === false ? "" : styles.skills__content__column_2
         }`}
       >
         {skills.map((item: any) => {
-          return <SkillsDetail key={item.skill} item={item} />
+          return (
+            <SkillsDetail
+              key={item.skill}
+              item={item}
+              isSkillType={isSkillType ?? true}
+            />
+          )
         })}
       </div>
     </div>

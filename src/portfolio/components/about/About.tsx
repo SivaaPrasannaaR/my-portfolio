@@ -14,7 +14,7 @@ const About = () => {
         <ShowData
           title={"Personal Details"}
           skills={personalDetails}
-          isOneColumn={true}
+          isSkillType={false}
         />
 
         <div className={styles.about__myContent}>
