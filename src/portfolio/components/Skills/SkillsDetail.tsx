@@ -1,9 +1,41 @@
-import React from "react"
 import styles from "./Skills.module.scss"
 import { BsPatchCheckFill } from "react-icons/bs"
+import { SkillLevelValueType, skillLevel } from "./mySkills"
+import StarIcon from "@mui/icons-material/Star"
+import StarBorderIcon from "@mui/icons-material/StarBorder"
 
 type itemTypes = {
   item: any
+}
+
+const getStarLevel = (level: SkillLevelValueType) => {
+  const fSize = 16
+  switch (level) {
+    case skillLevel.level_1:
+      return (
+        <div>
+          <StarIcon sx={{ color: "orange", fontSize: fSize }} />
+          <StarBorderIcon sx={{ fontSize: fSize }} />
+          <StarBorderIcon sx={{ fontSize: fSize }} />
+        </div>
+      )
+    case skillLevel.level_2:
+      return (
+        <div>
+          <StarIcon sx={{ color: "orange", fontSize: fSize }} />
+          <StarIcon sx={{ color: "orange", fontSize: fSize }} />
+          <StarBorderIcon sx={{ fontSize: fSize }} />
+        </div>
+      )
+    case skillLevel.level_3:
+      return (
+        <div>
+          <StarIcon sx={{ color: "orange", fontSize: fSize }} />
+          <StarIcon sx={{ color: "orange", fontSize: fSize }} />
+          <StarIcon sx={{ color: "orange", fontSize: fSize }} />
+        </div>
+      )
+  }
 }
 
 const SkillsDetail = (props: itemTypes) => {
@@ -15,7 +47,7 @@ const SkillsDetail = (props: itemTypes) => {
         <div>
           <h5 className={styles.textColor_white}>{item.skill}</h5>
           <small className={styles.text_light}>
-            {item.level ? item.level : ""}
+            {item.level ? getStarLevel(item.level) : ""}
           </small>
         </div>
       </article>

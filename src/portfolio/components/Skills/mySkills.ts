@@ -1,19 +1,22 @@
 export const skillLevel = {
-  l1: "Beginer",
-  l2: "Intermediate",
-  l3: "Advanced",
+  level_1: "Beginer",
+  level_2: "Intermediate",
+  level_3: "Advanced",
 }
+
+type SkillLevelKeyType = keyof typeof skillLevel
+export type SkillLevelValueType = (typeof skillLevel)[SkillLevelKeyType]
 
 // experience in months
 export const programingSkills = [
   {
     skill: "Javascript",
-    level: skillLevel.l3,
+    level: skillLevel.level_3,
     experience: 16,
   },
   {
     skill: "Typescript",
-    level: skillLevel.l3,
+    level: skillLevel.level_3,
     experience: 16,
   },
 ]
@@ -21,17 +24,17 @@ export const programingSkills = [
 export const frontendSkills = [
   {
     skill: "React.js",
-    level: skillLevel.l3,
+    level: skillLevel.level_3,
     experience: 16,
   },
   {
     skill: "Vue.js",
-    level: skillLevel.l1,
+    level: skillLevel.level_1,
     experience: 1,
   },
   {
     skill: "Electron.js",
-    level: skillLevel.l1,
+    level: skillLevel.level_1,
     experience: 1,
   },
   // {
@@ -46,12 +49,12 @@ export const frontendSkills = [
   // },
   {
     skill: "HTML5",
-    level: skillLevel.l3,
+    level: skillLevel.level_3,
     experience: 16,
   },
   {
     skill: "CSS3",
-    level: skillLevel.l3,
+    level: skillLevel.level_3,
     experience: 16,
   },
 ]
@@ -59,15 +62,43 @@ export const frontendSkills = [
 export const backendSkills = [
   {
     skill: "Node.Js",
-    level: skillLevel.l1,
+    level: skillLevel.level_2,
     experience: 16,
+  },
+  {
+    skill: "Express",
+    level: skillLevel.level_2,
+    experience: 16,
+  },
+]
+
+export const libraryKnown = [
+  {
+    skill: "Redux",
+    level: skillLevel.level_2,
+  },
+  {
+    skill: "React Router",
+    level: skillLevel.level_3,
+  },
+  {
+    skill: "Axios",
+    level: skillLevel.level_2,
+  },
+  {
+    skill: "Lerna",
+    level: skillLevel.level_2,
+  },
+  {
+    skill: "Material UI",
+    level: skillLevel.level_2,
   },
 ]
 
 export const databaseSkills = [
   {
     skill: "Firebase",
-    level: skillLevel.l2,
+    level: skillLevel.level_2,
     experience: 16,
   },
   // {
@@ -80,12 +111,12 @@ export const databaseSkills = [
 export const testingFramework = [
   {
     skill: "Jest",
-    level: skillLevel.l2,
+    level: skillLevel.level_2,
     experience: 4,
   },
   {
-    skill: "Selenium",
-    level: skillLevel.l1,
+    skill: "Selenium using JS",
+    level: skillLevel.level_1,
     experience: 1,
   },
 ]
@@ -108,21 +139,6 @@ export const devToolsSkills = [
   },
   {
     skill: "Slack",
-  },
-]
-
-export const libraryKnown = [
-  {
-    skill: "Redux",
-  },
-  {
-    skill: "Axios",
-  },
-  {
-    skill: "Lerna",
-  },
-  {
-    skill: "Material UI",
   },
 ]
 
