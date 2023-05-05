@@ -1,5 +1,4 @@
 import { Routes, Route } from "react-router-dom"
-import ShooterPlayGround from "../../game/shooter/screen/ShooterPlayGround"
 import Home from "../home/Home"
 import routing from "./routing"
 import styles from "./mainBody.module.scss"
@@ -15,7 +14,6 @@ const WithAuth = () => {
             <Route path={url.path} element={url.component} key={url.label} />
           )
         })}
-        <Route path={"/gameShooter/:id"} element={<ShooterPlayGround />} />
       </Routes>
     </div>
   )

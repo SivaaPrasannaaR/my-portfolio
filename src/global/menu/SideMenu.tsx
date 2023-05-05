@@ -5,16 +5,33 @@ import LogoutIcon from "@mui/icons-material/Logout"
 import GamesIcon from "@mui/icons-material/Games"
 import PersonIcon from "@mui/icons-material/Person"
 import PollIcon from "@mui/icons-material/Poll"
+import MenuIcon from "@mui/icons-material/Menu"
+import LocalLibraryIcon from "@mui/icons-material/LocalLibrary"
 import styles from "./sideMenu.module.scss"
+import { useState } from "react"
 
 const SideMenu: React.FC = () => {
   const navigate = useNavigate()
+  const [isMenuActive, setIsMenuActive] = useState<boolean>(false)
   const { logoutUser }: any = useUserContext()
 
   return (
-    <div className={styles.menuContainer}>
+    <div
+      className={`${styles.menuContainer} ${
+        isMenuActive ? styles.menuContainerActive : ""
+      }`}
+    >
       <nav>
         <ul>
+          <li
+            style={{ borderBottom: "1px solid black", marginBottom: "8px" }}
+            onClick={() => setIsMenuActive((s) => !s)}
+          >
+            <div className={styles.menuIcon}>
+              <MenuIcon />
+            </div>
+            <label>Menu</label>
+          </li>
           <li onClick={() => navigate(routingUrl.portfolio.path)}>
             <div className={styles.menuIcon}>
               <PersonIcon />
@@ -32,6 +49,12 @@ const SideMenu: React.FC = () => {
               <PollIcon />
             </div>
             <label> {routingUrl.expenseTracker.displayName}</label>
+          </li>
+          <li onClick={() => navigate(routingUrl.studyMaterial.path)}>
+            <div className={styles.menuIcon}>
+              <LocalLibraryIcon />
+            </div>
+            <label> {routingUrl.studyMaterial.displayName}</label>
           </li>
           <li onClick={logoutUser} className={styles.logoutMenu}>
             <div className={styles.menuIcon}>

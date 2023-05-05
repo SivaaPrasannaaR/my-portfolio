@@ -1,6 +1,14 @@
 // url path for navigating to screen
 
-export const routingUrl = {
+type RoutingUrlType = {
+  [key: string]: {
+    label: string
+    path: string
+    displayName: string
+  }
+}
+
+export const routingUrl: RoutingUrlType = {
   urlNotFound: {
     label: "urlNotFound",
     path: "*",
@@ -54,12 +62,12 @@ export const routingUrl = {
   gameShooter: {
     label: "gameShooter",
     path: "/gameShooter",
-    displayName: "Shooter Game",
+    displayName: "War of Luck",
   },
   gameShooterDetail: {
     label: "gameShooterPlayground",
     path: "/gameShooter/:id",
-    displayName: "Shooter Game Playground",
+    displayName: "War of Luck Playground",
   },
 }
 

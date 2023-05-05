@@ -10,7 +10,7 @@ import ShooterPlayGround from "../../game/shooter/screen/ShooterPlayGround"
 
 type Routing = {
   label: string
-  displayname: string
+  displayName: string
   path: string
   component: any
   hide: (accessLabel: string) => boolean
@@ -18,39 +18,38 @@ type Routing = {
 }[]
 
 const hideFunction = (accessLabel: string): boolean => {
+  /**
+   * TODO - need to implement
+   * temp - the array contains the list of non access sites that needed to be hidden
+   */
+  const isHide = [routingUrl.urlNotFound.label].includes(accessLabel)
+  if (isHide) return true
+
   return false
 }
 
 const showDisplayNameFunction = (accessLabel: string): boolean => {
-  const isHide = [routingUrl.urlNotFound.label].includes(accessLabel)
-  if (isHide) return false
-
-  return true
+  // TODO - need to implement
+  return !hideFunction(accessLabel)
 }
 
 const routing: Routing = [
   {
-    label: routingUrl.urlNotFound.label,
-    displayname: routingUrl.urlNotFound.displayName,
-    path: routingUrl.urlNotFound.path,
+    ...routingUrl.urlNotFound,
     component: <Home />,
     hide: (accessLabel: string) => hideFunction(accessLabel),
     showDisplayName: (accessLabel: string) =>
       showDisplayNameFunction(accessLabel),
   },
   {
-    label: routingUrl.home.label,
-    displayname: routingUrl.home.displayName,
-    path: routingUrl.home.path,
+    ...routingUrl.home,
     component: <Home />,
     hide: (accessLabel: string) => hideFunction(accessLabel),
     showDisplayName: (accessLabel: string) =>
       showDisplayNameFunction(accessLabel),
   },
   {
-    label: routingUrl.portfolio.label,
-    displayname: routingUrl.portfolio.displayName,
-    path: routingUrl.portfolio.path,
+    ...routingUrl.portfolio,
     component: <PortfolioLayout />,
     hide: (accessLabel: string) => hideFunction(accessLabel),
     showDisplayName: (accessLabel: string) =>
@@ -66,54 +65,42 @@ const routing: Routing = [
   //     showDisplayNameFunction(accessLabel),
   // },
   {
-    label: routingUrl.studyMaterial.label,
-    displayname: routingUrl.studyMaterial.displayName,
-    path: routingUrl.studyMaterial.path,
+    ...routingUrl.studyMaterial,
     component: <SMLayout />,
     hide: (accessLabel: string) => hideFunction(accessLabel),
     showDisplayName: (accessLabel: string) =>
       showDisplayNameFunction(accessLabel),
   },
   {
-    label: routingUrl.expenseTracker.label,
-    displayname: routingUrl.expenseTracker.displayName,
-    path: routingUrl.expenseTracker.path,
+    ...routingUrl.expenseTracker,
     component: <ExpenseTrackerLayout />,
     hide: (accessLabel: string) => hideFunction(accessLabel),
     showDisplayName: (accessLabel: string) =>
       showDisplayNameFunction(accessLabel),
   },
   {
-    label: routingUrl.betterShopping.label,
-    displayname: routingUrl.betterShopping.displayName,
-    path: routingUrl.betterShopping.path,
+    ...routingUrl.betterShopping,
     component: <BetterShoppingIndex />,
     hide: (accessLabel: string) => hideFunction(accessLabel),
     showDisplayName: (accessLabel: string) =>
       showDisplayNameFunction(accessLabel),
   },
   {
-    label: routingUrl.betterShoppingDetail.label,
-    displayname: routingUrl.betterShoppingDetail.displayName,
-    path: routingUrl.betterShoppingDetail.path,
+    ...routingUrl.betterShoppingDetail,
     component: <AllProductsDetails />,
     hide: (accessLabel: string) => hideFunction(accessLabel),
     showDisplayName: (accessLabel: string) =>
       showDisplayNameFunction(accessLabel),
   },
   {
-    label: routingUrl.gameShooter.label,
-    displayname: routingUrl.gameShooter.displayName,
-    path: routingUrl.gameShooter.path,
+    ...routingUrl.gameShooter,
     component: <ShooterIndex />,
     hide: (accessLabel: string) => hideFunction(accessLabel),
     showDisplayName: (accessLabel: string) =>
       showDisplayNameFunction(accessLabel),
   },
   {
-    label: routingUrl.gameShooterDetail.label,
-    displayname: routingUrl.gameShooterDetail.displayName,
-    path: routingUrl.gameShooterDetail.path,
+    ...routingUrl.gameShooterDetail,
     component: <ShooterPlayGround />,
     hide: (accessLabel: string) => hideFunction(accessLabel),
     showDisplayName: (accessLabel: string) =>
@@ -124,7 +111,7 @@ const routing: Routing = [
 export const menuNames = routing
   .map((url) => {
     if (url.showDisplayName(url.label)) {
-      return url.displayname
+      return url.displayName
     }
     return false
   })
