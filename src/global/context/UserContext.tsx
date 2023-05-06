@@ -13,7 +13,7 @@ import {
 import { useNavigate } from "react-router-dom"
 import { auth } from "../utils/firebase/firebase_config"
 import Firestore from "../utils/firebase/firebase"
-import { routingUrl } from "../router/routerFunctions/urlPath"
+import { routingUrl } from "../router/urlPath"
 import LocalStorage, {
   LocalStorageKey,
 } from "../utils/local-storage/local-storage"
