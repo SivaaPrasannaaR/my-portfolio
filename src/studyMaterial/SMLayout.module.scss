@@ -1,5 +1,18 @@
 @import "../global/styles/global.module.scss";
 
-.smLayout__container {
+.smLayout_container {
+  @include container;
   display: flex;
+  padding: 1rem;
+}
+
+.sideIndex_container {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+
+  background-color: bisque;
+  padding: 1rem;
+  width: 10rem;
 }

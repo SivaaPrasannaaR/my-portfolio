@@ -1,7 +1,10 @@
-import Firestore from "./firebase"
-
-const firebaseRefs = {
-  usersRef: Firestore.collectionRef("users"),
+export const firebaseCollectionNames = {
+  users: "users",
+  expenseTracker: "expenseTracker",
 }
 
-export default firebaseRefs
+type FirebaseRefsKey = keyof typeof firebaseCollectionNames
+export type FirebaseRefsValue =
+  (typeof firebaseCollectionNames)[FirebaseRefsKey]
+
+export default firebaseCollectionNames

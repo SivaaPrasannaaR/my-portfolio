@@ -1,28 +1,57 @@
 import { Paper, Card, Stack, CardContent, Typography } from "@mui/material"
-import { useState } from "react"
+import { useEffect, useState, useRef } from "react"
 import Entry from "../component/Entry"
+import Firestore from "../../global/utils/firebase/firebase"
+import firebaseCollectionNames from "../../global/utils/firebase/firebaseCollection"
 
-type ExpenseType = { title: string; amount: string }
+export type ExpenseType = { id: string; title: string; amount: number }
 
 // This project is made using material UI
 const ExpenseTrackerLayout: React.FC = () => {
-  // const [expense, setExpense] = useState<ExpenseType>({ title: "", amount: "" })
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const title = useRef<HTMLInputElement>(null)
+  const amount = useRef<HTMLInputElement>(null)
   const [totalExpense, setTotalExpense] = useState<ExpenseType[]>([])
+
+  const getData = async () => {
+    const data: any[] = await Firestore.getAllData(
+      firebaseCollectionNames.expenseTracker
+    )
+    console.log({ data })
+    setTotalExpense(data)
+  }
+
+  useEffect(() => {
+    getData()
+  }, [])
+
+  const handleAddButton = async (event: any) => {
+    event.preventDefault()
+
+    await Firestore.createData(firebaseCollectionNames.expenseTracker, {
+      title: title.current?.value ?? "",
+      amount: Number(amount.current?.value) ?? 0,
+    })
+    await getData()
+  }
+
   return (
     <Stack>
       <Stack>
-        <Entry />
+        <Entry
+          title={title}
+          amount={amount}
+          handleAddButton={handleAddButton}
+        />
       </Stack>
       <Stack>
         <Paper sx={{ ...style.root, ...style.someSpace }}>
           <Typography sx={style.showExpense}>
-            {totalExpense.map((ex) => {
+            {totalExpense.map((ex, index) => {
               return (
-                <Card sx={style.cardSpace}>
+                <Card sx={style.cardSpace} key={index}>
                   <CardContent>
-                    <div>title: {ex.title}</div>
-                    <div>amount: {ex.amount}</div>
+                    <Typography>title: {ex.title}</Typography>
+                    <Typography>amount: {ex.amount}</Typography>
                   </CardContent>
                 </Card>
               )

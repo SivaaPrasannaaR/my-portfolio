@@ -10,7 +10,6 @@ import {
 } from "@mui/material"
 import { useState } from "react"
 
-type ExpenseType = { title: string; amount: string }
 enum EntryType {
   income = "income",
   expense = "expense",
@@ -26,10 +25,16 @@ const textDesc = {
   investment: "Enter Investment",
 }
 
+type EntryPropsType = {
+  title: any
+  amount: any
+  handleAddButton: (event: any) => Promise<void>
+}
+
 // This project is made using material UI
-const Entry: React.FC = () => {
-  const [expense, setExpense] = useState<ExpenseType>({ title: "", amount: "" })
-  const [totalExpense, setTotalExpense] = useState<ExpenseType[]>([])
+const Entry: React.FC<EntryPropsType> = (props) => {
+  const { title, amount, handleAddButton } = props
+
   const [entryType, setEntryType] = useState<EntryStateType>(EntryType.expense)
 
   return (
@@ -62,18 +67,17 @@ const Entry: React.FC = () => {
         id="expense-desc"
         label={textDesc[entryType]}
         sx={style.colorWhite}
+        inputRef={title}
         focused
       />
-      <TextField id="expense-amt" label="Enter Amount" focused />
+      <TextField
+        id="expense-amt"
+        inputRef={amount}
+        label="Enter Amount"
+        focused
+      />
 
-      <Button
-        variant="contained"
-        onClick={() =>
-          setTotalExpense((s) => {
-            return [...s, expense].flat()
-          })
-        }
-      >
+      <Button variant="contained" onClick={handleAddButton}>
         Add
       </Button>
     </Paper>

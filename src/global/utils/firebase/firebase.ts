@@ -5,10 +5,10 @@ import {
   updateDoc,
   setDoc,
   getDocs,
-  CollectionReference,
   onSnapshot,
 } from "firebase/firestore"
 import { db } from "./firebase_config"
+import { FirebaseRefsValue } from "./firebaseCollection"
 
 // export const getSnapshot = (refs: CollectionReference) => {
 //   return onSnapshot(refs, (snapshot) => {
@@ -18,22 +18,26 @@ import { db } from "./firebase_config"
 
 export default class Firestore {
   // used to access the firestore collection
-  public static collectionRef = (collectionName: string) =>
+  public static collectionRef = (collectionName: FirebaseRefsValue) =>
     collection(db, collectionName)
 
   // To add data in firestore
   public static createData = async (
-    refs: CollectionReference,
+    collectionName: FirebaseRefsValue,
     data: Object
   ) => {
-    await addDoc(refs, data)
+    /**
+     * addDoc have 1st arg as ref to firestore and collection
+     * 2nd arg as data
+     */
+    await addDoc(Firestore.collectionRef(collectionName), data)
       .then(() => console.log("Data created in Firestore"))
       .catch((error) => console.error(error))
   }
 
   // To update only the existed data in firestore
   public static updateData = async (
-    collectionName: string,
+    collectionName: FirebaseRefsValue,
     id: string,
     data: Object
   ) => {
@@ -45,7 +49,7 @@ export default class Firestore {
 
   // To update or create data in firestore
   public static setData = async (
-    collectionName: string,
+    collectionName: FirebaseRefsValue,
     id: string,
     data: Object
   ) => {
@@ -56,9 +60,9 @@ export default class Firestore {
   }
 
   // To get all data from main collection
-  public static getAllData = async (collectionName: string) => {
-    const firestoreCollection = this.collectionRef(collectionName)
-    const collectionSnapshot = await getDocs(firestoreCollection)
+  public static getAllData = async (collectionName: FirebaseRefsValue) => {
+    const firestoreCollectionRef = this.collectionRef(collectionName)
+    const collectionSnapshot = await getDocs(firestoreCollectionRef)
     const dataList = collectionSnapshot.docs.map((doc) => ({
       ...doc.data(),
       id: doc.id,
@@ -67,7 +71,8 @@ export default class Firestore {
   }
 
   // To get all data from main collection
-  public static getSnapshot = async (refs: CollectionReference) => {
+  public static getSnapshot = async (collectionName: FirebaseRefsValue) => {
+    const refs = Firestore.collectionRef(collectionName)
     const unsubscribe = onSnapshot(refs, (snapshot) => {
       return snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
     })
