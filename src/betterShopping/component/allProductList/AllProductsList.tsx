@@ -3,7 +3,7 @@ import React from "react"
 import { dbBS } from "../../db/betterShopping"
 import styles from "../../BetterShoppingIndex.module.scss"
 import { useNavigate } from "react-router-dom"
-import { routingUrl } from "../../../global/router/urlPath"
+import { routingUrl } from "../../../global/router/routerFunctions/urlPath"
 
 const AllProductsList: React.FC = () => {
   const navigate = useNavigate()

@@ -1,6 +1,6 @@
 import { Routes, Route } from "react-router-dom"
 import Home from "../home/Home"
-import routing from "./routing"
+import { routing } from "./routerFunctions/routing"
 import styles from "./mainBody.module.scss"
 
 const WithAuth = () => {
@@ -9,7 +9,6 @@ const WithAuth = () => {
       <Routes>
         <Route index element={<Home />} />
         {routing.map((url) => {
-          if (url.hide(url.label)) return <></>
           return (
             <Route path={url.path} element={url.component} key={url.label} />
           )

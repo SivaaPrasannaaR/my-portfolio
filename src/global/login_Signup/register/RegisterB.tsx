@@ -1,6 +1,6 @@
 import { useRef } from "react"
 import { useNavigate } from "react-router-dom"
-import { routingUrl } from "../../router/urlPath"
+import { routingUrl } from "../../router/routerFunctions/urlPath"
 import styles from "../login_signup.module.scss"
 import { SignUpType } from "../signup"
 

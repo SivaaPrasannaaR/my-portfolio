@@ -1,12 +1,5 @@
 // url path for navigating to screen
-
-type RoutingUrlType = {
-  [key: string]: {
-    label: string
-    path: string
-    displayName: string
-  }
-}
+import { RoutingUrlType } from "./routeTypes"
 
 export const routingUrl: RoutingUrlType = {
   urlNotFound: {

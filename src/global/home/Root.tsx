@@ -1,7 +1,7 @@
-import React, { useEffect } from "react"
+import { useEffect } from "react"
 import { useNavigate } from "react-router-dom"
 import { useUserContext } from "../context/UserContext"
-import { routingUrl } from "../router/urlPath"
+import { routingUrl } from "../router/routerFunctions/urlPath"
 
 const Root = () => {
   const { user }: any = useUserContext()
