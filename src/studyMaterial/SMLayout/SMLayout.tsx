@@ -1,7 +1,11 @@
-import React from "react"
+import styles from "../SMLayout.module.scss"
 
 const SMLayout = () => {
-  return <div>SMLayout</div>
+  return (
+    <div className={styles.smLayout__container}>
+      <h2>Study Material</h2>
+    </div>
+  )
 }
 
 export default SMLayout

@@ -10,7 +10,6 @@ import { NoAuth } from "./global/router/NoAuth"
  */
 function App() {
   const { user, loading, error }: any = useUserContext()
-
   useEffect(() => {
     console.log("get Data from axios", getData())
   }, [])
@@ -32,7 +31,6 @@ function App() {
       ) : (
         <>{user ? <WithAuth /> : <NoAuth />}</>
       )}
-      {/* {user && <SideMenu />} */}
     </div>
   )
 }

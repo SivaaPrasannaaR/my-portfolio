@@ -13,12 +13,12 @@ import { store } from "./global/redux/store"
 const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement)
 root.render(
   <React.StrictMode>
-    <BrowserRouter>
-      <Provider store={store}>
-        <UserContextProvider>
+    <Provider store={store}>
+      <UserContextProvider>
+        <BrowserRouter>
           <App />
-        </UserContextProvider>
-      </Provider>
-    </BrowserRouter>
+        </BrowserRouter>
+      </UserContextProvider>
+    </Provider>
   </React.StrictMode>
 )
