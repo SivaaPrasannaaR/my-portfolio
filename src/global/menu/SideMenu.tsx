@@ -15,7 +15,10 @@ const SideMenu: React.FC = () => {
   const [isMenuActive, setIsMenuActive] = useState<boolean>(false)
   const { user, logoutUser }: any = useUserContext()
 
-  const isMyUserId = user.uid === "hfzivZZrzlV0EolNCpyfMvyYGJD3"
+  const isMyUserId = [
+    "hfzivZZrzlV0EolNCpyfMvyYGJD3",
+    "Dnm8DMzgRihMwFthkKOJcgodexE3",
+  ].includes(user.uid)
 
   return (
     <div

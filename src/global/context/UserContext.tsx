@@ -9,6 +9,7 @@ import {
   signInWithPopup,
   GoogleAuthProvider,
   AuthProvider,
+  UserCredential,
 } from "firebase/auth"
 import { useNavigate } from "react-router-dom"
 import { auth } from "../utils/firebase/firebase_config"
@@ -17,6 +18,7 @@ import { routingUrl } from "../router/urlPath"
 import LocalStorage, {
   LocalStorageKey,
 } from "../utils/local-storage/local-storage"
+import firebaseCollectionNames from "../utils/firebase/firebaseCollection"
 
 export const UserContext = createContext({})
 
@@ -34,6 +36,14 @@ export type userContextProps = {
   forgotPassword?: (email: string) => Promise<any>
   socialMediaAuth: (provider: AuthProvider) => void
   googleProvider?: GoogleAuthProvider
+}
+
+type UserDataType = {
+  uid: string
+  name: string | null
+  email: string | null
+  phoneNumber: string | null
+  photoURL: string | null
 }
 
 const UserContextProvider: FC<any> = ({ children }) => {
@@ -83,10 +93,29 @@ const UserContextProvider: FC<any> = ({ children }) => {
       .finally(() => setLoading(false))
   }
 
+  const updateUserInfoInFirestore = async (userData: UserDataType) => {
+    LocalStorage.set(LocalStorageKey.USERID, userData.uid)
+    await Firestore.setData(
+      firebaseCollectionNames.users,
+      userData.uid,
+      userData
+    )
+  }
+
   const signInUser = (email: string, password: string) => {
     setLoading(true)
     signInWithEmailAndPassword(auth, email, password)
-      .then((res) => console.log(res))
+      .then(async (res: UserCredential) => {
+        console.log("#", res)
+        const userData: UserDataType = {
+          uid: res.user.uid,
+          name: res.user.displayName,
+          email: res.user.email,
+          phoneNumber: res.user.phoneNumber,
+          photoURL: res.user.photoURL,
+        }
+        await updateUserInfoInFirestore(userData)
+      })
       .catch((err) => setError(err.code))
       .finally(() => setLoading(false))
   }
@@ -109,15 +138,14 @@ const UserContextProvider: FC<any> = ({ children }) => {
       .then(async (result) => {
         const socialMediaUser = result.user
         setUser(socialMediaUser)
-        const userData = {
+        const userData: UserDataType = {
           uid: socialMediaUser.uid,
           name: socialMediaUser.displayName,
           email: socialMediaUser.email,
           phoneNumber: socialMediaUser.phoneNumber,
           photoURL: socialMediaUser.photoURL,
         }
-        LocalStorage.set(LocalStorageKey.USERID, userData.uid)
-        await Firestore.setData("users", userData.uid, userData)
+        await updateUserInfoInFirestore(userData)
         navigate(routingUrl.home.path)
       })
       .catch((error) => {

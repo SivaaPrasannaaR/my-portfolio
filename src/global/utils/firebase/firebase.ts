@@ -54,8 +54,14 @@ export default class Firestore {
     data: Object
   ) => {
     const docRef = doc(db, collectionName, id)
-    await setDoc(docRef, data)
-      .then(() => console.log("Data updated in Firestore"))
+    const new_date = new Date()
+    const dataWithTimeStamp = {
+      ...data,
+      updatedAt: { date: new_date, timestamp: new_date.getTime() },
+    }
+    console.log({ dataWithTimeStamp })
+    await setDoc(docRef, dataWithTimeStamp)
+      .then(() => console.log("Data updated in Firestore", dataWithTimeStamp))
       .catch((error) => console.error(error))
   }
 
