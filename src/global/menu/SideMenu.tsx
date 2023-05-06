@@ -13,7 +13,9 @@ import { useState } from "react"
 const SideMenu: React.FC = () => {
   const navigate = useNavigate()
   const [isMenuActive, setIsMenuActive] = useState<boolean>(false)
-  const { logoutUser }: any = useUserContext()
+  const { user, logoutUser }: any = useUserContext()
+
+  const isMyUserId = user.uid === "hfzivZZrzlV0EolNCpyfMvyYGJD3"
 
   return (
     <div
@@ -50,12 +52,16 @@ const SideMenu: React.FC = () => {
             </div>
             <label> {routingUrl.expenseTracker.displayName}</label>
           </li>
-          <li onClick={() => navigate(routingUrl.studyMaterial.path)}>
-            <div className={styles.menuIcon}>
-              <LocalLibraryIcon />
-            </div>
-            <label> {routingUrl.studyMaterial.displayName}</label>
-          </li>
+          {isMyUserId && (
+            <>
+              <li onClick={() => navigate(routingUrl.studyMaterial.path)}>
+                <div className={styles.menuIcon}>
+                  <LocalLibraryIcon />
+                </div>
+                <label> {routingUrl.studyMaterial.displayName}</label>
+              </li>
+            </>
+          )}
           <li onClick={logoutUser} className={styles.logoutMenu}>
             <div className={styles.menuIcon}>
               <LogoutIcon />
