@@ -69,6 +69,11 @@ export const routingUrl: RoutingUrlType = {
     path: "/gameShooter/:id",
     displayName: "War of Luck Playground",
   },
+  changeCanvas: {
+    label: "changeAnimation",
+    path: "/changeAnimation",
+    displayName: "Change Animation",
+  },
 }
 
 // // url path for navigating to screen

@@ -88,6 +88,7 @@ const degradeBoxStage = (
   box: BoxCountType,
   isOpponent: boolean
 ) => {
+  // Decrease the stage of a player's box
   const playerName = getPlayerName(player)
   const boxName = getBoxName(box)
 
@@ -109,6 +110,7 @@ const updateReadyToShoot = (
   state: ShooterStateType,
   action: PayloadAction<BasicActionPayloadType>
 ) => {
+  // Update readiness for shooting based on the player's box stage
   const playerName = getPlayerName(action.payload.player)
 
   boxNameArr.forEach((boxNumber: BoxCountType) => {
@@ -195,6 +197,7 @@ const unSetLockedToShoot = (
   })
 }
 
+/** To perform a shooting action against an opponent's box */
 const shootOpponent = (
   state: ShooterStateType,
   action: PayloadAction<{ opponentBox: BoxInfoType }>
@@ -246,6 +249,7 @@ const checkKilledBox = (state: ShooterStateType) => {
   })
 }
 
+/** To check if a player has lost the game */
 const checkGameLosser = (state: ShooterStateType) => {
   if (state.gameStarted) {
     Array.from(new Array(state.playerCount)).forEach((_, index) => {
@@ -268,6 +272,7 @@ const checkGameLosser = (state: ShooterStateType) => {
   }
 }
 
+// Define the reducer functions
 const shooterReducerFunction = {
   setPlayer,
   updateInitialState,
