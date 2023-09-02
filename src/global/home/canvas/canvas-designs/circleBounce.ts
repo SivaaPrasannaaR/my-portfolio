@@ -57,7 +57,7 @@ class Circle {
   }
 
   updateVelocity() {
-    const maxVelocity = 10
+    // const maxVelocity = 10
     if (this.x + this.radius > this.canvas.width || this.x - this.radius < 0) {
       this.velocity.x = -this.velocity.x
     }
@@ -137,7 +137,8 @@ class Circle {
 
 export default function createCircleBounce(
   canvas: HTMLCanvasElement,
-  c: CanvasRenderingContext2D
+  c: CanvasRenderingContext2D,
+  circleCount: number
 ) {
   let circleArr: Circle[] = []
 
@@ -160,7 +161,6 @@ export default function createCircleBounce(
     }
   }
 
-  const circleCount = 500
   init(circleCount) // Create an array of {circleCount} circles
 
   makeAnimation(circleArr, canvas, c)

@@ -57,7 +57,7 @@ class Circle {
 
   // Method to update the circle's velocity and handle bouncing
   updateVelocity() {
-    const maxVelocity = 10
+    // const maxVelocity = 10
     if (this.x + this.radius > this.canvas.width || this.x - this.radius < 0) {
       this.dx = -this.dx
     }
@@ -98,7 +98,8 @@ class Circle {
 // Function to create and animate bouncing circles
 export function createCircleZoomOnHover(
   canvas: HTMLCanvasElement,
-  c: CanvasRenderingContext2D
+  c: CanvasRenderingContext2D,
+  circleCount: number
 ) {
   const circleArray: Circle[] = []
 
@@ -116,7 +117,6 @@ export function createCircleZoomOnHover(
     }
   }
 
-  const circleCount = 1000
   createCircleArray(circleCount) // Create an array of 1000 circles
 
   // Function to animate the canvas
