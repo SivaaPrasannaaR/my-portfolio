@@ -1,14 +1,15 @@
-import { useEffect, useMemo, useState } from "react"
-import { Table } from "../../../common-components/table/Table"
-import { NotesType, SmRepo } from "../../smRepo/SmRepo"
+import { useMemo, useState } from "react"
+import { Table } from "../../common-components/table/Table"
+import { SmRepo } from "./SmRepo"
 
 type QuestionTableType = {
   onRowClick: (row: any) => any
+  tableData: any[]
 }
 
 const QuestionTable: React.FC<QuestionTableType> = (props) => {
-  const { onRowClick } = props
-  const [tableData, setTableData] = useState([] as any[])
+  const { onRowClick, tableData } = props
+
   const [selectedRow, setSelectedRow] = useState(null)
   const [isConfirmationModalOpen, setConfirmationModalOpen] = useState(false)
 
@@ -26,34 +27,6 @@ const QuestionTable: React.FC<QuestionTableType> = (props) => {
   }
   const toggleConfirmationModal = () => {
     setConfirmationModalOpen(!isConfirmationModalOpen)
-  }
-
-  useEffect(() => {
-    fetchData()
-  }, [])
-
-  // Create a new note
-  const newNote: NotesType = {
-    id: "id",
-    title: "Sample Note",
-    question: "What is your question?",
-    faqRate: 5,
-    answer: "This is the answer.",
-  }
-
-  const fetchData = async () => {
-    try {
-      console.log("fetching")
-      //   await notesRepo.createNotes(newNote)
-      const data = await notesRepo.getAllNotes()
-      if (data.length) {
-        setTableData(data)
-      } else {
-        setTableData([])
-      }
-    } catch (error) {
-      console.error("🚀 ~ file:~ fetchData ~ error:", error)
-    }
   }
 
   const columns = useMemo(

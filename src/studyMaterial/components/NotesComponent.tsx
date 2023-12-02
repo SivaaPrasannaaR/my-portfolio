@@ -1,18 +1,19 @@
-import React, { useState } from "react"
+import React from "react"
 import ReactQuill from "react-quill"
 import "react-quill/dist/quill.snow.css"
-import { NotesType } from "../../smRepo/SmRepo"
+import { NotesType } from "./SmRepo"
+import TextField from "@mui/material/TextField"
 
 type NotesComponentType = {
   content: NotesType
-  // setContent: React.Dispatch<React.SetStateAction<NotesType>>
-  handleContentOnChange: (value: string) => void
+  setContent: React.Dispatch<React.SetStateAction<NotesType>>
+  editable: boolean
+  setEditable: React.Dispatch<React.SetStateAction<boolean>>
   saveContent: (row: any) => Promise<void>
 }
 
 const NotesComponent: React.FC<NotesComponentType> = (props) => {
-  const { content, handleContentOnChange, saveContent } = props
-  const [editable, setEditable] = useState<boolean>(false)
+  const { content, setContent, editable, setEditable, saveContent } = props
 
   const modules = {
     toolbar: [
@@ -36,6 +37,20 @@ const NotesComponent: React.FC<NotesComponentType> = (props) => {
     "image",
   ]
 
+  async function handleQuestionChange(value: string) {
+    setContent((prevState) => ({
+      ...prevState,
+      question: value,
+    }))
+  }
+
+  async function handleAnswerChange(value: string) {
+    setContent((prevState) => ({
+      ...prevState,
+      answer: value,
+    }))
+  }
+
   async function handleSaveContent() {
     await saveContent(content)
     setEditable(!editable)
@@ -50,7 +65,21 @@ const NotesComponent: React.FC<NotesComponentType> = (props) => {
           alignItems: "center",
         }}
       >
-        <h2>{content.question}</h2>
+        {!editable ? (
+          <h2 onClick={() => setEditable(!editable)}>{content.question}</h2>
+        ) : (
+          <TextField
+            variant="outlined"
+            fullWidth
+            value={content?.question}
+            onChange={(e) => handleQuestionChange(e.target.value)}
+            InputProps={{
+              style: {
+                border: "1px solid #000",
+              },
+            }}
+          />
+        )}
         {editable ? (
           <div style={{ display: "flex", gap: "4px" }}>
             <button
@@ -89,12 +118,13 @@ const NotesComponent: React.FC<NotesComponentType> = (props) => {
         <ReactQuill
           theme="snow"
           value={content.answer}
-          onChange={handleContentOnChange}
+          onChange={handleAnswerChange}
           modules={modules}
           formats={formats}
           readOnly={!editable}
           style={{
             flex: 1,
+            height: "85vh",
             overflowY: "auto",
             border: "1px solid #ccc",
           }}
