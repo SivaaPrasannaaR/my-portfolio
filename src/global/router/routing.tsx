@@ -7,6 +7,7 @@ import Home from "../home/Home"
 import { routingUrl } from "./urlPath"
 import ShooterIndex from "../../game/shooter/screen/ShooterIndex"
 import ShooterPlayGround from "../../game/shooter/screen/ShooterPlayGround"
+import ChangeCanvas from "../home/canvas/ChangeCanvas"
 
 type Routing = {
   label: string
@@ -102,6 +103,13 @@ const routing: Routing = [
   {
     ...routingUrl.gameShooterDetail,
     component: <ShooterPlayGround />,
+    hide: (accessLabel: string) => hideFunction(accessLabel),
+    showDisplayName: (accessLabel: string) =>
+      showDisplayNameFunction(accessLabel),
+  },
+  {
+    ...routingUrl.changeCanvas,
+    component: <ChangeCanvas />,
     hide: (accessLabel: string) => hideFunction(accessLabel),
     showDisplayName: (accessLabel: string) =>
       showDisplayNameFunction(accessLabel),

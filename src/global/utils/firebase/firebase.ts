@@ -5,6 +5,7 @@ import {
   updateDoc,
   setDoc,
   getDocs,
+  getDoc,
   onSnapshot,
 } from "firebase/firestore"
 import { db } from "./firebase_config"
@@ -63,6 +64,22 @@ export default class Firestore {
     await setDoc(docRef, dataWithTimeStamp)
       .then(() => console.log("Data updated in Firestore", dataWithTimeStamp))
       .catch((error) => console.error(error))
+  }
+
+  // To get all data from main collection
+  public static getData = async (
+    collectionName: FirebaseRefsValue,
+    id: string
+  ) => {
+    const docRef = doc(db, collectionName, id)
+    const docSnapshot = await getDoc(docRef)
+
+    if (docSnapshot.exists()) {
+      // Document exists, you can access the data
+      const data = docSnapshot.data()
+      return data
+    }
+    return {}
   }
 
   // To get all data from main collection

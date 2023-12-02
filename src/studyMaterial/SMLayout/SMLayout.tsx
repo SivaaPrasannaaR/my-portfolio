@@ -1,28 +1,51 @@
-import { Box, Stack, TextField } from "@mui/material"
+import { Box, Stack } from "@mui/material"
 import styles from "../SMLayout.module.scss"
+import SubjectTitle from "../components/SubjectTitle"
+import QuestionTable from "../components/questionTable/QuestionTable"
+import NotesComponent from "../components/answer/NotesComponent"
 import { useState } from "react"
-import SideIndex from "../components/SideIndex"
+import { NotesType, SmRepo } from "../smRepo/SmRepo"
 
 const SMLayout = () => {
-  const [value, setValue] = useState("")
+  const [content, setContent] = useState<NotesType>({} as NotesType)
+
+  const notesRepo = new SmRepo()
+
+  const handleContentOnChange = (value: string) => {
+    setContent((prevState) => ({
+      ...prevState,
+      answer: value,
+    }))
+  }
+
+  const onRowClick = async (row: any) => {
+    console.log(row)
+    const data = await notesRepo.getNoteById(row.id)
+    setContent(data)
+  }
+
+  async function saveContent(row: any) {
+    await notesRepo.updateNotes(row.id, row)
+  }
+
   return (
     <div>
-      <SideIndex />
+      <SubjectTitle />
       <div className={styles.smLayout_container}>
-        <Stack>
-          <Box>
-            <TextField id="title" label="Title" variant="outlined" />
-            <TextField
-              id="content"
-              label="content"
-              multiline
-              maxRows={8}
-              value={value}
-              onChange={(e) => setValue(e.target.value)}
+        <Box minWidth="500px">
+          <Stack>
+            <QuestionTable onRowClick={onRowClick} />
+          </Stack>
+        </Box>
+        <Box minWidth="600px" style={{ marginLeft: "1rem" }}>
+          <Stack>
+            <NotesComponent
+              content={content}
+              handleContentOnChange={handleContentOnChange}
+              saveContent={saveContent}
             />
-            {/* <ReactMarkdown >{value}</ReactMarkdown> */}
-          </Box>
-        </Stack>
+          </Stack>
+        </Box>
       </div>
     </div>
   )

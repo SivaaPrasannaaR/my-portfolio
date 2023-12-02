@@ -113,7 +113,6 @@ class Circle {
       )
       if (distance - this.radius * 2 < 0) {
         this.resolveCollision(this, circleArr[i])
-        console.log("collided")
       }
     }
   }

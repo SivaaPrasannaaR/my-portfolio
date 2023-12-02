@@ -1,0 +1,56 @@
+// src/components/FAQ.scss
+
+@import "../../../global/styles/global.module.scss";
+
+.faq-container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.faq-item {
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.faq-item:hover {
+  background-color: #f4f4f4;
+}
+
+.faq_question {
+  font-weight: bold;
+  background-color: #2196f3; // Background color for questions
+  color: white; // Text color for questions
+  width: 100%;
+  padding: 10px;
+}
+
+.faq_answer {
+  margin-top: 10px;
+  display: none;
+  background-color: #f9f9f9; // Background color for answers
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.faq_item.open .faq_answer {
+  display: block;
+}
+
+.markdown_content {
+  pre {
+    background-color: #f0f0f0; // Background color for code blocks
+    padding: 10px;
+    border-radius: 5px;
+    overflow-x: auto;
+  }
+
+  code {
+    color: #007acc; // Text color for code within code blocks
+  }
+}

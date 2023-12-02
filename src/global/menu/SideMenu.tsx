@@ -19,6 +19,7 @@ const SideMenu: React.FC = () => {
   const isMyUserId = [
     "hfzivZZrzlV0EolNCpyfMvyYGJD3",
     "Dnm8DMzgRihMwFthkKOJcgodexE3",
+    "xlrmJFv1P9NrhX1D47b3QsTkYD53",
   ].includes(user.uid)
 
   return (
