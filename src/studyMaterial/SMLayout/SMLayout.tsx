@@ -10,8 +10,11 @@ import SearchBar from "../../common-components/searchBar/SearchBar"
 const emptyContent = {} as NotesType
 
 const SMLayout = () => {
-  const [tableData, setTableData] = useState([] as any[])
+  const [tableData, setTableData] = useState([] as NotesType[])
+  const [tabledataCopy, setTabledataCopy] = useState([] as NotesType[])
+  // the content that will be displayed in notes
   const [content, setContent] = useState<NotesType>(emptyContent)
+
   const [subject, setSubject] = useState<string>("")
   const [subjectList, setSubjectList] = useState<string[]>([])
 
@@ -19,11 +22,15 @@ const SMLayout = () => {
 
   const notesRepo = new SmRepo()
 
-  function fetchNotes(subject: string) {
-    notesRepo.getAllNotes(subject).then((notesData) => {
+  function fetchNotes(subject: string, noteId?: string) {
+    notesRepo.getAllNotes(subject).then((notesData: NotesType[]) => {
       if (notesData.length) {
         setTableData(notesData)
-        setContent(notesData[0])
+        setTabledataCopy(notesData)
+        const note = noteId
+          ? notesData.find((note) => note.id === noteId)
+          : null
+        setContent(note ? note : notesData[0])
       } else {
         setTableData([])
         setContent(emptyContent)
@@ -67,7 +74,7 @@ const SMLayout = () => {
       }
       await notesRepo.createNotes(subject, newNote)
     }
-    fetchData()
+    fetchNotes(subject, row.id)
   }
 
   function onSubjectClick(sub: string) {
@@ -75,25 +82,20 @@ const SMLayout = () => {
     fetchNotes(sub)
   }
   async function createNewNote() {
-    setContent({
-      ...emptyContent,
-      question: "What is your question?",
-      answer: "Your Answer",
-    })
+    setContent(emptyContent)
     setEditable(true)
   }
   async function createNewSubject() {}
 
   function handleSearch(search: string) {
-    notesRepo.getSearchNotes(subject, search).then((notesData) => {
-      if (notesData.length) {
-        setTableData(notesData)
-        setContent(notesData[0])
-      } else {
-        setTableData([])
-        setContent(emptyContent)
-      }
-    })
+    if (search) {
+      const filtereData = tabledataCopy.filter((data) =>
+        data.question.toLowerCase().includes(search.toLowerCase())
+      )
+      setTableData(filtereData)
+    } else {
+      setTableData(tabledataCopy)
+    }
   }
 
   return (

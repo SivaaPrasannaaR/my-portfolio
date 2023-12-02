@@ -43,11 +43,16 @@ const NotesComponent: React.FC<NotesComponentType> = (props) => {
       question: value,
     }))
   }
-
   async function handleAnswerChange(value: string) {
     setContent((prevState) => ({
       ...prevState,
       answer: value,
+    }))
+  }
+  async function handleFAQRateChange(value: string) {
+    setContent((prevState) => ({
+      ...prevState,
+      faqRate: parseInt(value),
     }))
   }
 
@@ -66,11 +71,19 @@ const NotesComponent: React.FC<NotesComponentType> = (props) => {
         }}
       >
         {!editable ? (
-          <h2 onClick={() => setEditable(!editable)}>{content.question}</h2>
+          <h2
+            style={{
+              marginBottom: "0px",
+            }}
+            onClick={() => setEditable(!editable)}
+          >
+            {content.question}
+          </h2>
         ) : (
           <TextField
             variant="outlined"
             fullWidth
+            placeholder="What is your question?"
             value={content?.question}
             onChange={(e) => handleQuestionChange(e.target.value)}
             InputProps={{
@@ -80,6 +93,19 @@ const NotesComponent: React.FC<NotesComponentType> = (props) => {
             }}
           />
         )}
+        {editable && (
+          <TextField
+            label="FAQ Rate"
+            type="number"
+            value={content?.faqRate}
+            onChange={(e) => handleFAQRateChange(e.target.value)}
+            inputProps={{
+              maxLength: 2,
+              style: { width: "60px" }, // Adjust the width as needed
+            }}
+          />
+        )}
+
         {editable ? (
           <div style={{ display: "flex", gap: "4px" }}>
             <button
@@ -117,6 +143,7 @@ const NotesComponent: React.FC<NotesComponentType> = (props) => {
       >
         <ReactQuill
           theme="snow"
+          placeholder="Type your answer here!!!"
           value={content.answer}
           onChange={handleAnswerChange}
           modules={modules}
@@ -126,6 +153,7 @@ const NotesComponent: React.FC<NotesComponentType> = (props) => {
             flex: 1,
             height: "85vh",
             overflowY: "auto",
+            marginTop: "8px",
             border: "1px solid #ccc",
           }}
         />

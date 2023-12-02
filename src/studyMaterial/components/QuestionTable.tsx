@@ -1,10 +1,10 @@
 import { useMemo, useState } from "react"
 import { Table } from "../../common-components/table/Table"
-import { SmRepo } from "./SmRepo"
+import { NotesType, SmRepo } from "./SmRepo"
 
 type QuestionTableType = {
   onRowClick: (row: any) => any
-  tableData: any[]
+  tableData: NotesType[]
 }
 
 const QuestionTable: React.FC<QuestionTableType> = (props) => {
@@ -12,6 +12,8 @@ const QuestionTable: React.FC<QuestionTableType> = (props) => {
 
   const [selectedRow, setSelectedRow] = useState(null)
   const [isConfirmationModalOpen, setConfirmationModalOpen] = useState(false)
+
+  tableData.sort((a, b) => b.faqRate - a.faqRate)
 
   const notesRepo = new SmRepo()
 

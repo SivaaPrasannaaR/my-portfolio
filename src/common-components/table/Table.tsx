@@ -39,7 +39,7 @@ export const Table: React.FC<TableType> = (props) => {
       </thead>
 
       <tbody {...getTableBodyProps()}>
-        {rows.map((row) => {
+        {rows.map((row, index) => {
           prepareRow(row)
           return (
             <tr
@@ -59,9 +59,12 @@ export const Table: React.FC<TableType> = (props) => {
                     width: cell.column.width,
                     padding: "2px",
                     border: "1px solid black",
+                    textAlign: ["slNo", "faqRate"].includes(cell.column.id)
+                      ? "center"
+                      : "left",
                   }}
                 >
-                  {cell.render("Cell")}
+                  {cell.column.id === "slNo" ? index + 1 : cell.render("Cell")}
                 </td>
               ))}
             </tr>
