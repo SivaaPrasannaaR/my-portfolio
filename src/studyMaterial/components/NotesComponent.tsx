@@ -17,25 +17,25 @@ const NotesComponent: React.FC<NotesComponentType> = (props) => {
 
   const modules = {
     toolbar: [
-      [{ header: [1, 2, 3, 4, 5, false] }],
-      ["bold", "italic", "underline", "strike", "blockquote"],
-      [{ list: "ordered" }, { list: "bullet" }],
-      ["link", "image"],
-    ],
-  }
+      ["bold", "italic", "underline", "strike"], // toggled buttons
+      ["blockquote", "code-block"],
 
-  const formats = [
-    "header",
-    "bold",
-    "italic",
-    "underline",
-    "strike",
-    "blockquote",
-    "list",
-    "bullet",
-    "link",
-    "image",
-  ]
+      [{ header: 1 }, { header: 2 }], // custom button values
+      [{ list: "ordered" }, { list: "bullet" }],
+      [{ indent: "-1" }, { indent: "+1" }], // outdent/indent
+      [{ direction: "rtl" }], // text direction
+
+      [{ size: ["small", false, "large", "huge"] }], // custom dropdown
+      [{ header: [1, 2, 3, 4, 5, 6, false] }],
+
+      [{ color: [] }, { background: [] }], // dropdown with defaults from theme
+      [{ font: [] }],
+      [{ align: [] }],
+
+      ["clean"],
+    ],
+    syntax: true,
+  }
 
   async function handleQuestionChange(value: string) {
     setContent((prevState) => ({
@@ -148,7 +148,6 @@ const NotesComponent: React.FC<NotesComponentType> = (props) => {
           value={content.answer}
           onChange={handleAnswerChange}
           modules={modules}
-          formats={formats}
           readOnly={!editable}
           style={{
             flex: 1,
