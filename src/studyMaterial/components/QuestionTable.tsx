@@ -1,6 +1,6 @@
-import { useMemo, useState } from "react"
+import { useMemo } from "react"
 import { Table } from "../../common-components/table/Table"
-import { NotesType, SmRepo } from "./SmRepo"
+import { NotesType } from "./SmRepo"
 
 type QuestionTableType = {
   onRowClick: (row: any) => any
@@ -10,26 +10,26 @@ type QuestionTableType = {
 const QuestionTable: React.FC<QuestionTableType> = (props) => {
   const { onRowClick, tableData } = props
 
-  const [selectedRow, setSelectedRow] = useState(null)
-  const [isConfirmationModalOpen, setConfirmationModalOpen] = useState(false)
-
   tableData.sort((a, b) => b.faqRate - a.faqRate)
 
-  const notesRepo = new SmRepo()
+  // const [selectedRow, setSelectedRow] = useState(null)
+  // const [isConfirmationModalOpen, setConfirmationModalOpen] = useState(false)
 
-  const handleViewClick = (row: any) => {
-    // navigate(`/store/viewstore/${row.id}`)
-  }
-  const handleEditClick = (row: any) => {
-    // navigate(`/store/updatestore/${row.id}`)
-  }
-  const handleDeleteClick = (row: any) => {
-    setSelectedRow(row)
-    toggleConfirmationModal()
-  }
-  const toggleConfirmationModal = () => {
-    setConfirmationModalOpen(!isConfirmationModalOpen)
-  }
+  // const notesRepo = new SmRepo()
+
+  // const handleViewClick = (row: any) => {
+  //   // navigate(`/store/viewstore/${row.id}`)
+  // }
+  // const handleEditClick = (row: any) => {
+  //   // navigate(`/store/updatestore/${row.id}`)
+  // }
+  // const handleDeleteClick = (row: any) => {
+  //   setSelectedRow(row)
+  //   toggleConfirmationModal()
+  // }
+  // const toggleConfirmationModal = () => {
+  //   setConfirmationModalOpen(!isConfirmationModalOpen)
+  // }
 
   const columns = useMemo(
     () => [

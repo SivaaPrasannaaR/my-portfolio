@@ -57,6 +57,7 @@ const SMLayout = () => {
 
   useEffect(() => {
     fetchData()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const onRowClick = async (row: any) => {

@@ -18,9 +18,9 @@ export const Canvas = () => {
 
   const [isDialogOpen, setIsDialogOpen] = React.useState(true)
 
-  const openDialog = () => {
-    setIsDialogOpen(true)
-  }
+  // const openDialog = () => {
+  //   setIsDialogOpen(true)
+  // }
   const closeDialog = () => {
     setIsDialogOpen(false)
   }
