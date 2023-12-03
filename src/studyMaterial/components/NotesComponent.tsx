@@ -17,7 +17,7 @@ const NotesComponent: React.FC<NotesComponentType> = (props) => {
 
   const modules = {
     toolbar: [
-      [{ header: [1, 2, 3, false] }],
+      [{ header: [1, 2, 3, 4, 5, false] }],
       ["bold", "italic", "underline", "strike", "blockquote"],
       [{ list: "ordered" }, { list: "bullet" }],
       ["link", "image"],
@@ -62,7 +62,7 @@ const NotesComponent: React.FC<NotesComponentType> = (props) => {
   }
 
   return (
-    <div style={{ height: "100vh", display: "flex", flexDirection: "column" }}>
+    <div style={{ display: "flex", flexDirection: "column" }}>
       <div
         style={{
           display: "flex",
@@ -138,7 +138,8 @@ const NotesComponent: React.FC<NotesComponentType> = (props) => {
       </div>
       <div
         style={{
-          pointerEvents: editable ? "auto" : "none",
+          overflowY: "auto",
+          flex: 1,
         }}
       >
         <ReactQuill
