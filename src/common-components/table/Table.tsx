@@ -52,7 +52,7 @@ export const Table: React.FC<TableType> = (props) => {
                     width:
                       column.id === "slNo" || column.id === "faqRate"
                         ? "24px"
-                        : "200px",
+                        : "175px",
                   }}
                 >
                   {column.render("Header")}
