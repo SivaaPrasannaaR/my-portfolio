@@ -28,6 +28,8 @@ const SMLayout = () => {
         setTableData(notesData)
         setTabledataCopy(notesData)
 
+        notesData.sort((a, b) => b.faqRate - a.faqRate)
+
         if (noteId) {
           const note = noteId
             ? notesData.find((note) => note.id === noteId)
