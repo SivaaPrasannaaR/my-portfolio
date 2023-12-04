@@ -1,0 +1,14 @@
+.tableTr {
+  border-bottom: "1px solid #ddd";
+  padding: "4px";
+  text-align: "left";
+  border: "1px solid black";
+  transition: "background 0.3s";
+}
+
+.tableTr:hover {
+  background-color: bisque;
+}
+.tableTrBg {
+  background-color: bisque;
+}

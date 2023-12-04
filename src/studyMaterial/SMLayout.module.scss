@@ -22,3 +22,8 @@
 .subjectTitle_header {
   @include container;
 }
+
+.subjectList_container {
+  max-height: 85vh;
+  overflow-y: auto;
+}

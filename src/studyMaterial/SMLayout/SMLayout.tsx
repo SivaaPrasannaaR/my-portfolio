@@ -27,10 +27,15 @@ const SMLayout = () => {
       if (notesData.length) {
         setTableData(notesData)
         setTabledataCopy(notesData)
-        const note = noteId
-          ? notesData.find((note) => note.id === noteId)
-          : null
-        setContent(note ? note : notesData[0])
+
+        if (noteId) {
+          const note = noteId
+            ? notesData.find((note) => note.id === noteId)
+            : null
+          note && setContent(note)
+        } else {
+          setContent(notesData[0])
+        }
       } else {
         setTableData([])
         setContent(emptyContent)
@@ -75,7 +80,7 @@ const SMLayout = () => {
       }
       await notesRepo.createNotes(subject, newNote)
     }
-    fetchNotes(subject, row.id)
+    fetchNotes(subject, row.id || "newNote")
   }
 
   function onSubjectClick(sub: string) {

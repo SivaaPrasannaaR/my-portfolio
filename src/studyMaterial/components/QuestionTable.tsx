@@ -36,7 +36,7 @@ const QuestionTable: React.FC<QuestionTableType> = (props) => {
       {
         Header: "Sl No",
         accessor: "slNo",
-        width: 5,
+        width: 1,
       },
       {
         Header: "Questions",
@@ -46,7 +46,7 @@ const QuestionTable: React.FC<QuestionTableType> = (props) => {
       {
         Header: "FAQ Rate",
         accessor: "faqRate",
-        width: 5,
+        width: 1,
       },
 
       // {
