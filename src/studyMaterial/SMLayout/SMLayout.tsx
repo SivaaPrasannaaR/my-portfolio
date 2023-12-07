@@ -97,10 +97,22 @@ const SMLayout = () => {
 
   function handleSearch(search: string) {
     if (search) {
-      const filtereData = tabledataCopy.filter((data) =>
+      const filteredQuestion = tabledataCopy.filter((data) =>
         data.question.toLowerCase().includes(search.toLowerCase())
       )
-      setTableData(filtereData)
+      const filteredAnswer = tabledataCopy.filter((data) => {
+        const isSearchedAnswer = data.answer
+          ?.toLowerCase()
+          .includes(search.toLowerCase())
+        const isSearchedQuestion = data.question
+          ?.toLowerCase()
+          .includes(search.toLowerCase())
+        return isSearchedAnswer && !isSearchedQuestion
+      })
+
+      const filteredData = [...filteredQuestion, ...filteredAnswer]
+
+      setTableData(filteredData)
     } else {
       setTableData(tabledataCopy)
     }
