@@ -49,6 +49,17 @@ const SideMenu: React.FC = () => {
             </div>
             <label>My Profile</label>
           </li>
+          {isMyUserId && (
+            <li
+              onClick={() => navigate(routingUrl.studyMaterial.path)}
+              title={routingUrl.studyMaterial.displayName}
+            >
+              <div className={styles.menuIcon}>
+                <LocalLibraryIcon />
+              </div>
+              <label> {routingUrl.studyMaterial.displayName}</label>
+            </li>
+          )}
           <li
             onClick={() => navigate(routingUrl.changeCanvas.path)}
             title={routingUrl.changeCanvas.displayName}
@@ -78,17 +89,7 @@ const SideMenu: React.FC = () => {
               <label> {routingUrl.expenseTracker.displayName}</label>
             </li>
           )}
-          {isMyUserId && (
-            <li
-              onClick={() => navigate(routingUrl.studyMaterial.path)}
-              title={routingUrl.studyMaterial.displayName}
-            >
-              <div className={styles.menuIcon}>
-                <LocalLibraryIcon />
-              </div>
-              <label> {routingUrl.studyMaterial.displayName}</label>
-            </li>
-          )}
+
           <li onClick={logoutUser} className={styles.logoutMenu} title="Logout">
             <div className={styles.menuIcon}>
               <LogoutIcon />

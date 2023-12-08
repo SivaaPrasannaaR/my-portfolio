@@ -2,6 +2,7 @@ import React from "react"
 import ReactQuill from "react-quill"
 import "react-quill/dist/quill.snow.css"
 import { NotesType } from "./SmRepo"
+import { useMediaQuery } from "@mui/material"
 import TextField from "@mui/material/TextField"
 
 type NotesComponentType = {
@@ -14,6 +15,8 @@ type NotesComponentType = {
 
 const NotesComponent: React.FC<NotesComponentType> = (props) => {
   const { content, setContent, editable, setEditable, saveContent } = props
+
+  const isMobile = useMediaQuery("(max-width: 600px)")
 
   const modules = {
     toolbar: [
@@ -62,7 +65,16 @@ const NotesComponent: React.FC<NotesComponentType> = (props) => {
   }
 
   return (
-    <div style={{ display: "flex", flexDirection: "column" }}>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        maxWidth: isMobile ? "90vw" : "100%",
+        maxHeight: isMobile ? "58vh" : "100%",
+        marginLeft: isMobile ? "0rem" : "1rem",
+        marginTop: isMobile ? "1rem" : "0rem",
+      }}
+    >
       <div
         style={{
           display: "flex",
@@ -154,7 +166,7 @@ const NotesComponent: React.FC<NotesComponentType> = (props) => {
             height: "85vh",
             overflowY: "auto",
             marginTop: "8px",
-            border: "1px solid #ccc",
+            border: "1px solid #000",
           }}
         />
       </div>

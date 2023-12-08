@@ -4,7 +4,7 @@ import QuestionTable from "../components/QuestionTable"
 import NotesComponent from "../components/NotesComponent"
 import { useEffect, useState } from "react"
 import { NotesType, SmRepo } from "../components/SmRepo"
-import SubjectTitle from "../components/SubjectTitle"
+import SubjectMenu from "../components/SubjectMenu"
 import SearchBar from "../../common-components/searchBar/SearchBar"
 
 const emptyContent = {} as NotesType
@@ -121,8 +121,8 @@ const SMLayout = () => {
   }
 
   return (
-    <div>
-      <SubjectTitle
+    <div className={styles.smLayoutWrapper}>
+      <SubjectMenu
         subjectList={subjectList}
         subject={subject}
         onSubjectClick={onSubjectClick}
@@ -136,7 +136,7 @@ const SMLayout = () => {
             <QuestionTable onRowClick={onRowClick} tableData={tableData} />
           </Stack>
         </Box>
-        <Box minWidth="600px" style={{ marginLeft: "1rem" }}>
+        <Box minWidth="600px">
           <Stack>
             <NotesComponent
               content={content}

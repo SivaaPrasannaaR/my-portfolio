@@ -1,5 +1,6 @@
 import { Column, useTable } from "react-table"
 import React, { useState } from "react"
+import { useMediaQuery } from "@mui/material"
 import styles from "./table.module.scss"
 
 type TableType = {
@@ -10,6 +11,7 @@ type TableType = {
 
 export const Table: React.FC<TableType> = (props) => {
   const { data, columns, onRowClick } = props
+  const isMobile = useMediaQuery("(max-width: 600px)")
 
   const [highlightRow, setHighlightRow] = useState<number>(0)
 
@@ -23,7 +25,12 @@ export const Table: React.FC<TableType> = (props) => {
 
   return (
     <div
-      style={{ overflow: "auto", maxHeight: "85vh", border: "1px solid black" }}
+      style={{
+        overflow: "auto",
+        maxHeight: isMobile ? "25vh" : "85vh",
+        maxWidth: isMobile ? "90vw" : "100%",
+        border: "1px solid black",
+      }}
     >
       <table
         {...getTableProps()}

@@ -1,6 +1,7 @@
 import React, { useState } from "react"
 import { TextField, IconButton, InputAdornment } from "@mui/material"
 import SearchIcon from "@mui/icons-material/Search"
+import { useMediaQuery } from "@mui/material"
 
 export type SearchBarProps = {
   onSearch: (query: string) => void
@@ -8,6 +9,8 @@ export type SearchBarProps = {
 
 const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
   const [searchQuery, setSearchQuery] = useState<string>("")
+
+  const isMobile = useMediaQuery("(max-width: 600px)")
 
   const handleSearch = (value: string) => {
     setSearchQuery(value)
@@ -25,6 +28,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
       style={{
         marginBottom: "8px",
         border: "1px solid black",
+        maxWidth: isMobile ? "90vw" : "100%",
       }}
       InputProps={{
         style: {
