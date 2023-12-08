@@ -42,6 +42,7 @@ const SMLayout = () => {
         setTableData([])
         setContent(emptyContent)
       }
+      setEditable(false)
     })
   }
 
@@ -69,6 +70,7 @@ const SMLayout = () => {
 
   const onRowClick = async (row: any) => {
     setContent(row)
+    setEditable(false)
   }
 
   async function saveContent(row: any) {
