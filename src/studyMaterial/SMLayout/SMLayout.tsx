@@ -1,4 +1,4 @@
-import { Box, Stack, useMediaQuery } from "@mui/material"
+import { Box, Stack, useMediaQuery, Button } from "@mui/material"
 import styles from "../SMLayout.module.scss"
 import QuestionTable from "../components/QuestionTable"
 import NotesComponent from "../components/NotesComponent"
@@ -138,7 +138,17 @@ const SMLayout = () => {
           createNewNote={createNewNote}
           updateSubjectList={updateSubjectList}
         />
-
+        {!isMobile && (
+          <Button
+            style={{
+              color: "black",
+              minWidth: "175px",
+              fontWeight: "bolder",
+            }}
+          >
+            {subject}
+          </Button>
+        )}
         <SearchBar onSearch={handleSearch} />
       </div>
       <div className={styles.smLayout_container}>
