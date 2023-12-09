@@ -10,6 +10,11 @@ export type NotesType = {
   answer: string
 }
 
+export type SubjectType = {
+  title: string
+  rank: number
+}
+
 export class SmRepo {
   private collectionRef(subjectName: string) {
     const collName = subjectName
@@ -40,23 +45,18 @@ export class SmRepo {
     return collRef
   }
 
-  async createSubject(subjectName: string) {
+  async updateSubjectList(subjecList: SubjectType[]) {
     try {
-      // Create a new note
-      const newNote: NotesType = {
-        id: "id",
-        subject: subjectName,
-        question: `What is ${subjectName}?`,
-        faqRate: 5,
-        answer: "This is the answer.",
-      }
-
-      const collectionRef = this.collectionRef(subjectName)
-
-      await Firestore.createData(
+      const documentRef = Firestore.documentRef(
         firebaseCollectionNames.interviewNotes,
-        newNote,
-        collectionRef
+        "subject"
+      )
+
+      await Firestore.setData(
+        firebaseCollectionNames.interviewNotes,
+        "subject",
+        { subjecList: subjecList },
+        documentRef
       )
     } catch (err) {
       console.log(err)
@@ -64,13 +64,13 @@ export class SmRepo {
     }
   }
 
-  async getSubjectList(): Promise<string[]> {
+  async getSubjectList(): Promise<SubjectType[]> {
     try {
       const data = await Firestore.getData(
         firebaseCollectionNames.interviewNotes,
         "subject"
       )
-      return data.subjectList
+      return data.subjecList
     } catch (err) {
       console.log(err)
       return []

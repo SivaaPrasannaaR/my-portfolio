@@ -1,9 +1,9 @@
-import { Box, Stack } from "@mui/material"
+import { Box, Stack, useMediaQuery } from "@mui/material"
 import styles from "../SMLayout.module.scss"
 import QuestionTable from "../components/QuestionTable"
 import NotesComponent from "../components/NotesComponent"
 import { useEffect, useState } from "react"
-import { NotesType, SmRepo } from "../components/SmRepo"
+import { NotesType, SmRepo, SubjectType } from "../components/SmRepo"
 import SubjectMenu from "../components/SubjectMenu"
 import SearchBar from "../../common-components/searchBar/SearchBar"
 
@@ -16,10 +16,10 @@ const SMLayout = () => {
   const [content, setContent] = useState<NotesType>(emptyContent)
 
   const [subject, setSubject] = useState<string>("")
-  const [subjectList, setSubjectList] = useState<string[]>([])
+  const [subjectList, setSubjectList] = useState<SubjectType[]>([])
 
   const [editable, setEditable] = useState<boolean>(false)
-
+  const isMobile = useMediaQuery("(max-width: 600px)")
   const notesRepo = new SmRepo()
 
   function fetchNotes(subject: string, noteId?: string) {
@@ -51,13 +51,14 @@ const SMLayout = () => {
       console.log("fetching")
       const subjectDataList = await notesRepo.getSubjectList()
       if (subjectDataList.length) {
+        subjectDataList.sort((a, b) => a.rank - b.rank)
         setSubjectList(subjectDataList)
-        setSubject(subjectDataList[0])
+        setSubject(subjectDataList[0].title)
       } else {
         setSubjectList([])
       }
 
-      fetchNotes(subjectDataList[0])
+      fetchNotes(subjectDataList[0].title)
     } catch (error) {
       console.error("🚀 ~ file:~ fetchData ~ error:", error)
     }
@@ -95,7 +96,11 @@ const SMLayout = () => {
     setContent(emptyContent)
     setEditable(true)
   }
-  async function createNewSubject() {}
+  async function updateSubjectList(subjList: SubjectType[]) {
+    subjList.sort((a, b) => a.rank - b.rank)
+    await notesRepo.updateSubjectList(subjList)
+    await fetchData()
+  }
 
   function handleSearch(search: string) {
     if (search) {
@@ -122,21 +127,27 @@ const SMLayout = () => {
 
   return (
     <div className={styles.smLayoutWrapper}>
-      <SubjectMenu
-        subjectList={subjectList}
-        subject={subject}
-        onSubjectClick={onSubjectClick}
-        createNewNote={createNewNote}
-        createNewSubject={createNewSubject}
-      />
+      <div
+        className={styles.smHeader}
+        style={isMobile ? { maxWidth: "92vw" } : { maxWidth: "45vw" }}
+      >
+        <SubjectMenu
+          subjectList={subjectList}
+          subject={subject}
+          onSubjectClick={onSubjectClick}
+          createNewNote={createNewNote}
+          updateSubjectList={updateSubjectList}
+        />
+
+        <SearchBar onSearch={handleSearch} />
+      </div>
       <div className={styles.smLayout_container}>
-        <Box minWidth="500px">
+        <Box maxWidth={isMobile ? "100%" : "45vw"}>
           <Stack>
-            <SearchBar onSearch={handleSearch} />
             <QuestionTable onRowClick={onRowClick} tableData={tableData} />
           </Stack>
         </Box>
-        <Box minWidth="600px">
+        <Box>
           <Stack>
             <NotesComponent
               content={content}

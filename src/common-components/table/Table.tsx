@@ -27,8 +27,8 @@ export const Table: React.FC<TableType> = (props) => {
     <div
       style={{
         overflow: "auto",
-        maxHeight: isMobile ? "25vh" : "85vh",
-        maxWidth: isMobile ? "90vw" : "100%",
+        maxHeight: isMobile ? "25vh" : "88vh",
+        maxWidth: isMobile ? "92vw" : "100%",
         border: "1px solid black",
       }}
     >

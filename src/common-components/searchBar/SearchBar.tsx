@@ -28,7 +28,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
       style={{
         marginBottom: "8px",
         border: "1px solid black",
-        maxWidth: isMobile ? "90vw" : "100%",
+        maxWidth: isMobile ? "100%" : "100%",
       }}
       InputProps={{
         style: {

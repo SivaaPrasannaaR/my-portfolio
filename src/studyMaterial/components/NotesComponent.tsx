@@ -69,10 +69,10 @@ const NotesComponent: React.FC<NotesComponentType> = (props) => {
       style={{
         display: "flex",
         flexDirection: "column",
-        maxWidth: isMobile ? "90vw" : "100%",
-        maxHeight: isMobile ? "58vh" : "100%",
+        maxWidth: isMobile ? "92vw" : "100%",
+        maxHeight: isMobile ? "62vh" : "100%",
         marginLeft: isMobile ? "0rem" : "1rem",
-        marginTop: isMobile ? "1rem" : "0rem",
+        marginTop: isMobile ? "1rem" : "-3rem",
       }}
     >
       <div
@@ -163,7 +163,7 @@ const NotesComponent: React.FC<NotesComponentType> = (props) => {
           readOnly={!editable}
           style={{
             flex: 1,
-            height: "85vh",
+            height: "88vh",
             overflowY: "auto",
             marginTop: "8px",
             border: "1px solid #000",

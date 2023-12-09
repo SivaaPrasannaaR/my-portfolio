@@ -5,6 +5,10 @@
   overflow-y: hidden;
 }
 
+.smHeader {
+  display: flex;
+}
+
 .smLayout_container {
   @include container;
   display: flex;
