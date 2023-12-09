@@ -145,6 +145,7 @@ const SMLayout = () => {
               minWidth: "175px",
               fontWeight: "bolder",
             }}
+            onClick={createNewNote}
           >
             {subject}
           </Button>
