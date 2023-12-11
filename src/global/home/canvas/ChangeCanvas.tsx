@@ -1,4 +1,5 @@
 import { useState } from "react"
+import Canvas from "./Canvas"
 
 export const ChangeCanvas = () => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -9,7 +10,11 @@ export const ChangeCanvas = () => {
     setIsDialogOpen(false)
   }
 
-  return <></>
+  return (
+    <>
+      <Canvas />
+    </>
+  )
 }
 
 export default ChangeCanvas
