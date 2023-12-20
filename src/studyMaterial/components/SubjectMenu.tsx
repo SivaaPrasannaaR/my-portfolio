@@ -26,6 +26,7 @@ interface SubjectMenuProps {
   subject: string
   onSubjectClick: (subject: string) => void
   createNewNote: () => void
+  getAllNotes: () => void
   updateSubjectList: (subjList: SubjectType[]) => void
 }
 
@@ -34,6 +35,7 @@ const SubjectMenu: React.FC<SubjectMenuProps> = ({
   subject,
   onSubjectClick,
   createNewNote,
+  getAllNotes,
   updateSubjectList,
 }) => {
   const [drawerOpen, setDrawerOpen] = useState(false)
@@ -131,6 +133,7 @@ const SubjectMenu: React.FC<SubjectMenuProps> = ({
               <ListItem>
                 <Button
                   fullWidth
+                  disabled={subject === "All Notes"}
                   variant="contained"
                   color="primary"
                   startIcon={<AddIcon />}
@@ -140,6 +143,20 @@ const SubjectMenu: React.FC<SubjectMenuProps> = ({
                 </Button>
               </ListItem>
             </List>
+            <ListItem>
+              <Button
+                fullWidth
+                variant="contained"
+                color="primary"
+                startIcon={<AddIcon />}
+                onClick={() => {
+                  handleMenuClick("All Notes")
+                  getAllNotes()
+                }}
+              >
+                {"All Notes"}
+              </Button>
+            </ListItem>
             <Divider />
           </div>
 

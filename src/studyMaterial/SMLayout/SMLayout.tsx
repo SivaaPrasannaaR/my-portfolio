@@ -76,7 +76,7 @@ const SMLayout = () => {
 
   async function saveContent(row: any) {
     if (row.id) {
-      await notesRepo.updateNotes(subject, row.id, row)
+      await notesRepo.updateNotes(row.subject, row.id, row)
     } else {
       const newNote: NotesType = {
         subject: subject,
@@ -85,13 +85,42 @@ const SMLayout = () => {
       }
       await notesRepo.createNotes(subject, newNote)
     }
-    fetchNotes(subject, row.id || "newNote")
+    if (subject === "All Notes") {
+      getAllNotes()
+    } else {
+      fetchNotes(subject, row.id || "newNote")
+    }
   }
 
   function onSubjectClick(sub: string) {
     setSubject(sub)
     fetchNotes(sub)
   }
+
+  async function getAllNotes() {
+    const promises = subjectList.map(async (sub) => {
+      const notesData = await notesRepo.getAllNotes(sub.title)
+      return notesData.length ? notesData : []
+    })
+
+    const subDataList = await Promise.all(promises)
+
+    const subData: NotesType[] = subDataList.flat()
+
+    if (subData.length) {
+      subData.sort((a, b) => b.faqRate - a.faqRate)
+
+      setTableData(subData)
+      setTabledataCopy(subData)
+
+      setContent(subData[0])
+    } else {
+      setTableData([])
+      setContent(emptyContent)
+    }
+    setEditable(false)
+  }
+
   async function createNewNote() {
     setContent(emptyContent)
     setEditable(true)
@@ -135,6 +164,7 @@ const SMLayout = () => {
           subjectList={subjectList}
           subject={subject}
           onSubjectClick={onSubjectClick}
+          getAllNotes={getAllNotes}
           createNewNote={createNewNote}
           updateSubjectList={updateSubjectList}
         />
