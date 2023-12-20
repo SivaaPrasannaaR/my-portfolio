@@ -122,6 +122,9 @@ const SMLayout = () => {
   }
 
   async function createNewNote() {
+    if (subject === "All Notes") {
+      return
+    }
     setContent(emptyContent)
     setEditable(true)
   }
