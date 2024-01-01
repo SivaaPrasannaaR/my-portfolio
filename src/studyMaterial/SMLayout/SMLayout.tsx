@@ -1,4 +1,5 @@
 import { Box, Stack, useMediaQuery, Button } from "@mui/material"
+import RefreshIcon from "@mui/icons-material/Refresh"
 import styles from "../SMLayout.module.scss"
 import QuestionTable from "../components/QuestionTable"
 import NotesComponent from "../components/NotesComponent"
@@ -184,6 +185,18 @@ const SMLayout = () => {
           </Button>
         )}
         <SearchBar onSearch={handleSearch} />
+        {!isMobile && (
+          <Button
+            style={{
+              color: "black",
+              minWidth: "50px",
+              fontWeight: "bolder",
+            }}
+            onClick={fetchData}
+          >
+            <RefreshIcon fontSize="large" color="primary" />
+          </Button>
+        )}
       </div>
       <div className={styles.smLayout_container}>
         <Box maxWidth={isMobile ? "100%" : "45vw"}>
