@@ -11,10 +11,18 @@ type NotesComponentType = {
   editable: boolean
   setEditable: React.Dispatch<React.SetStateAction<boolean>>
   saveContent: (row: any) => Promise<void>
+  handleSearch: (value: string) => void
 }
 
 const NotesComponent: React.FC<NotesComponentType> = (props) => {
-  const { content, setContent, editable, setEditable, saveContent } = props
+  const {
+    content,
+    setContent,
+    editable,
+    setEditable,
+    saveContent,
+    handleSearch,
+  } = props
 
   const isMobile = useMediaQuery("(max-width: 600px)")
 
@@ -45,6 +53,7 @@ const NotesComponent: React.FC<NotesComponentType> = (props) => {
       ...prevState,
       question: value,
     }))
+    handleSearch(value)
   }
   async function handleAnswerChange(value: string) {
     setContent((prevState) => ({

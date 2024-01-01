@@ -209,6 +209,7 @@ const SMLayout = () => {
             <NotesComponent
               content={content}
               setContent={setContent}
+              handleSearch={handleSearch}
               saveContent={saveContent}
               editable={editable}
               setEditable={setEditable}
