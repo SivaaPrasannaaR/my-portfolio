@@ -1,7 +1,7 @@
 import React from "react"
 import ReactQuill from "react-quill"
 import "react-quill/dist/quill.snow.css"
-import { NotesType } from "./SmRepo"
+import { NotesType } from "../model/SmRepo"
 import { useMediaQuery } from "@mui/material"
 import TextField from "@mui/material/TextField"
 

@@ -1,4 +1,4 @@
-import { NotesType } from "../../studyMaterial/components/SmRepo"
+import { NotesType } from "../../studyMaterial/model/SmRepo"
 import NotesModel from "../models/Notes"
 
 export class NotesRepo {

@@ -1,6 +1,6 @@
 import { useMemo } from "react"
 import { Table } from "../../common-components/table/Table"
-import { NotesType } from "./SmRepo"
+import { NotesType } from "../model/SmRepo"
 
 type QuestionTableType = {
   onRowClick: (row: any) => any

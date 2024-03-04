@@ -4,7 +4,7 @@ import styles from "../SMLayout.module.scss"
 import QuestionTable from "../components/QuestionTable"
 import NotesComponent from "../components/NotesComponent"
 import { useEffect, useState } from "react"
-import { NotesType, SmRepo, SubjectType } from "../components/SmRepo"
+import { NotesType, SmRepo, SubjectType } from "../model/SmRepo"
 import SubjectMenu from "../components/SubjectMenu"
 import SearchBar from "../../common-components/searchBar/SearchBar"
 

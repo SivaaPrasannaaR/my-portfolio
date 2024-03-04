@@ -19,7 +19,7 @@ import EditIcon from "@mui/icons-material/Edit"
 import MenuIcon from "@mui/icons-material/Menu"
 import AddCircleIcon from "@mui/icons-material/AddCircle"
 import styles from "../SMLayout.module.scss"
-import { SubjectType } from "./SmRepo"
+import { SubjectType } from "../model/SmRepo"
 
 interface SubjectMenuProps {
   subjectList: SubjectType[]
