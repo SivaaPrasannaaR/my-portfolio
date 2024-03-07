@@ -28,26 +28,6 @@ export const frontendSkills = [
     experience: 16,
   },
   {
-    skill: "Vue.js",
-    level: skillLevel.level_1,
-    experience: 1,
-  },
-  {
-    skill: "Electron.js",
-    level: skillLevel.level_1,
-    experience: 1,
-  },
-  // {
-  //   skill: "React Native",
-  //   level: skillLevel.l1,
-  //   experience: 2,
-  // },
-  // {
-  //   skill: "Next.js",
-  //   level: skillLevel.l1,
-  //   experience: 2,
-  // },
-  {
     skill: "HTML5",
     level: skillLevel.level_3,
     experience: 16,
@@ -56,6 +36,27 @@ export const frontendSkills = [
     skill: "CSS3",
     level: skillLevel.level_3,
     experience: 16,
+  },
+  {
+    skill: "Next.js",
+    level: skillLevel.level_1,
+    experience: 2,
+  },
+
+  {
+    skill: "Electron.js",
+    level: skillLevel.level_1,
+    experience: 1,
+  },
+  {
+    skill: "React Native",
+    level: skillLevel.level_1,
+    experience: 2,
+  },
+  {
+    skill: "Vue.js",
+    level: skillLevel.level_1,
+    experience: 1,
   },
 ]
 
@@ -74,8 +75,8 @@ export const backendSkills = [
 
 export const libraryKnown = [
   {
-    skill: "Redux",
-    level: skillLevel.level_2,
+    skill: "Redux-Toolkit",
+    level: skillLevel.level_3,
   },
   {
     skill: "React Router",
@@ -83,7 +84,7 @@ export const libraryKnown = [
   },
   {
     skill: "Axios",
-    level: skillLevel.level_2,
+    level: skillLevel.level_3,
   },
   {
     skill: "Lerna",
@@ -97,15 +98,15 @@ export const libraryKnown = [
 
 export const databaseSkills = [
   {
+    skill: "MongoDb",
+    level: skillLevel.level_2,
+    experience: 12,
+  },
+  {
     skill: "Firebase",
     level: skillLevel.level_2,
     experience: 16,
   },
-  // {
-  //   skill: "MongoDb",
-  //   level: skillLevel.l1,
-  //   experience: 1,
-  // },
 ]
 
 export const testingFramework = [

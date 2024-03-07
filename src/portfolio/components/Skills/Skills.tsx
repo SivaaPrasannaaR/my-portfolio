@@ -5,10 +5,9 @@ import {
   devToolsSkills,
   frontendSkills,
   libraryKnown,
-  notInTouch,
   programingSkills,
   testingFramework,
-} from "./mySkills"
+} from "../../constants/mySkills"
 import styles from "./Skills.module.scss"
 
 const Skills = () => {
@@ -22,6 +21,9 @@ const Skills = () => {
         {/* React and JS library Known */}
         <ShowData title={"Library"} skills={libraryKnown} />
 
+        {/* Programing Language */}
+        <ShowData title={"Programing Language"} skills={programingSkills} />
+
         {/* Backend Development */}
         <ShowData title={"Back-end Development"} skills={backendSkills} />
 
@@ -31,14 +33,11 @@ const Skills = () => {
         {/* Testing Framework */}
         <ShowData title={"Testing Framework"} skills={testingFramework} />
 
-        {/* Programing Language */}
-        <ShowData title={"Programing Language"} skills={programingSkills} />
-
         {/* Tools */}
         <ShowData title={"Tools"} skills={devToolsSkills} />
 
         {/* Tech that are not in touch */}
-        <ShowData title={"Tech That are not in Touch"} skills={notInTouch} />
+        {/* <ShowData title={"Tech That are not in Touch"} skills={notInTouch} /> */}
       </div>
     </section>
   )

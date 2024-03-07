@@ -1,11 +1,11 @@
-import React from "react"
 import styles from "./contacts.module.scss"
 import { MdOutlineEmail } from "react-icons/md"
 import { BsWhatsapp } from "react-icons/bs"
+import { personalInfo } from "../../constants/personalInfo"
 // import { Link } from "react-router-dom"
 
 const Contacts = () => {
-  const emailUrl = "mailto:sivaprasanna98@gmail.com"
+  const emailUrl = `mailto:${personalInfo.email}`
   const whatsAppUrl = "https://api.whatsapp.com/send?phone=+918248392614"
 
   return (
@@ -20,12 +20,8 @@ const Contacts = () => {
         >
           <MdOutlineEmail className={styles.contact__option_icon} />
           <h4 className={styles.textColor_white}>Email</h4>
-          <h5 className={styles.textColor_white}>sivaprasanna98@gmail.com</h5>
-          <a
-            href="mailto:sivaprasanna98@gmail.com"
-            target={"_blank"}
-            rel="noopener noreferrer"
-          >
+          <h5 className={styles.textColor_white}>{personalInfo.email}</h5>
+          <a href={emailUrl} target={"_blank"} rel="noopener noreferrer">
             Send a message
           </a>
         </article>
@@ -36,11 +32,7 @@ const Contacts = () => {
           <BsWhatsapp className={styles.contact__option_icon} />
           <h4 className={styles.textColor_white}>WhatsApp</h4>
           <h5 className={styles.textColor_white}>+91-824-839-2614</h5>
-          <a
-            href="https://api.whatsapp.com/send?phone=+918248392614"
-            target={"_blank"}
-            rel="noopener noreferrer"
-          >
+          <a href={whatsAppUrl} target={"_blank"} rel="noopener noreferrer">
             Send a message
           </a>
         </article>

@@ -1,6 +1,6 @@
 import styles from "./Skills.module.scss"
 import { BsPatchCheckFill } from "react-icons/bs"
-import { SkillLevelValueType, skillLevel } from "./mySkills"
+import { SkillLevelValueType, skillLevel } from "../../constants/mySkills"
 import StarIcon from "@mui/icons-material/Star"
 import StarBorderIcon from "@mui/icons-material/StarBorder"
 

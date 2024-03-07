@@ -1,6 +1,6 @@
 import styles from "./Experience.module.scss"
 import TimeLineBox from "./timeline/TimeLineBox"
-import { VakenExperience } from "./myExperience"
+import { VakenExperience } from "../../constants/myExperience"
 import vaken from "../../assets/vaken.png"
 
 const Experience = () => {
@@ -19,7 +19,8 @@ const Experience = () => {
                 <TimeLineBox
                   summary={exp.summary}
                   technologyUsed={exp.technologyUsed}
-                  myRole={exp.myRole}
+                  role={exp.role}
+                  duration={exp.duration}
                 />
               )
             })}

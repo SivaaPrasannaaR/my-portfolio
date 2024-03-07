@@ -1,28 +1,36 @@
 import React from "react"
 import styles from "./TimeLineBox.module.scss"
 export type TimeLineBoxType = {
-  summary: string
+  summary: string[]
+  role: string
   technologyUsed: string
-  myRole: string
+  duration: string
 }
 
 const TimeLineBox: React.FC<TimeLineBoxType> = (props) => {
-  const { summary, technologyUsed, myRole } = props
+  const { summary, technologyUsed, role, duration } = props
   return (
     // <div className={styles.timeLineBox_container}>
     <div className={styles.timeLine_box}>
-      <p className={styles.commonContent}>Nov 2020 - Present</p>
+      <h3
+        className={styles.commonContent}
+        style={{ marginBottom: "-4px", color: "orange" }}
+      >
+        {role}
+      </h3>
+      <p className={styles.commonContent}>{duration}</p>
+
       <div className={styles.commonContent}>
         <label>{"Summary: "}</label>
-        <p>{summary}</p>
+        <ul style={{ marginLeft: "16px", listStyleType: "square" }}>
+          {summary.map((summaryData: string) => {
+            return <li>{summaryData}</li>
+          })}
+        </ul>
       </div>
       <div className={styles.commonContent}>
         <label>{"Technology Used: "}</label>
-        <p>{technologyUsed}</p>
-      </div>
-      <div className={styles.commonContent}>
-        <label>{"My Role: "}</label>
-        <p>{myRole}</p>
+        <p style={{ marginLeft: "16px" }}>{technologyUsed}</p>
       </div>
     </div>
     // </div>
