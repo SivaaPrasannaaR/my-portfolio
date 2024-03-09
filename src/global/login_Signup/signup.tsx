@@ -56,22 +56,24 @@ const Signup = () => {
   const [form, setForm] = useState<any>(tabs[1].component)
 
   return (
-    <div className={styles.auth_parent_container}>
-      {/* <span>Choose Register Form: </span> */}
-      <span className={styles.card}>
-        {tabs.map((val, index) => {
-          return (
-            <span
-              key={index}
-              className={styles.card_label}
-              onClick={() => setForm(val.component)}
-            >
-              {val.label}
-            </span>
-          )
-        })}
-      </span>
-      {form}
+    <div className={styles.modal}>
+      <div className={styles.auth_parent_container}>
+        {/* <span>Choose Register Form: </span> */}
+        <span className={styles.card}>
+          {tabs.map((val, index) => {
+            return (
+              <span
+                key={index}
+                className={styles.card_label}
+                onClick={() => setForm(val.component)}
+              >
+                {val.label}
+              </span>
+            )
+          })}
+        </span>
+        {form}
+      </div>
     </div>
   )
 }

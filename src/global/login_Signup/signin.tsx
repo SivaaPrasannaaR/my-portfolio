@@ -43,44 +43,46 @@ const Signin = () => {
   }
 
   return (
-    <div className={styles.auth_parent_container}>
-      <div className={styles.authContainer}>
-        <div className={styles.form}>
-          <h2> Login </h2>
-          <form onSubmit={onSubmit}>
-            <input
-              placeholder="Email"
-              type="email"
-              ref={emailRef}
-              className={styles.input}
-            />
-            <input
-              placeholder="Password"
-              type="password"
-              ref={psdRef}
-              className={styles.input}
-            />
-            <button type="submit" className={styles.formButton}>
-              Sign In
-            </button>
-            <p onClick={forgotPasswordHandler}>Forgot Password?</p>
-            <p onClick={() => navigate(routingUrl.signUp.path)}>
-              {"New user? Click here"}
-            </p>
-            <button
-              onClick={() => handleSocialMediaOnClick(googleProvider)}
-              className={styles.loginWithGoogleBtn}
-            >
-              Sign in with Google
-            </button>
-            <div
-              onClick={() => navigate(routingUrl.portfolio.path)}
-              className={styles.checkProfile}
-            >
-              <img src={myPhoto} alt="myPhoto" />
-              <p>Check My Profile Without Login</p>
-            </div>
-          </form>
+    <div className={styles.modal}>
+      <div className={styles.auth_parent_container}>
+        <div className={styles.authContainer}>
+          <div className={styles.form}>
+            <h2> Login </h2>
+            <form onSubmit={onSubmit}>
+              <input
+                placeholder="Email"
+                type="email"
+                ref={emailRef}
+                className={styles.input}
+              />
+              <input
+                placeholder="Password"
+                type="password"
+                ref={psdRef}
+                className={styles.input}
+              />
+              <button type="submit" className={styles.formButton}>
+                Sign In
+              </button>
+              <p onClick={forgotPasswordHandler}>Forgot Password?</p>
+              <p onClick={() => navigate(routingUrl.signUp.path)}>
+                {"New user? Click here"}
+              </p>
+              <button
+                onClick={() => handleSocialMediaOnClick(googleProvider)}
+                className={styles.loginWithGoogleBtn}
+              >
+                Sign in with Google
+              </button>
+              <div
+                onClick={() => navigate(routingUrl.portfolio.path)}
+                className={styles.checkProfile}
+              >
+                <img src={myPhoto} alt="myPhoto" />
+                <p>Check My Profile Without Login</p>
+              </div>
+            </form>
+          </div>
         </div>
       </div>
     </div>

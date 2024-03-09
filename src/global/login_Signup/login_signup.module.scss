@@ -5,7 +5,10 @@
 
   min-height: 100vh;
   flex-direction: column;
-  background: $color-white;
+}
+
+.modal {
+  background-color: rgba(0, 0, 0, 0.5);
 }
 
 .card {
@@ -36,6 +39,7 @@
   flex-direction: column;
   width: 400px;
   padding: 22px;
+  background: $color-white;
 }
 
 .input {
